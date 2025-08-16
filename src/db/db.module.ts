@@ -29,6 +29,6 @@ import { DbPracticeGroupService } from './services/db-practice-group/db-practice
     ]),
   ],
   providers: [DbCampService, DbPracticeGroupService],
-  exports: [DbCampService],
+  exports: [DbCampService, DbPracticeGroupService],
 })
 export class DbModule {}

@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePraciteGroupDto } from './dto/create-pracite-group.dto';
-import { UpdatePraciteGroupDto } from './dto/update-pracite-group.dto';
+import { DbPracticeGroupService } from '../../db/services/db-practice-group/db-practice-group.service';
 
 @Injectable()
 export class PracticeGroupService {
-  create(createPraciteGroupDto: CreatePraciteGroupDto) {
-    return 'This action adds a new praciteGroup';
+  constructor(
+    private readonly dbPracticeGroupService: DbPracticeGroupService,
+  ) {}
+  create(params: { name: string; parentId?: number }) {
+    return this.dbPracticeGroupService.create(params);
   }
 
   findAll() {
-    return `This action returns all praciteGroup`;
+    return this.dbPracticeGroupService.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} praciteGroup`;
+  findAllByCamp(campId: number) {
+    return this.dbPracticeGroupService.findAllByCamp(campId);
   }
 
-  update(id: number, updatePraciteGroupDto: UpdatePraciteGroupDto) {
-    return `This action updates a #${id} praciteGroup`;
+  update(id: number, params: Partial<{ name: string; parentId?: number }>) {
+    return this.dbPracticeGroupService.update(id, params);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} praciteGroup`;
+    return this.dbPracticeGroupService.remove(id);
   }
 }

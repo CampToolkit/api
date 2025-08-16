@@ -12,7 +12,7 @@ export class PracticeGroup extends AbstractEntity {
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'parentId' })
-  parent?: PracticeGroup;
+  parentId?: number;
 
   children?: PracticeGroup[];
 
