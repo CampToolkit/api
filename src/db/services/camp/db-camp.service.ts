@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Camp } from '../../entities/camp.entity';
 import { Repository } from 'typeorm';
-import { UpdateCampDto } from '../../../modules/camp/dto/update-camp.dto';
+import { Logger } from '@nestjs/common';
 
 @Injectable()
 export class DbCampService {
@@ -10,6 +10,7 @@ export class DbCampService {
     @InjectRepository(Camp)
     private readonly campRepository: Repository<Camp>,
   ) {}
+  logger = new Logger('DbCampService');
 
   findAll() {
     return this.campRepository.find();
@@ -20,24 +21,25 @@ export class DbCampService {
   }
 
   create(params: {
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
     name: string;
     city: string;
-  }) {
-    return this.campRepository.create(params);
+  }): Promise<Camp> {
+    const camp = this.campRepository.create(params);
+    return this.campRepository.save(camp);
   }
 
   async update(
     id: number,
     params: Partial<{
-      startDate: Date;
-      endDate: Date;
+      startDate: string;
+      endDate: string;
       name: string;
       city: string;
     }>,
   ) {
-    const camp = await this.campRepository.findOneBy({ id });
+    const camp = await this.campRepository.findOne({ where: { id: id } });
     if (!camp) {
       throw new Error(`Camp with id ${id} not found`);
     }
@@ -51,6 +53,6 @@ export class DbCampService {
     if (!camp) {
       throw new Error(`Camp with id ${id} not found`);
     }
-    return this.campRepository.delete(id);
+    return this.campRepository.softDelete(id);
   }
 }
