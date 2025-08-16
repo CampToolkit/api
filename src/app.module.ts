@@ -5,6 +5,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModule } from './db/db.module';
 import { User } from './db/entities/user.entity';
+import { Camp } from './db/entities/camp.entity';
+import { PracticeGroup } from './db/entities/practice-group.entity';
+import { CampPracticeGroup } from './db/entities/camp_practice-group.entity';
+import { CampSportsman } from './db/entities/camp_sportsman.entity';
+import { Session } from './db/entities/session.entity';
+import { RbActivityType } from './db/entities/rb-activity-type.entity';
+import { RbAuditorium } from './db/entities/rb-auditorium.entity';
+import { RbSlotType } from './db/entities/rb-slot-type.entity';
+import { Sportsman } from './db/entities/sportsman.entity';
+import * as process from 'node:process';
 
 @Module({
   imports: [
@@ -24,8 +34,19 @@ import { User } from './db/entities/user.entity';
         database: config.get('DB_NAME'),
         migrations: ['./src/db/migrations/*.js'],
         migrationsTableName: 'typeorm_migrations',
-        entities: [User],
-        synchronize: true,
+        entities: [
+          User,
+          Camp,
+          PracticeGroup,
+          CampPracticeGroup,
+          CampSportsman,
+          Session,
+          RbActivityType,
+          RbAuditorium,
+          RbSlotType,
+          Sportsman,
+        ],
+        synchronize: process.env.NODE_ENV === 'development',
         autoLoadEntities: true,
         connectorPackage: 'mysql2',
         migrationsRun: true,
