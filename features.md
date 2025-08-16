@@ -1,5 +1,5 @@
 ## EndPoints
-- camp
+- camp x
 - group
 - session
 - sportsman
