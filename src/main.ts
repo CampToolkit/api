@@ -1,11 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as dotenv from 'dotenv';
 import { ValidationPipe, Logger, INestApplication } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
+dotenv.config();
+console.log(process.env.DB_USERNAME);
 bootstrap();
 
 async function bootstrap() {
+  console.log(process.env.DB_USERNAME);
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'log', 'debug', 'verbose'],
   });
