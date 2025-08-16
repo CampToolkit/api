@@ -1,6 +1,6 @@
 ## EndPoints
+- camp x
 - group x
-- group
 - session
 - sportsman
 - coach
