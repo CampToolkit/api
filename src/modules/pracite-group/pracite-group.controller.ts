@@ -1,11 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PraciteGroupService } from './pracite-group.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { PracticeGroupService } from './practice-group.service';
 import { CreatePraciteGroupDto } from './dto/create-pracite-group.dto';
 import { UpdatePraciteGroupDto } from './dto/update-pracite-group.dto';
 
 @Controller('pracite-group')
 export class PraciteGroupController {
-  constructor(private readonly praciteGroupService: PraciteGroupService) {}
+  constructor(private readonly praciteGroupService: PracticeGroupService) {}
 
   @Post()
   create(@Body() createPraciteGroupDto: CreatePraciteGroupDto) {
@@ -23,7 +31,10 @@ export class PraciteGroupController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePraciteGroupDto: UpdatePraciteGroupDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePraciteGroupDto: UpdatePraciteGroupDto,
+  ) {
     return this.praciteGroupService.update(+id, updatePraciteGroupDto);
   }
 

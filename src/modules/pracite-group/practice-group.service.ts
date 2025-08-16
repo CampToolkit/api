@@ -3,7 +3,7 @@ import { CreatePraciteGroupDto } from './dto/create-pracite-group.dto';
 import { UpdatePraciteGroupDto } from './dto/update-pracite-group.dto';
 
 @Injectable()
-export class PraciteGroupService {
+export class PracticeGroupService {
   create(createPraciteGroupDto: CreatePraciteGroupDto) {
     return 'This action adds a new praciteGroup';
   }
