@@ -10,6 +10,7 @@ import { RbAuditorium } from './entities/rb-auditorium.entity';
 import { RbSlotType } from './entities/rb-slot-type.entity';
 import { Sportsman } from './entities/sportsman.entity';
 import { Session } from './entities/session.entity';
+import { DbCampService } from './services/camp/db-camp.service';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { Session } from './entities/session.entity';
       Sportsman,
     ]),
   ],
-  providers: [],
-  exports: [],
+  providers: [DbCampService],
+  exports: [DbCampService],
 })
 export class DbModule {}

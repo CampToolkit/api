@@ -14,6 +14,7 @@ import { RbActivityType } from './db/entities/rb-activity-type.entity';
 import { RbAuditorium } from './db/entities/rb-auditorium.entity';
 import { RbSlotType } from './db/entities/rb-slot-type.entity';
 import { Sportsman } from './db/entities/sportsman.entity';
+import { CampModule } from './modules/camp/camp.module';
 import * as process from 'node:process';
 
 @Module({
@@ -55,6 +56,7 @@ import * as process from 'node:process';
       }),
     }),
     DbModule,
+    CampModule,
   ],
   controllers: [AppController],
   providers: [AppService],
