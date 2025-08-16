@@ -46,7 +46,7 @@ import * as process from 'node:process';
           RbSlotType,
           Sportsman,
         ],
-        synchronize: process.env.NODE_ENV === 'development',
+        synchronize: true,
         autoLoadEntities: true,
         connectorPackage: 'mysql2',
         migrationsRun: true,

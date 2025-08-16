@@ -4,7 +4,7 @@ import { Session } from './session.entity';
 
 @Entity('rbAuditorium')
 export class RbAuditorium extends AbstractEntity {
-  @Column({ type: 'char' })
+  @Column({ type: 'varchar', length: 256 })
   name: string;
 
   @OneToMany(() => Session, (session: Session) => session.camp)
