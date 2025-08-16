@@ -20,6 +20,8 @@ import { AppService } from './app.service';
         username: config.get('DB_USER'),
         password: config.get('DB_PASS'),
         database: config.get('DB_NAME'),
+        migrations: ['./src/db/migrations/*.js'],
+        migrationsTableName: 'typeorm_migrations',
         entities: [],
         synchronize: true,
         connectorPackage: 'mysql2',
