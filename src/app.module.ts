@@ -23,6 +23,7 @@ import { AppService } from './app.service';
         entities: [],
         synchronize: true,
         connectorPackage: 'mysql2',
+        migrationsRun: true,
       }),
     }),
   ],
