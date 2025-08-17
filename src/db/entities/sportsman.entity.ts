@@ -14,4 +14,6 @@ export class Sportsman extends AbstractEntity {
 
   @Column({ type: 'datetime', nullable: true })
   birthday: Date | null;
+
+  //   todo добавить город
 }

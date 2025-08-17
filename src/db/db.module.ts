@@ -12,6 +12,7 @@ import { Sportsman } from './entities/sportsman.entity';
 import { Session } from './entities/session.entity';
 import { DbCampService } from './services/camp/db-camp.service';
 import { DbPracticeGroupService } from './services/db-practice-group/db-practice-group.service';
+import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { DbPracticeGroupService } from './services/db-practice-group/db-practice
       Sportsman,
     ]),
   ],
-  providers: [DbCampService, DbPracticeGroupService],
-  exports: [DbCampService, DbPracticeGroupService],
+  providers: [DbCampService, DbPracticeGroupService, DbSportsmanService],
+  exports: [DbCampService, DbPracticeGroupService, DbSportsmanService],
 })
 export class DbModule {}

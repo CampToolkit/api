@@ -16,6 +16,7 @@ import { RbSlotType } from './db/entities/rb-slot-type.entity';
 import { Sportsman } from './db/entities/sportsman.entity';
 import { CampModule } from './modules/camp/camp.module';
 import { PracticeGroupModule } from './modules/pracite-group/practice-group.module';
+import { SportsmanModule } from './modules/sportsman/sportsman.module';
 import * as process from 'node:process';
 
 @Module({
@@ -52,13 +53,14 @@ import * as process from 'node:process';
         autoLoadEntities: true,
         connectorPackage: 'mysql2',
         migrationsRun: true,
-        logging: true,
-        logger: 'advanced-console',
+        // logging: true,
+        // logger: 'advanced-console',
       }),
     }),
     DbModule,
     CampModule,
     PracticeGroupModule,
+    SportsmanModule,
   ],
   controllers: [AppController],
   providers: [AppService],
