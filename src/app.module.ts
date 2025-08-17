@@ -17,6 +17,7 @@ import { Sportsman } from './db/entities/sportsman.entity';
 import { CampModule } from './modules/camp/camp.module';
 import { PracticeGroupModule } from './modules/pracite-group/practice-group.module';
 import { SportsmanModule } from './modules/sportsman/sportsman.module';
+import { SessionModule } from './modules/session/session.module';
 import * as process from 'node:process';
 
 @Module({
@@ -60,6 +61,7 @@ import * as process from 'node:process';
     CampModule,
     PracticeGroupModule,
     SportsmanModule,
+    SessionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
