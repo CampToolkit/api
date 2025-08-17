@@ -30,6 +30,6 @@ import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service
     ]),
   ],
   providers: [DbCampService, DbPracticeGroupService, DbSportsmanService],
-  exports: [DbCampService, DbPracticeGroupService],
+  exports: [DbCampService, DbPracticeGroupService, DbSportsmanService],
 })
 export class DbModule {}

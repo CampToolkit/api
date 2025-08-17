@@ -1,26 +1,46 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSportsmanDto } from './dto/create-sportsman.dto';
-import { UpdateSportsmanDto } from './dto/update-sportsman.dto';
+import { Injectable, Logger } from '@nestjs/common';
+import { DbSportsmanService } from '../../db/services/db-sportsman/db-sportsman.service';
 
 @Injectable()
 export class SportsmanService {
-  create(createSportsmanDto: CreateSportsmanDto) {
-    return 'This action adds a new sportsman';
+  constructor(private readonly dbSportsmanService: DbSportsmanService) {}
+
+  logger = new Logger('SportsmanService');
+
+  create(params: {
+    lastName: string;
+    firstName: string;
+    patrName: string;
+    birthDate?: string;
+  }) {
+    return this.dbSportsmanService.create(params);
   }
 
   findAll() {
-    return `This action returns all sportsman`;
+    return this.dbSportsmanService.findAll();
+  }
+
+  findAllByCamp(campId: number) {
+    return this.dbSportsmanService.findAllByCamp(campId);
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} sportsman`;
+    return this.dbSportsmanService.findOne(id);
   }
 
-  update(id: number, updateSportsmanDto: UpdateSportsmanDto) {
-    return `This action updates a #${id} sportsman`;
+  update(
+    id: number,
+    params: Partial<{
+      lastName: string;
+      firstName: string;
+      patrName: string;
+      birthDate: string;
+    }>,
+  ) {
+    return this.dbSportsmanService.update(id, params);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} sportsman`;
+    return this.dbSportsmanService.remove(id);
   }
 }

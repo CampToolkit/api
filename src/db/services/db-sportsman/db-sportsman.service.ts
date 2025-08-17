@@ -1,6 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateSportsmanDto } from '../../../modules/sportsman/dto/create-sportsman.dto';
-import { UpdateSportsmanDto } from '../../../modules/sportsman/dto/update-sportsman.dto';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sportsman } from '../../entities/sportsman.entity';
 import { Repository } from 'typeorm';
@@ -16,7 +14,7 @@ export class DbSportsmanService {
     lastName: string;
     firstName: string;
     patrName: string;
-    birthDate: string;
+    birthDate?: string;
   }) {
     const sportsman = await this.sportsmanRepository.findOne({
       where: {
