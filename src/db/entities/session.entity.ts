@@ -27,15 +27,18 @@ export class Session extends AbstractEntity {
   @ManyToOne(() => RbActivityType, (type) => type.sessions, {
     onDelete: 'SET NULL',
   })
+  @JoinColumn({ name: 'activityTypeId' })
   activityType: RbActivityType;
 
   @ManyToOne(() => RbSlotType, (type) => type.sessions, {
     onDelete: 'SET NULL',
   })
+  @JoinColumn({ name: 'slotTypeId' })
   slotType: RbSlotType;
 
   @ManyToOne(() => RbAuditorium, (type) => type.sessions, {
     onDelete: 'SET NULL',
   })
+  @JoinColumn({ name: 'auditoriumId' })
   auditorium: RbAuditorium;
 }

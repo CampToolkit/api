@@ -12,6 +12,10 @@ import { Session } from './entities/session.entity';
 import { DbCampService } from './services/camp/db-camp.service';
 import { DbPracticeGroupService } from './services/db-practice-group/db-practice-group.service';
 import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
+import { DbSessionService } from './services/db-session/db-session.service';
+import { DbActivityTypeService } from './services/activity-type/db-activity-type.service';
+import { DbSlotTypeService } from './services/slot-type/db-slot-type.service';
+import { DbAuditoriumService } from './services/auditorium/db-auditorium.service';
 
 @Module({
   imports: [
@@ -27,7 +31,20 @@ import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service
       Sportsman,
     ]),
   ],
-  providers: [DbCampService, DbPracticeGroupService, DbSportsmanService],
-  exports: [DbCampService, DbPracticeGroupService, DbSportsmanService],
+  providers: [
+    DbCampService,
+    DbPracticeGroupService,
+    DbSportsmanService,
+    DbSessionService,
+    DbActivityTypeService,
+    DbSlotTypeService,
+    DbAuditoriumService,
+  ],
+  exports: [
+    DbCampService,
+    DbPracticeGroupService,
+    DbSportsmanService,
+    DbSessionService,
+  ],
 })
 export class DbModule {}

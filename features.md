@@ -1,6 +1,7 @@
 ## EndPoints
 - camp x
 - group x
-- practiceGroup
+- dbPracticeGroup x
 - sportsman x
+- session
 - coach

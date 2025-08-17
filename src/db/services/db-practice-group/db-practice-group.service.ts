@@ -30,7 +30,7 @@ export class DbPracticeGroupService {
   }
 
   findOne(id: number) {
-    return this.practiceGroupRepository.find({
+    return this.practiceGroupRepository.findOne({
       where: { id: id },
       relations: ['parent', 'children'],
     });
