@@ -9,4 +9,8 @@ export class CreatePracticeGroupDto {
   @IsNumber()
   @IsOptional()
   parentId: number;
+
+  @Type(() => Number)
+  @IsNumber()
+  campId: number;
 }

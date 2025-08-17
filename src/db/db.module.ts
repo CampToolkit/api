@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Camp } from './entities/camp.entity';
-import { CampPracticeGroup } from './entities/camp_practice-group.entity';
 import { CampSportsman } from './entities/camp_sportsman.entity';
 import { PracticeGroup } from './entities/practice-group.entity';
 import { RbActivityType } from './entities/rb-activity-type.entity';
@@ -20,7 +19,6 @@ import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service
       User,
       Camp,
       PracticeGroup,
-      CampPracticeGroup,
       CampSportsman,
       Session,
       RbActivityType,

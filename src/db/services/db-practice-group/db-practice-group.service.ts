@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PracticeGroup } from '../../entities/practice-group.entity';
-import { Repository } from 'typeorm';
+import { Repository, IsNull } from 'typeorm';
 
 @Injectable()
 export class DbPracticeGroupService {
@@ -12,7 +12,7 @@ export class DbPracticeGroupService {
 
   logger = new Logger('DbPracticeGroupService');
 
-  create(params: { name: string; parentId?: number }) {
+  create(params: { name: string; parentId?: number; campId: number }) {
     const group = this.practiceGroupRepository.create(params);
     this.logger.log(group);
     return this.practiceGroupRepository.save(group);
@@ -23,11 +23,17 @@ export class DbPracticeGroupService {
   }
 
   findAllByCamp(campId: number) {
-    return this.practiceGroupRepository
-      .createQueryBuilder('pg')
-      .innerJoin('camp_practiceGroup', 'cpg', 'cpg.practiceGroupId = pg.id')
-      .where('cpg.campId = :campId', { campId })
-      .getMany();
+    return this.practiceGroupRepository.find({
+      where: { camp: { id: campId }, parent: IsNull() },
+      relations: ['parent', 'children'],
+    });
+  }
+
+  findOne(id: number) {
+    return this.practiceGroupRepository.find({
+      where: { id: id },
+      relations: ['parent', 'children'],
+    });
   }
 
   async update(

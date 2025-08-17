@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { Session } from './session.entity';
+import { PracticeGroup } from './practice-group.entity';
 
 @Entity('camp')
 export class Camp extends AbstractEntity {
@@ -18,4 +19,7 @@ export class Camp extends AbstractEntity {
 
   @OneToMany(() => Session, (session: Session) => session.camp)
   sessions: Session[];
+
+  @OneToMany(() => PracticeGroup, (group) => group.camp)
+  practiceGroups: PracticeGroup[];
 }
