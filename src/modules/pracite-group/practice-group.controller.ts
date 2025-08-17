@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  BadRequestException,
 } from '@nestjs/common';
 import { PracticeGroupService } from './practice-group.service';
 import { CreatePracticeGroupDto } from './dto/create-practice-group.dto';
@@ -33,6 +34,11 @@ export class PracticeGroupController {
   @Get('camp/:id')
   findAllByCamp(@Param('id') id: string) {
     return this.practiceGroupService.findAllByCamp(Number(id));
+  }
+
+  @Get('camp')
+  invalidCamp() {
+    throw new BadRequestException('id обязателен');
   }
 
   @Patch(':id')

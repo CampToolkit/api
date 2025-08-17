@@ -1,5 +1,5 @@
 ## EndPoints
-- camp x
+- session x
 - group x
 - dbPracticeGroup x
 - sportsman x

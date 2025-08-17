@@ -1,26 +1,45 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSessionDto } from './dto/create-session.dto';
-import { UpdateSessionDto } from './dto/update-session.dto';
+import { DbSessionService } from '../../db/services/db-session/db-session.service';
 
 @Injectable()
 export class SessionService {
-  create(createSessionDto: CreateSessionDto) {
-    return 'This action adds a new session';
+  constructor(private readonly dbSessionService: DbSessionService) {}
+
+  create(params: {
+    startDate: string;
+    endDate: string;
+    campId: number;
+    practiceGroupId: number;
+    activityTypeId: number;
+    slotTypeId: number;
+    auditoriumId: number;
+  }) {
+    return this.dbSessionService.create(params);
   }
 
-  findAll() {
-    return `This action returns all session`;
+  findAll(campId: number) {
+    return this.dbSessionService.findAll(campId);
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} session`;
+    return this.dbSessionService.findOne(id);
   }
 
-  update(id: number, updateSessionDto: UpdateSessionDto) {
-    return `This action updates a #${id} session`;
+  update(
+    id: number,
+    params: {
+      startDate?: string;
+      endDate?: string;
+      practiceGroupId?: number;
+      activityTypeId?: number;
+      slotTypeId?: number;
+      auditoriumId?: number;
+    },
+  ) {
+    return this.dbSessionService.update(id, params);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} session`;
+    return this.dbSessionService.remove(id);
   }
 }

@@ -38,10 +38,10 @@ export class DbSessionService {
     const [camp, practiceGroup, activityType, slotType, auditorium] =
       await Promise.all([
         this.dbCampService.findOne(params.campId),
-        this.dbPracticeGroup.findOne(params.campId),
-        this.dbActivityTypeService.findOne(params.campId),
-        this.dbSlotTypeService.findOne(params.campId),
-        this.dbAuditoriumService.findOne(params.campId),
+        this.dbPracticeGroup.findOne(params.practiceGroupId),
+        this.dbActivityTypeService.findOne(params.activityTypeId),
+        this.dbSlotTypeService.findOne(params.slotTypeId),
+        this.dbAuditoriumService.findOne(params.auditoriumId),
       ]);
 
     if (!camp) {
@@ -67,6 +67,8 @@ export class DbSessionService {
     }
 
     const session = this.sessionRepository.create({
+      startDate: params.startDate,
+      endDate: params.endDate,
       camp: camp,
       practiceGroup: practiceGroup,
       activityType: activityType,
@@ -77,19 +79,91 @@ export class DbSessionService {
     return this.sessionRepository.save(session);
   }
 
-  findAll() {
-    return `This action returns all session`;
+  findAll(campId: number) {
+    return this.sessionRepository.find({ where: { camp: { id: campId } } });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} session`;
+    return this.sessionRepository.findOne({ where: { id } });
   }
 
-  update(id: number) {
-    return `This action updates a #${id} session`;
+  async update(
+    id: number,
+    params: {
+      startDate?: string;
+      endDate?: string;
+      practiceGroupId?: number;
+      activityTypeId?: number;
+      slotTypeId?: number;
+      auditoriumId?: number;
+    },
+  ) {
+    const session = await this.sessionRepository.findOne({
+      where: { id },
+      relations: ['practiceGroup', 'activityType', 'slotType', 'auditorium'],
+    });
+
+    if (!session) {
+      throw new Error(`Session with id=${id} not found`);
+    }
+
+    if (params.startDate) {
+      session.startDate = new Date(params.startDate);
+    }
+    if (params.endDate) {
+      session.endDate = new Date(params.endDate);
+    }
+
+    if (params.practiceGroupId) {
+      const practiceGroup = await this.dbPracticeGroup.findOne(
+        params.practiceGroupId,
+      );
+      if (!practiceGroup) {
+        throw new Error(
+          `PracticeGroup with id=${params.practiceGroupId} not found`,
+        );
+      }
+      session.practiceGroup = practiceGroup;
+    }
+
+    if (params.activityTypeId) {
+      const activityType = await this.dbActivityTypeService.findOne(
+        params.activityTypeId,
+      );
+      if (!activityType) {
+        throw new Error(
+          `ActivityType with id=${params.activityTypeId} not found`,
+        );
+      }
+      session.activityType = activityType;
+    }
+
+    if (params.slotTypeId) {
+      const slotType = await this.dbSlotTypeService.findOne(params.slotTypeId);
+      if (!slotType) {
+        throw new Error(`SlotType with id=${params.slotTypeId} not found`);
+      }
+      session.slotType = slotType;
+    }
+
+    if (params.auditoriumId) {
+      const auditorium = await this.dbAuditoriumService.findOne(
+        params.auditoriumId,
+      );
+      if (!auditorium) {
+        throw new Error(`Auditorium with id=${params.auditoriumId} not found`);
+      }
+      session.auditorium = auditorium;
+    }
+
+    return this.sessionRepository.save(session);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} session`;
+  async remove(id: number) {
+    const session = await this.sessionRepository.findOneBy({ id });
+    if (!session) {
+      throw new Error(`session with id ${id} not found`);
+    }
+    return this.sessionRepository.softDelete(id);
   }
 }
