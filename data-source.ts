@@ -6,7 +6,6 @@ import { join } from 'path';
 import { User } from './src/db/entities/user.entity';
 import { Camp } from './src/db/entities/camp.entity';
 import { PracticeGroup } from './src/db/entities/practice-group.entity';
-import { CampPracticeGroup } from './src/db/entities/camp_practice-group.entity';
 import { CampSportsman } from './src/db/entities/camp_sportsman.entity';
 
 import { RbActivityType } from './src/db/entities/rb-activity-type.entity';
@@ -28,7 +27,7 @@ export const AppDataSource = new DataSource({
     User,
     Camp,
     PracticeGroup,
-    CampPracticeGroup,
+
     CampSportsman,
     Session,
     RbActivityType,

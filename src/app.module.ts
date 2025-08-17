@@ -7,7 +7,7 @@ import { DbModule } from './db/db.module';
 import { User } from './db/entities/user.entity';
 import { Camp } from './db/entities/camp.entity';
 import { PracticeGroup } from './db/entities/practice-group.entity';
-import { CampPracticeGroup } from './db/entities/camp_practice-group.entity';
+
 import { CampSportsman } from './db/entities/camp_sportsman.entity';
 import { Session } from './db/entities/session.entity';
 import { RbActivityType } from './db/entities/rb-activity-type.entity';
@@ -41,7 +41,6 @@ import * as process from 'node:process';
           User,
           Camp,
           PracticeGroup,
-          CampPracticeGroup,
           CampSportsman,
           Session,
           RbActivityType,

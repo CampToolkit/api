@@ -25,7 +25,12 @@ export class PracticeGroupController {
     return this.practiceGroupService.findAll();
   }
 
-  @Get('camp:id')
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.practiceGroupService.findOne(Number(id));
+  }
+
+  @Get('camp/:id')
   findAllByCamp(@Param('id') id: string) {
     return this.practiceGroupService.findAllByCamp(Number(id));
   }

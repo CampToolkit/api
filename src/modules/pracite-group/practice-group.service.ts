@@ -6,7 +6,7 @@ export class PracticeGroupService {
   constructor(
     private readonly dbPracticeGroupService: DbPracticeGroupService,
   ) {}
-  create(params: { name: string; parentId?: number }) {
+  create(params: { name: string; parentId?: number; campId: number }) {
     return this.dbPracticeGroupService.create(params);
   }
 
@@ -16,6 +16,10 @@ export class PracticeGroupService {
 
   findAllByCamp(campId: number) {
     return this.dbPracticeGroupService.findAllByCamp(campId);
+  }
+
+  findOne(id: number) {
+    return this.dbPracticeGroupService.findOne(id);
   }
 
   update(id: number, params: Partial<{ name: string; parentId?: number }>) {

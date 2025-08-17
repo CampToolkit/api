@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { Session } from './session.entity';
+import { Camp } from './camp.entity';
 
 @Entity('practiceGroup')
 export class PracticeGroup extends AbstractEntity {
@@ -12,9 +13,16 @@ export class PracticeGroup extends AbstractEntity {
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'parentId' })
-  parentId?: number;
+  parent?: PracticeGroup;
 
+  @OneToMany(() => PracticeGroup, (practiceGroup) => practiceGroup.parent)
   children?: PracticeGroup[];
+
+  @ManyToOne(() => Camp, (camp) => camp.practiceGroups, {
+    onDelete: 'CASCADE', // если лагерь удалят, все его группы тоже удалятся
+  })
+  @JoinColumn({ name: 'campId' }) // явное имя колонки
+  camp: Camp;
 
   @OneToMany(() => Session, (session: Session) => session.camp)
   sessions: Session[];
