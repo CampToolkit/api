@@ -16,6 +16,7 @@ import { DbSessionService } from './services/db-session/db-session.service';
 import { DbActivityTypeService } from './services/activity-type/db-activity-type.service';
 import { DbSlotTypeService } from './services/slot-type/db-slot-type.service';
 import { DbAuditoriumService } from './services/auditorium/db-auditorium.service';
+import { DbUserService } from './services/db-user/db-user.service';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { DbAuditoriumService } from './services/auditorium/db-auditorium.service
     DbActivityTypeService,
     DbSlotTypeService,
     DbAuditoriumService,
+    DbUserService,
   ],
   exports: [
     DbCampService,
