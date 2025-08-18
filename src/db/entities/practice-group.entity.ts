@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
-import { Session } from './session.entity';
+import { PracticeSession } from './practice-session.entity';
 import { Camp } from './camp.entity';
 
 @Entity('practiceGroup')
@@ -24,6 +24,6 @@ export class PracticeGroup extends AbstractEntity {
   @JoinColumn({ name: 'campId' }) // явное имя колонки
   camp: Camp;
 
-  @OneToMany(() => Session, (session: Session) => session.camp)
-  sessions: Session[];
+  @OneToMany(() => PracticeSession, (session: PracticeSession) => session.camp)
+  sessions: PracticeSession[];
 }
