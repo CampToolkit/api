@@ -6,8 +6,8 @@ import { RbActivityType } from './rb-activity-type.entity';
 import { RbSlotType } from './rb-slot-type.entity';
 import { RbAuditorium } from './rb-auditorium.entity';
 
-@Entity('session')
-export class Session extends AbstractEntity {
+@Entity('practiceSession')
+export class PracticeSession extends AbstractEntity {
   @Column({ type: 'datetime' })
   startDate: Date;
 

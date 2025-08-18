@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Session } from '../../entities/session.entity';
+import { PracticeSession } from '../../entities/practice-session.entity';
 import { Repository } from 'typeorm';
 import { DbActivityTypeService } from '../activity-type/db-activity-type.service';
 import { DbSlotTypeService } from '../slot-type/db-slot-type.service';
@@ -11,8 +11,8 @@ import { DbPracticeGroupService } from '../db-practice-group/db-practice-group.s
 @Injectable()
 export class DbSessionService {
   constructor(
-    @InjectRepository(Session)
-    private readonly sessionRepository: Repository<Session>,
+    @InjectRepository(PracticeSession)
+    private readonly sessionRepository: Repository<PracticeSession>,
 
     @Inject(DbCampService)
     private readonly dbCampService: DbCampService,

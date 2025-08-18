@@ -9,15 +9,15 @@ import { Camp } from './db/entities/camp.entity';
 import { PracticeGroup } from './db/entities/practice-group.entity';
 
 import { CampSportsman } from './db/entities/camp_sportsman.entity';
-import { Session } from './db/entities/session.entity';
+import { PracticeSession } from './db/entities/practice-session.entity';
 import { RbActivityType } from './db/entities/rb-activity-type.entity';
 import { RbAuditorium } from './db/entities/rb-auditorium.entity';
 import { RbSlotType } from './db/entities/rb-slot-type.entity';
 import { Sportsman } from './db/entities/sportsman.entity';
-import { CampModule } from './modules/camp/camp.module';
-import { PracticeGroupModule } from './modules/pracite-group/practice-group.module';
-import { SportsmanModule } from './modules/sportsman/sportsman.module';
-import { SessionModule } from './modules/session/session.module';
+import { CampModule } from './camp-api-modules/camp/camp.module';
+import { PracticeGroupModule } from './camp-api-modules/pracite-group/practice-group.module';
+import { SportsmanModule } from './camp-api-modules/sportsman/sportsman.module';
+import { SessionModule } from './camp-api-modules/session/session.module';
 import { configuration } from './configuration';
 import * as process from 'node:process';
 
@@ -45,7 +45,7 @@ import * as process from 'node:process';
           Camp,
           PracticeGroup,
           CampSportsman,
-          Session,
+          PracticeSession,
           RbActivityType,
           RbAuditorium,
           RbSlotType,

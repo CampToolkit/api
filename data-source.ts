@@ -12,7 +12,7 @@ import { RbActivityType } from './src/db/entities/rb-activity-type.entity';
 import { RbAuditorium } from './src/db/entities/rb-auditorium.entity';
 import { RbSlotType } from './src/db/entities/rb-slot-type.entity';
 import { Sportsman } from './src/db/entities/sportsman.entity';
-import { Session } from './src/db/entities/session.entity';
+import { PracticeSession } from './src/db/entities/practice-session.entity';
 
 config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
 
@@ -29,7 +29,7 @@ export const AppDataSource = new DataSource({
     PracticeGroup,
 
     CampSportsman,
-    Session,
+    PracticeSession,
     RbActivityType,
     RbAuditorium,
     RbSlotType,

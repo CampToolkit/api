@@ -8,7 +8,7 @@ import { RbActivityType } from './entities/rb-activity-type.entity';
 import { RbAuditorium } from './entities/rb-auditorium.entity';
 import { RbSlotType } from './entities/rb-slot-type.entity';
 import { Sportsman } from './entities/sportsman.entity';
-import { Session } from './entities/session.entity';
+import { PracticeSession } from './entities/practice-session.entity';
 import { DbCampService } from './services/camp/db-camp.service';
 import { DbPracticeGroupService } from './services/db-practice-group/db-practice-group.service';
 import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
@@ -25,7 +25,7 @@ import { DbUserService } from './services/db-user/db-user.service';
       Camp,
       PracticeGroup,
       CampSportsman,
-      Session,
+      PracticeSession,
       RbActivityType,
       RbAuditorium,
       RbSlotType,
