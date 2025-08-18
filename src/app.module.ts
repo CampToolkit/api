@@ -18,12 +18,14 @@ import { CampModule } from './modules/camp/camp.module';
 import { PracticeGroupModule } from './modules/pracite-group/practice-group.module';
 import { SportsmanModule } from './modules/sportsman/sportsman.module';
 import { SessionModule } from './modules/session/session.module';
+import { configuration } from './configuration';
 import * as process from 'node:process';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      load: [configuration],
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
     TypeOrmModule.forRootAsync({
@@ -31,11 +33,11 @@ import * as process from 'node:process';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'mysql',
-        host: config.get('DB_HOST'),
-        port: Number(config.get('DB_PORT')),
-        username: config.get('DB_USER'),
-        password: config.get('DB_PASS'),
-        database: config.get('DB_NAME'),
+        host: config.get('db.host'),
+        port: Number(config.get('db.port')),
+        username: config.get('db.user'),
+        password: config.get('db.password'),
+        database: config.get('db.name'),
         migrations: ['./src/db/migrations/*.js'],
         migrationsTableName: 'typeorm_migrations',
         entities: [
