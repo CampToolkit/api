@@ -28,8 +28,8 @@ async function bootstrap() {
 
 function setSwagger(app: INestApplication) {
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Sequence Generator API')
-    .setDescription('Sequence Generator API documentation')
+    .setTitle('Camp-Toolkit API')
+    .setDescription('Camp-Toolkit API documentation')
     .setVersion('1.0')
     .addTag('sg')
     .build();
