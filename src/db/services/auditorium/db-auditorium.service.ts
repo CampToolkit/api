@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { RbAuditorium } from '../../entities/rb-auditorium.entity';
+import { RbAuditorium } from '../../entities/schedule/rb-auditorium.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
