@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Camp } from '../../entities/camp.entity';
+import { Camp } from '../../entities/camp/camp.entity';
 import { Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
 

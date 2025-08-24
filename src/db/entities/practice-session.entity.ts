@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
-import { Camp } from './camp.entity';
+import { Camp } from './camp/camp.entity';
 import { PracticeGroup } from './practice-group.entity';
 import { RbActivityType } from './schedule/rb-activity-type.entity';
 import { RbLessonType } from './schedule/rb-lesson-type.entity';

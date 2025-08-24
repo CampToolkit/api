@@ -4,9 +4,9 @@ import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
 import { join } from 'path';
 import { User } from './src/db/entities/person/user.entity';
-import { Camp } from './src/db/entities/camp.entity';
+import { Camp } from './src/db/entities/camp/camp.entity';
 import { PracticeGroup } from './src/db/entities/practice-group.entity';
-import { CampSportsman } from './src/db/entities/camp_sportsman.entity';
+import { CampSportsman } from './src/db/entities/camp/camp_sportsman.entity';
 
 import { RbActivityType } from './src/db/entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from './src/db/entities/schedule/rb-auditorium.entity';
