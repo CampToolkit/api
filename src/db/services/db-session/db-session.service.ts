@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PracticeSession } from '../../entities/practice-session.entity';
 import { Repository } from 'typeorm';
 import { DbActivityTypeService } from '../activity-type/db-activity-type.service';
-import { DbSlotTypeService } from '../slot-type/db-slot-type.service';
+import { DbLessonTypeService } from '../slot-type/db-lesson-type.service';
 import { DbAuditoriumService } from '../auditorium/db-auditorium.service';
 import { DbCampService } from '../camp/db-camp.service';
 import { DbPracticeGroupService } from '../db-practice-group/db-practice-group.service';
@@ -20,8 +20,8 @@ export class DbSessionService {
     private readonly dbPracticeGroup: DbPracticeGroupService,
     @Inject(DbActivityTypeService)
     private readonly dbActivityTypeService: DbActivityTypeService,
-    @Inject(DbSlotTypeService)
-    private readonly dbSlotTypeService: DbSlotTypeService,
+    @Inject(DbLessonTypeService)
+    private readonly dbSlotTypeService: DbLessonTypeService,
     @Inject(DbAuditoriumService)
     private readonly dbAuditoriumService: DbAuditoriumService,
   ) {}

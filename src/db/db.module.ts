@@ -14,7 +14,7 @@ import { DbPracticeGroupService } from './services/db-practice-group/db-practice
 import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
 import { DbSessionService } from './services/db-session/db-session.service';
 import { DbActivityTypeService } from './services/activity-type/db-activity-type.service';
-import { DbSlotTypeService } from './services/slot-type/db-slot-type.service';
+import { DbLessonTypeService } from './services/slot-type/db-lesson-type.service';
 import { DbAuditoriumService } from './services/auditorium/db-auditorium.service';
 import { DbUserService } from './services/db-user/db-user.service';
 import { LessonSportsmanParticipants } from './entities/schedule/lesson-sportsman-participants.entity';
@@ -22,6 +22,7 @@ import { LessonGroupParticipants } from './entities/schedule/lesson-group-partic
 import { Coach } from './entities/person/coach.entity';
 import { Lesson } from './entities/schedule/lesson.entity';
 import { Lesson_Coach } from './entities/schedule/lesson_coach.entity';
+import { DbLessonService } from './services/lesson/db-lesson.service';
 
 @Module({
   imports: [
@@ -51,9 +52,10 @@ import { Lesson_Coach } from './entities/schedule/lesson_coach.entity';
     DbSportsmanService,
     DbSessionService,
     DbActivityTypeService,
-    DbSlotTypeService,
+    DbLessonTypeService,
     DbAuditoriumService,
     DbUserService,
+    DbLessonService,
   ],
   exports: [
     DbCampService,

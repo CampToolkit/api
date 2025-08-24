@@ -17,9 +17,10 @@ export class Camp extends AbstractEntity {
   @Column({ type: 'varchar', length: 255 })
   city: string;
 
-  @OneToMany(() => PracticeSession, (session: PracticeSession) => session.camp)
-  sessions: PracticeSession[];
-
   @OneToMany(() => PracticeGroup, (group) => group.camp)
   practiceGroups: PracticeGroup[];
+
+  // todo удалить
+  @OneToMany(() => PracticeSession, (session: PracticeSession) => session.camp)
+  sessions: PracticeSession[];
 }

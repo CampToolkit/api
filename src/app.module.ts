@@ -17,7 +17,7 @@ import { Sportsman } from './db/entities/person/sportsman.entity';
 import { CampModule } from './camp-api-modules/camp/camp.module';
 import { PracticeGroupModule } from './camp-api-modules/pracite-group/practice-group.module';
 import { SportsmanModule } from './camp-api-modules/sportsman/sportsman.module';
-import { SessionModule } from './camp-api-modules/session/session.module';
+import { SessionModule } from './camp-api-modules/session/sessionModule';
 import { configuration } from './configuration';
 import * as process from 'node:process';
 

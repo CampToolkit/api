@@ -4,7 +4,7 @@ import { RbLessonType } from '../../entities/schedule/rb-lesson-type.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class DbSlotTypeService {
+export class DbLessonTypeService {
   constructor(
     @InjectRepository(RbLessonType)
     private readonly slotTypeRepository: Repository<RbLessonType>,

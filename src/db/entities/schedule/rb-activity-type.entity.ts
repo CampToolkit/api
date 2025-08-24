@@ -11,6 +11,7 @@ export class RbActivityType extends AbstractEntity {
   @OneToMany(() => Lesson, (lesson) => lesson.activityType)
   lessons: Lesson[];
 
+  // todo удалить
   @OneToMany(() => PracticeSession, (session: PracticeSession) => session.camp)
   sessions: PracticeSession[];
 }

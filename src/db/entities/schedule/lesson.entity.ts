@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../abstract.entity';
 import { RbActivityType } from './rb-activity-type.entity';
 import { RbAuditorium } from './rb-auditorium.entity';
@@ -6,9 +6,14 @@ import { Lesson_Coach } from './lesson_coach.entity';
 import { RbLessonType } from './rb-lesson-type.entity';
 import { LessonGroupParticipants } from './lesson-group-participants.entity';
 import { LessonSportsmanParticipants } from './lesson-sportsman-participants.entity';
+import { Camp } from '../camp/camp.entity';
 
 @Entity('lesson')
 export class Lesson extends AbstractEntity {
+  @ManyToOne(() => Camp)
+  @JoinColumn({ name: 'campId' })
+  camp: Camp;
+
   @Column({ type: 'datetime' })
   startDate: Date;
 
