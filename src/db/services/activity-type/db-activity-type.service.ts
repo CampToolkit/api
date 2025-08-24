@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RbActivityType } from '../../entities/rb-activity-type.entity';
+import { RbActivityType } from '../../entities/schedule/rb-activity-type.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

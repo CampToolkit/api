@@ -1,5 +1,5 @@
 import { Column, Entity, Index } from 'typeorm';
-import { AbstractEntity } from './abstract.entity';
+import { AbstractEntity } from '../abstract.entity';
 
 @Entity()
 @Index('IDX_USER_USER_VKID', ['user_vkid'], { unique: true })

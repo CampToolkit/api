@@ -4,16 +4,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModule } from './db/db.module';
-import { User } from './db/entities/user.entity';
+import { User } from './db/entities/person/user.entity';
 import { Camp } from './db/entities/camp.entity';
 import { PracticeGroup } from './db/entities/practice-group.entity';
 
 import { CampSportsman } from './db/entities/camp_sportsman.entity';
 import { PracticeSession } from './db/entities/practice-session.entity';
-import { RbActivityType } from './db/entities/rb-activity-type.entity';
-import { RbAuditorium } from './db/entities/rb-auditorium.entity';
-import { RbSlotType } from './db/entities/rb-slot-type.entity';
-import { Sportsman } from './db/entities/sportsman.entity';
+import { RbActivityType } from './db/entities/schedule/rb-activity-type.entity';
+import { RbAuditorium } from './db/entities/schedule/rb-auditorium.entity';
+import { RbLessonType } from './db/entities/schedule/rb-lesson-type.entity';
+import { Sportsman } from './db/entities/person/sportsman.entity';
 import { CampModule } from './camp-api-modules/camp/camp.module';
 import { PracticeGroupModule } from './camp-api-modules/pracite-group/practice-group.module';
 import { SportsmanModule } from './camp-api-modules/sportsman/sportsman.module';
@@ -48,7 +48,7 @@ import * as process from 'node:process';
           PracticeSession,
           RbActivityType,
           RbAuditorium,
-          RbSlotType,
+          RbLessonType,
           Sportsman,
         ],
         synchronize: true,

@@ -2,9 +2,9 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { Camp } from './camp.entity';
 import { PracticeGroup } from './practice-group.entity';
-import { RbActivityType } from './rb-activity-type.entity';
-import { RbSlotType } from './rb-slot-type.entity';
-import { RbAuditorium } from './rb-auditorium.entity';
+import { RbActivityType } from './schedule/rb-activity-type.entity';
+import { RbLessonType } from './schedule/rb-lesson-type.entity';
+import { RbAuditorium } from './schedule/rb-auditorium.entity';
 
 @Entity('practiceSession')
 export class PracticeSession extends AbstractEntity {
@@ -30,11 +30,11 @@ export class PracticeSession extends AbstractEntity {
   @JoinColumn({ name: 'activityTypeId' })
   activityType: RbActivityType;
 
-  @ManyToOne(() => RbSlotType, (type) => type.sessions, {
+  @ManyToOne(() => RbLessonType, (type) => type.sessions, {
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'slotTypeId' })
-  slotType: RbSlotType;
+  slotType: RbLessonType;
 
   @ManyToOne(() => RbAuditorium, (type) => type.sessions, {
     onDelete: 'SET NULL',
