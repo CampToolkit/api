@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { Camp } from '../../db/entities/camp.entity';
+import { Camp } from '../../db/entities/camp/camp.entity';
 import { DbCampService } from '../../db/services/camp/db-camp.service';
 import { UpdateResult } from 'typeorm';
 

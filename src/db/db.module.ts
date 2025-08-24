@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/person/user.entity';
-import { Camp } from './entities/camp.entity';
-import { CampSportsman } from './entities/camp_sportsman.entity';
+import { Camp } from './entities/camp/camp.entity';
+import { CampSportsman } from './entities/camp/camp_sportsman.entity';
 import { PracticeGroup } from './entities/practice-group.entity';
 import { RbActivityType } from './entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from './entities/schedule/rb-auditorium.entity';

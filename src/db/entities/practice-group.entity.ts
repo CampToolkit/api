@@ -1,8 +1,17 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { PracticeSession } from './practice-session.entity';
-import { Camp } from './camp.entity';
+import { Camp } from './camp/camp.entity';
 import { LessonGroupParticipants } from './schedule/lesson-group-participants.entity';
+import { Sportsman } from './person/sportsman.entity';
 
 @Entity('practiceGroup')
 export class PracticeGroup extends AbstractEntity {
@@ -20,10 +29,18 @@ export class PracticeGroup extends AbstractEntity {
   children?: PracticeGroup[];
 
   @ManyToOne(() => Camp, (camp) => camp.practiceGroups, {
-    onDelete: 'CASCADE', // если лагерь удалят, все его группы тоже удалятся
+    onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'campId' }) // явное имя колонки
+  @JoinColumn({ name: 'campId' })
   camp: Camp;
+
+  @ManyToMany(() => Sportsman, (sportsman) => sportsman.practiceGroups, {})
+  @JoinTable({
+    name: 'group_sportsman',
+    joinColumn: { name: 'groupId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'sportsmanId', referencedColumnName: 'id' },
+  })
+  sportsman: Sportsman[];
 
   @OneToMany(
     () => LessonGroupParticipants,

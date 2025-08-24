@@ -5,10 +5,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModule } from './db/db.module';
 import { User } from './db/entities/person/user.entity';
-import { Camp } from './db/entities/camp.entity';
+import { Camp } from './db/entities/camp/camp.entity';
 import { PracticeGroup } from './db/entities/practice-group.entity';
 
-import { CampSportsman } from './db/entities/camp_sportsman.entity';
+import { CampSportsman } from './db/entities/camp/camp_sportsman.entity';
 import { PracticeSession } from './db/entities/practice-session.entity';
 import { RbActivityType } from './db/entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from './db/entities/schedule/rb-auditorium.entity';
