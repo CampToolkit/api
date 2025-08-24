@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbSessionService } from '../../db/services/db-session/db-session.service';
+import { DbSessionService } from '../../db/services/session/db-session.service';
 
 @Injectable()
 export class SessionService {

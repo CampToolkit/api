@@ -6,7 +6,7 @@ import { DbActivityTypeService } from '../activity-type/db-activity-type.service
 import { DbLessonTypeService } from '../slot-type/db-lesson-type.service';
 import { DbAuditoriumService } from '../auditorium/db-auditorium.service';
 import { DbCampService } from '../camp/db-camp.service';
-import { DbPracticeGroupService } from '../db-practice-group/db-practice-group.service';
+import { DbPracticeGroupService } from '../practice-group/db-practice-group.service';
 
 @Injectable()
 export class DbSessionService {
