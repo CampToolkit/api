@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbPracticeGroupService } from '../../db/services/db-practice-group/db-practice-group.service';
+import { DbPracticeGroupService } from '../../db/services/practice-group/db-practice-group.service';
 
 @Injectable()
 export class PracticeGroupService {

@@ -10,18 +10,21 @@ import { RbLessonType } from './entities/schedule/rb-lesson-type.entity';
 import { Sportsman } from './entities/person/sportsman.entity';
 import { PracticeSession } from './entities/practice-session.entity';
 import { DbCampService } from './services/camp/db-camp.service';
-import { DbPracticeGroupService } from './services/db-practice-group/db-practice-group.service';
+import { DbPracticeGroupService } from './services/practice-group/db-practice-group.service';
 import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
-import { DbSessionService } from './services/db-session/db-session.service';
+import { DbSessionService } from './services/session/db-session.service';
 import { DbActivityTypeService } from './services/activity-type/db-activity-type.service';
-import { DbSlotTypeService } from './services/slot-type/db-slot-type.service';
+import { DbLessonTypeService } from './services/lesson-type/db-lesson-type.service';
 import { DbAuditoriumService } from './services/auditorium/db-auditorium.service';
-import { DbUserService } from './services/db-user/db-user.service';
+import { DbUserService } from './services/user/db-user.service';
 import { LessonSportsmanParticipants } from './entities/schedule/lesson-sportsman-participants.entity';
 import { LessonGroupParticipants } from './entities/schedule/lesson-group-participants.entity';
 import { Coach } from './entities/person/coach.entity';
 import { Lesson } from './entities/schedule/lesson.entity';
 import { Lesson_Coach } from './entities/schedule/lesson_coach.entity';
+import { DbLessonService } from './services/lesson/db-lesson.service';
+import { DbLessonCoachService } from './services/lesson_coach/db-lesson_coach.service';
+import { LessonGroupParticipantsService } from './services/lesson-group-participants/lesson-group-participants.service';
 
 @Module({
   imports: [
@@ -51,9 +54,12 @@ import { Lesson_Coach } from './entities/schedule/lesson_coach.entity';
     DbSportsmanService,
     DbSessionService,
     DbActivityTypeService,
-    DbSlotTypeService,
+    DbLessonTypeService,
     DbAuditoriumService,
     DbUserService,
+    DbLessonService,
+    DbLessonCoachService,
+    LessonGroupParticipantsService,
   ],
   exports: [
     DbCampService,
