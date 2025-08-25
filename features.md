@@ -3,8 +3,17 @@
 - group x
 - dbPracticeGroup x
 - sportsman x
-- session
+- lesson
 - coach
+
+## Schedule services
+- lesson x
+- lessonGroupParticipants
+- lessonSportsmanParticipants
+- lesson_coach x
+- rbActivityType
+- rbAuditorium
+- rbLessonType
 
 ## узнать
 makefile

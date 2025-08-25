@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from '../../entities/schedule/lesson.entity';
 
 import { DbActivityTypeService } from '../activity-type/db-activity-type.service';
-import { DbLessonTypeService } from '../slot-type/db-lesson-type.service';
+import { DbLessonTypeService } from '../lesson-type/db-lesson-type.service';
 import { DbAuditoriumService } from '../auditorium/db-auditorium.service';
 import { RbActivityType } from '../../entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from '../../entities/schedule/rb-auditorium.entity';
@@ -68,7 +68,7 @@ export class DbLessonService {
       const startDate = new Date(params.startDate);
       startDate.setHours(0, 0, 0, 0);
       const endDate = new Date(params.startDate);
-      endDate.setHours(0, 0, 0, 0);
+      endDate.setHours(23, 59, 0, 0);
       where.startDate = Between(startDate, endDate);
     }
 
