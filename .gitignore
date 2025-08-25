@@ -3,6 +3,8 @@
 /node_modules
 /build
 
+mariadb_data/
+
 # Logs
 logs
 *.log
