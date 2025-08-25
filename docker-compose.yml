@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: camp_toolkit_db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
+    ports:
+      - ${DOCKER_PORTS_MAP}
+    volumes:
+      - ./mariadb_data:/var/lib/mysql
