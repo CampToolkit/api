@@ -19,6 +19,10 @@ import { PracticeGroupModule } from './camp-api-modules/pracite-group/practice-g
 import { SportsmanModule } from './camp-api-modules/sportsman/sportsman.module';
 import { SessionModule } from './camp-api-modules/session/sessionModule';
 import { configuration } from './configuration';
+
+import { LessonModule } from './camp-api-modules/lessons/lesson/lesson.module';
+import { LessonCoachModule } from './camp-api-modules/lessons/lesson_coach/lesson_coach.module';
+import { LessonGroupParticipantsModule } from './camp-api-modules/lessons/lesson_group-participants/lesson_group-participants.module';
 import * as process from 'node:process';
 
 @Module({
@@ -64,6 +68,9 @@ import * as process from 'node:process';
     PracticeGroupModule,
     SportsmanModule,
     SessionModule,
+    LessonModule,
+    LessonCoachModule,
+    LessonGroupParticipantsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
