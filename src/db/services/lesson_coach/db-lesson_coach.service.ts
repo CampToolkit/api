@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class DbLessonCoachService {
+export class DbLesson_CoachService {
   constructor(
     @InjectRepository(Lesson_Coach)
     private lessonCoachRepository: Repository<Lesson_Coach>,
@@ -22,18 +22,13 @@ export class DbLessonCoachService {
   async update(
     id: number,
     params: Partial<{
-      lessonId: number;
       coachId: number;
       role: 'PRIMARY' | 'SECONDARY';
     }>,
   ) {
     const lessonCoach = await this.lessonCoachRepository.findOneBy({ id });
     if (!lessonCoach) {
-      throw new Error(`lesson with id: ${id} not found`);
-    }
-
-    if (params.lessonId) {
-      lessonCoach.lessonId = params.lessonId;
+      throw new Error(`lesson_coach with id: ${id} not found`);
     }
 
     if (params.coachId) {

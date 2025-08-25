@@ -23,8 +23,8 @@ import { Coach } from './entities/person/coach.entity';
 import { Lesson } from './entities/schedule/lesson.entity';
 import { Lesson_Coach } from './entities/schedule/lesson_coach.entity';
 import { DbLessonService } from './services/lesson/db-lesson.service';
-import { DbLessonCoachService } from './services/lesson_coach/db-lesson_coach.service';
-import { LessonGroupParticipantsService } from './services/lesson-group-participants/lesson-group-participants.service';
+import { DbLesson_CoachService } from './services/lesson_coach/db-lesson_coach.service';
+import { DbLessonGroupParticipantsService } from './services/lesson-group-participants/db-lesson-group-participants.service';
 
 @Module({
   imports: [
@@ -58,14 +58,17 @@ import { LessonGroupParticipantsService } from './services/lesson-group-particip
     DbAuditoriumService,
     DbUserService,
     DbLessonService,
-    DbLessonCoachService,
-    LessonGroupParticipantsService,
+    DbLesson_CoachService,
+    DbLessonGroupParticipantsService,
   ],
   exports: [
     DbCampService,
     DbPracticeGroupService,
     DbSportsmanService,
     DbSessionService,
+    DbLessonService,
+    DbLesson_CoachService,
+    DbLessonGroupParticipantsService,
   ],
 })
 export class DbModule {}

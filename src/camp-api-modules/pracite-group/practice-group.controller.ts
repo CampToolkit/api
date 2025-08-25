@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   BadRequestException,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { PracticeGroupService } from './practice-group.service';
 import { CreatePracticeGroupDto } from './dto/create-practice-group.dto';
@@ -32,6 +33,7 @@ export class PracticeGroupController {
   }
 
   @Get('camp/:id')
+  // todo поставить ParseIntPipe
   findAllByCamp(@Param('id') id: string) {
     return this.practiceGroupService.findAllByCamp(Number(id));
   }

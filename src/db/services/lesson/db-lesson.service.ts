@@ -54,15 +54,15 @@ export class DbLessonService {
     });
   }
 
-  findAllBy(
-    params: Partial<{
-      startDate: string;
-      activityTypeId: number;
-      auditoriumId: number;
-      lessonTypeId: number;
-    }>,
-  ) {
+  findAllBy(params: {
+    campId: number;
+    startDate?: string;
+    activityTypeId?: number;
+    auditoriumId?: number;
+    lessonTypeId?: number;
+  }) {
     const where: FindOptionsWhere<Lesson> = {};
+    where.camp = { id: params.campId };
 
     if (params.startDate) {
       const startDate = new Date(params.startDate);

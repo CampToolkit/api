@@ -1,17 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DbLessonGroupParticipantsService } from './db-lesson-group-participants.service';
+import { LessonGroupParticipantsService } from './lesson_group-participants.service';
 
 describe('LessonGroupParticipantsService', () => {
-  let service: DbLessonGroupParticipantsService;
+  let service: LessonGroupParticipantsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [DbLessonGroupParticipantsService],
+      providers: [LessonGroupParticipantsService],
     }).compile();
 
-    service = module.get<DbLessonGroupParticipantsService>(
-      DbLessonGroupParticipantsService,
-    );
+    service = module.get<LessonGroupParticipantsService>(LessonGroupParticipantsService);
   });
 
   it('should be defined', () => {
