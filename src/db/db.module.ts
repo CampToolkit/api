@@ -17,14 +17,15 @@ import { DbActivityTypeService } from './services/activity-type/db-activity-type
 import { DbLessonTypeService } from './services/lesson-type/db-lesson-type.service';
 import { DbAuditoriumService } from './services/auditorium/db-auditorium.service';
 import { DbUserService } from './services/user/db-user.service';
-import { LessonSportsmanParticipants } from './entities/schedule/lesson-sportsman-participants.entity';
-import { LessonGroupParticipants } from './entities/schedule/lesson-group-participants.entity';
+import { Lesson_Sportsman } from './entities/schedule/lesson_sportsman.entity';
+import { Lesson_Group } from './entities/schedule/lesson_group.entity';
 import { Coach } from './entities/person/coach.entity';
 import { Lesson } from './entities/schedule/lesson.entity';
 import { Lesson_Coach } from './entities/schedule/lesson_coach.entity';
 import { DbLessonService } from './services/lesson/db-lesson.service';
 import { DbLesson_CoachService } from './services/lesson_coach/db-lesson_coach.service';
-import { DbLessonGroupParticipantsService } from './services/lesson-group-participants/db-lesson-group-participants.service';
+import { DbLesson_GroupService } from './services/lesson-group-participants/db-lesson_-group.service';
+import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsman-participants/db-lesson_sportsman-participants.service';
 
 @Module({
   imports: [
@@ -38,8 +39,8 @@ import { DbLessonGroupParticipantsService } from './services/lesson-group-partic
       Sportsman,
 
       Lesson,
-      LessonSportsmanParticipants,
-      LessonGroupParticipants,
+      Lesson_Sportsman,
+      Lesson_Group,
       Lesson_Coach,
       RbActivityType,
       RbAuditorium,
@@ -59,7 +60,8 @@ import { DbLessonGroupParticipantsService } from './services/lesson-group-partic
     DbUserService,
     DbLessonService,
     DbLesson_CoachService,
-    DbLessonGroupParticipantsService,
+    DbLesson_GroupService,
+    DbLesson_SportsmanParticipantsService,
   ],
   exports: [
     DbCampService,
@@ -68,7 +70,8 @@ import { DbLessonGroupParticipantsService } from './services/lesson-group-partic
     DbSessionService,
     DbLessonService,
     DbLesson_CoachService,
-    DbLessonGroupParticipantsService,
+    DbLesson_GroupService,
+    DbLesson_SportsmanParticipantsService,
   ],
 })
 export class DbModule {}

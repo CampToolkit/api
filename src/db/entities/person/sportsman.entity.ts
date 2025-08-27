@@ -1,6 +1,6 @@
 import { AbstractEntity } from '../abstract.entity';
 import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
-import { LessonSportsmanParticipants } from '../schedule/lesson-sportsman-participants.entity';
+import { Lesson_Sportsman } from '../schedule/lesson_sportsman.entity';
 import { PracticeGroup } from '../practice-group.entity';
 
 @Entity('sportsman')
@@ -23,10 +23,10 @@ export class Sportsman extends AbstractEntity {
   practiceGroups: PracticeGroup[];
 
   @OneToMany(
-    () => LessonSportsmanParticipants,
+    () => Lesson_Sportsman,
     (lessonSportsman) => lessonSportsman.sportsman,
   )
-  sportsmanParticipant: LessonSportsmanParticipants[];
+  lesson_sportsmen: Lesson_Sportsman[];
 
   //   todo добавить город
 }

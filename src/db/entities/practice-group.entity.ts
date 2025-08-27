@@ -10,7 +10,7 @@ import {
 import { AbstractEntity } from './abstract.entity';
 import { PracticeSession } from './practice-session.entity';
 import { Camp } from './camp/camp.entity';
-import { LessonGroupParticipants } from './schedule/lesson-group-participants.entity';
+import { Lesson_Group } from './schedule/lesson_group.entity';
 import { Sportsman } from './person/sportsman.entity';
 
 @Entity('practiceGroup')
@@ -43,10 +43,10 @@ export class PracticeGroup extends AbstractEntity {
   sportsman: Sportsman[];
 
   @OneToMany(
-    () => LessonGroupParticipants,
+    () => Lesson_Group,
     (lessonGroupParticipants) => lessonGroupParticipants.group,
   )
-  lessonGroupParticipants: LessonGroupParticipants[];
+  lesson_group: Lesson_Group[];
 
   // todo удалить
   @OneToMany(() => PracticeSession, (session: PracticeSession) => session.camp)

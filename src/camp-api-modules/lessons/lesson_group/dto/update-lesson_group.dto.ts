@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsInt, Min } from 'class-validator';
 
-export class UpdateLessonGroupParticipantDto {
+export class UpdateLesson_GroupDto {
   @ApiProperty({
     example: 3,
     description: 'ID группы',
