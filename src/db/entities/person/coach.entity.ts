@@ -14,5 +14,5 @@ export class Coach extends AbstractEntity {
   patrName: string;
 
   @OneToMany(() => Lesson_Coach, (lesson_coach) => lesson_coach.coach)
-  lessonCoaches: Lesson_Coach[];
+  lesson_coaches: Lesson_Coach[];
 }

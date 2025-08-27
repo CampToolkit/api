@@ -11,12 +11,12 @@ export class Lesson_Coach extends AbstractEntity {
   @PrimaryColumn()
   coachId: number;
 
-  @ManyToOne(() => Lesson, (lesson) => lesson.lessonCoaches, {
+  @ManyToOne(() => Lesson, (lesson) => lesson.lesson_coaches, {
     onDelete: 'CASCADE',
   })
   lesson: Lesson;
 
-  @ManyToOne(() => Coach, (coach) => coach.lessonCoaches, {
+  @ManyToOne(() => Coach, (coach) => coach.lesson_coaches, {
     onDelete: 'CASCADE',
   })
   coach: Coach;

@@ -4,8 +4,8 @@ import { RbActivityType } from './rb-activity-type.entity';
 import { RbAuditorium } from './rb-auditorium.entity';
 import { Lesson_Coach } from './lesson_coach.entity';
 import { RbLessonType } from './rb-lesson-type.entity';
-import { LessonGroupParticipants } from './lesson-group-participants.entity';
-import { LessonSportsmanParticipants } from './lesson-sportsman-participants.entity';
+import { Lesson_Group } from './lesson_group.entity';
+import { Lesson_Sportsman } from './lesson_sportsman.entity';
 import { Camp } from '../camp/camp.entity';
 
 @Entity('lesson')
@@ -21,7 +21,7 @@ export class Lesson extends AbstractEntity {
   endDate: Date;
 
   @OneToMany(() => Lesson_Coach, (lesson_coach) => lesson_coach.lesson)
-  lessonCoaches: Lesson_Coach[];
+  lesson_coaches: Lesson_Coach[];
 
   @ManyToOne(() => RbActivityType, (activityType) => activityType.lessons)
   activityType: RbActivityType;
@@ -32,12 +32,12 @@ export class Lesson extends AbstractEntity {
   @ManyToOne(() => RbLessonType)
   lessonType: RbLessonType;
 
-  @OneToMany(() => LessonGroupParticipants, (lessonGroup) => lessonGroup.lesson)
-  lessonGroup: LessonGroupParticipants[];
+  @OneToMany(() => Lesson_Group, (lessonGroup) => lessonGroup.lesson)
+  lesson_group: Lesson_Group[];
 
   @OneToMany(
-    () => LessonSportsmanParticipants,
+    () => Lesson_Sportsman,
     (lessonSportsman) => lessonSportsman.lesson,
   )
-  lessonSportsman: LessonSportsmanParticipants[];
+  lesson_sportsmen: Lesson_Sportsman[];
 }

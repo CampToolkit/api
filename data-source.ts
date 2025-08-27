@@ -14,8 +14,8 @@ import { RbLessonType } from './src/db/entities/schedule/rb-lesson-type.entity';
 import { Sportsman } from './src/db/entities/person/sportsman.entity';
 import { PracticeSession } from './src/db/entities/practice-session.entity';
 import { Coach } from './src/db/entities/person/coach.entity';
-import { LessonGroupParticipants } from './src/db/entities/schedule/lesson-group-participants.entity';
-import { LessonSportsmanParticipants } from './src/db/entities/schedule/lesson-sportsman-participants.entity';
+import { Lesson_Group } from './src/db/entities/schedule/lesson_group.entity';
+import { Lesson_Sportsman } from './src/db/entities/schedule/lesson_sportsman.entity';
 import { Lesson_Coach } from './src/db/entities/schedule/lesson_coach.entity';
 import { Lesson } from './src/db/entities/schedule/lesson.entity';
 
@@ -38,8 +38,8 @@ export const AppDataSource = new DataSource({
     Coach,
 
     Lesson,
-    LessonGroupParticipants,
-    LessonSportsmanParticipants,
+    Lesson_Group,
+    Lesson_Sportsman,
     Lesson_Coach,
 
     RbLessonType,
