@@ -24,6 +24,7 @@ export class Lesson extends AbstractEntity {
   lesson_coaches: Lesson_Coach[];
 
   @ManyToOne(() => RbActivityType, (activityType) => activityType.lessons)
+  @JoinColumn({ name: 'activityTypeId' })
   activityType: RbActivityType;
 
   @ManyToOne(() => RbAuditorium, (auditorium) => auditorium.lessons)

@@ -1,6 +1,6 @@
 import { Between, FindOptionsWhere, Repository, UpdateResult } from 'typeorm';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from '../../entities/schedule/lesson.entity';
 
@@ -15,8 +15,9 @@ export class DbLessonService {
     private lessonRepository: Repository<Lesson>,
   ) {}
 
-  // Создание нового занятия
-  async create(args: {
+  logger = new Logger(DbLessonService.name);
+
+  async create(params: {
     campId: number;
     startDate: string;
     endDate: string;
@@ -24,7 +25,15 @@ export class DbLessonService {
     auditoriumId: number;
     lessonTypeId: number;
   }): Promise<Lesson> {
-    const lesson = this.lessonRepository.create(args);
+    const lesson = this.lessonRepository.create({
+      camp: { id: params.campId },
+      activityType: { id: params.activityTypeId },
+      auditorium: { id: params.auditoriumId },
+      lessonType: { id: params.lessonTypeId },
+      startDate: params.startDate,
+      endDate: params.endDate,
+    });
+    this.logger.log(lesson);
     return await this.lessonRepository.save(lesson);
   }
 
