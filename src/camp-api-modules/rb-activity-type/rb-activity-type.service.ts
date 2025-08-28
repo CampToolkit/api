@@ -1,40 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { RbActivityType } from '../../db/entities/schedule/rb-activity-type.entity';
-import { Repository } from 'typeorm';
+import { DbRbActivityTypeService } from '../../db/services/rb-activity-type/db-rb-activity-type.service';
 
 @Injectable()
 export class RbActivityTypeService {
-  constructor(
-    @InjectRepository(RbActivityType)
-    private rbActivityTypeRepository: Repository<RbActivityType>,
-  ) {}
+  constructor(private dbRbActivityTypeService: DbRbActivityTypeService) {}
 
   create(params: { name: string }) {
-    const activityType = this.rbActivityTypeRepository.create(params);
-    return this.rbActivityTypeRepository.save(activityType);
+    return this.dbRbActivityTypeService.create(params);
   }
 
   findAll() {
-    return this.rbActivityTypeRepository.find();
+    return this.dbRbActivityTypeService.findAll();
   }
 
   findOne(id: number) {
-    return this.rbActivityTypeRepository.findOne({ where: { id: id } });
+    return this.dbRbActivityTypeService.findOne(id);
   }
 
   async update(id: number, params: { name: string }) {
-    const activityType = await this.rbActivityTypeRepository.findOne({
-      where: { id: id },
-    });
-    if (!activityType) {
-      throw new Error(`Activity type ${id} not found`);
-    }
-    activityType.name = params.name;
-    return this.rbActivityTypeRepository.update(id, activityType);
+    return this.dbRbActivityTypeService.update(id, params);
   }
 
   remove(id: number) {
-    return this.rbActivityTypeRepository.softDelete(id);
+    return this.dbRbActivityTypeService.remove(id);
   }
 }

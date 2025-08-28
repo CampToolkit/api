@@ -1,12 +1,9 @@
 import { Between, FindOptionsWhere, Repository, UpdateResult } from 'typeorm';
 
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from '../../entities/schedule/lesson.entity';
 
-import { DbActivityTypeService } from '../activity-type/db-activity-type.service';
-import { DbLessonTypeService } from '../lesson-type/db-lesson-type.service';
-import { DbAuditoriumService } from '../auditorium/db-auditorium.service';
 import { RbActivityType } from '../../entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from '../../entities/schedule/rb-auditorium.entity';
 import { RbLessonType } from '../../entities/schedule/rb-lesson-type.entity';
@@ -16,14 +13,6 @@ export class DbLessonService {
   constructor(
     @InjectRepository(Lesson)
     private lessonRepository: Repository<Lesson>,
-
-    @Inject(DbActivityTypeService)
-    private readonly dbActivityTypeService: DbActivityTypeService,
-
-    @Inject(DbLessonTypeService)
-    private readonly dbLessonTypeService: DbLessonTypeService,
-    @Inject(DbAuditoriumService)
-    private readonly dbAuditoriumService: DbAuditoriumService,
   ) {}
 
   // Создание нового занятия
@@ -112,6 +101,7 @@ export class DbLessonService {
     if (!lesson) {
       throw new Error(`lesson is with id ${id} not found`);
     }
+
     if (params.startDate) {
       lesson.startDate = new Date(params.startDate);
     }

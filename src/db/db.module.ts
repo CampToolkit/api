@@ -13,9 +13,8 @@ import { DbCampService } from './services/camp/db-camp.service';
 import { DbPracticeGroupService } from './services/practice-group/db-practice-group.service';
 import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
 
-import { DbActivityTypeService } from './services/activity-type/db-activity-type.service';
 import { DbLessonTypeService } from './services/lesson-type/db-lesson-type.service';
-import { DbAuditoriumService } from './services/auditorium/db-auditorium.service';
+
 import { DbUserService } from './services/user/db-user.service';
 import { Lesson_Sportsman } from './entities/schedule/lesson_sportsman.entity';
 import { Lesson_Group } from './entities/schedule/lesson_group.entity';
@@ -27,6 +26,7 @@ import { DbLesson_CoachService } from './services/lesson_coach/db-lesson_coach.s
 import { DbLesson_GroupService } from './services/lesson-group-participants/db-lesson_group.service';
 import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsman-participants/db-lesson_sportsman-participants.service';
 import { DbRbAuditoriumService } from './services/rb-auditorium/db-rb-auditorium.service';
+import { DbRbActivityTypeService } from './services/rb-activity-type/db-rb-activity-type.service';
 
 @Module({
   imports: [
@@ -53,15 +53,15 @@ import { DbRbAuditoriumService } from './services/rb-auditorium/db-rb-auditorium
     DbPracticeGroupService,
     DbSportsmanService,
 
-    DbActivityTypeService,
     DbLessonTypeService,
-    DbAuditoriumService,
+
     DbUserService,
     DbLessonService,
     DbLesson_CoachService,
     DbLesson_GroupService,
     DbLesson_SportsmanParticipantsService,
     DbRbAuditoriumService,
+    DbRbActivityTypeService,
   ],
   exports: [
     DbCampService,
@@ -72,6 +72,10 @@ import { DbRbAuditoriumService } from './services/rb-auditorium/db-rb-auditorium
     DbLesson_CoachService,
     DbLesson_GroupService,
     DbLesson_SportsmanParticipantsService,
+
+    DbRbActivityTypeService,
+    DbRbAuditoriumService,
+    DbLessonTypeService,
   ],
 })
 export class DbModule {}
