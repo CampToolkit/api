@@ -12,7 +12,7 @@ import { RbActivityTypeService } from './rb-activity-type.service';
 import { CreateRbActivityTypeDto } from './dto/create-rb-activity-type.dto';
 import { UpdateRbActivityTypeDto } from './dto/update-rb-activity-type.dto';
 
-@Controller('rb-activity-type')
+@Controller('activity-type')
 export class RbActivityTypeController {
   constructor(private readonly rbActivityTypeService: RbActivityTypeService) {}
 

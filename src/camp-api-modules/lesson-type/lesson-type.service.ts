@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLessonTypeDto } from './dto/create-lesson-type.dto';
-import { UpdateLessonTypeDto } from './dto/update-lesson-type.dto';
 import { DbLessonTypeService } from '../../db/services/lesson-type/db-lesson-type.service';
 
 @Injectable()
