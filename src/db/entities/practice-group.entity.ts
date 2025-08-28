@@ -8,7 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
-import { PracticeSession } from './practice-session.entity';
+
 import { Camp } from './camp/camp.entity';
 import { Lesson_Group } from './schedule/lesson_group.entity';
 import { Sportsman } from './person/sportsman.entity';
@@ -47,8 +47,4 @@ export class PracticeGroup extends AbstractEntity {
     (lessonGroupParticipants) => lessonGroupParticipants.group,
   )
   lesson_group: Lesson_Group[];
-
-  // todo удалить
-  @OneToMany(() => PracticeSession, (session: PracticeSession) => session.camp)
-  sessions: PracticeSession[];
 }

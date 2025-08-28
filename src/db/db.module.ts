@@ -8,11 +8,11 @@ import { RbActivityType } from './entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from './entities/schedule/rb-auditorium.entity';
 import { RbLessonType } from './entities/schedule/rb-lesson-type.entity';
 import { Sportsman } from './entities/person/sportsman.entity';
-import { PracticeSession } from './entities/practice-session.entity';
+
 import { DbCampService } from './services/camp/db-camp.service';
 import { DbPracticeGroupService } from './services/practice-group/db-practice-group.service';
 import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
-import { DbSessionService } from './services/session/db-session.service';
+
 import { DbActivityTypeService } from './services/activity-type/db-activity-type.service';
 import { DbLessonTypeService } from './services/lesson-type/db-lesson-type.service';
 import { DbAuditoriumService } from './services/auditorium/db-auditorium.service';
@@ -45,15 +45,13 @@ import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsm
       RbActivityType,
       RbAuditorium,
       RbLessonType,
-
-      PracticeSession,
     ]),
   ],
   providers: [
     DbCampService,
     DbPracticeGroupService,
     DbSportsmanService,
-    DbSessionService,
+
     DbActivityTypeService,
     DbLessonTypeService,
     DbAuditoriumService,
@@ -67,7 +65,7 @@ import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsm
     DbCampService,
     DbPracticeGroupService,
     DbSportsmanService,
-    DbSessionService,
+
     DbLessonService,
     DbLesson_CoachService,
     DbLesson_GroupService,
