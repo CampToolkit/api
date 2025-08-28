@@ -1,7 +1,6 @@
-import { IsDateString, IsInt } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsDateString, IsInt } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { Optional } from '@nestjs/common';
 
 export class FindAllLessonsByDto {
   @ApiProperty({ example: '1', description: 'ID лагеря' })
@@ -9,28 +8,28 @@ export class FindAllLessonsByDto {
   @IsInt()
   campId: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     example: '2025-08-25T09:00:00.000Z',
     description: 'Дата начала',
   })
-  @Optional()
+  @IsOptional()
   @IsDateString()
   startDate: string;
 
-  @ApiProperty({ example: '3', description: 'ID типа активности' })
-  @Optional()
+  @ApiPropertyOptional({ example: '3', description: 'ID типа активности' })
+  @IsOptional()
   @Type(() => Number)
   @IsInt()
   activityTypeId: number;
 
-  @ApiProperty({ example: '2', description: 'ID аудитории' })
-  @Optional()
+  @ApiPropertyOptional({ example: '2', description: 'ID аудитории' })
+  @IsOptional()
   @Type(() => Number)
   @IsInt()
   auditoriumId: number;
 
-  @ApiProperty({ example: '5', description: 'ID типа урока' })
-  @Optional()
+  @ApiPropertyOptional({ example: '5', description: 'ID типа урока' })
+  @IsOptional()
   @Type(() => Number)
   @IsInt()
   lessonTypeId: number;
