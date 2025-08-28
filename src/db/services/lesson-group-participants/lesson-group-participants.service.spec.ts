@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DbLesson_GroupService } from './db-lesson_-group.service';
+import { DbLesson_GroupService } from './db-lesson_group.service';
 
 describe('LessonGroupParticipantsService', () => {
   let service: DbLesson_GroupService;

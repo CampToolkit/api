@@ -23,7 +23,7 @@ import { configuration } from './configuration';
 import { LessonModule } from './camp-api-modules/lessons/lesson/lesson.module';
 import { LessonCoachModule } from './camp-api-modules/lessons/lesson_coach/lesson_coach.module';
 import { Lesson_GroupModule } from './camp-api-modules/lessons/lesson_group/lesson_group.module';
-import { Lesson_SportsmanModule } from './camp-api-modules/lessons/lesson_sportsman-participants/lesson_sportsman-participants.module';
+import { Lesson_SportsmanModule } from './camp-api-modules/lessons/lesson_sportsman/lesson_sportsman-participants.module';
 import * as process from 'node:process';
 
 @Module({
