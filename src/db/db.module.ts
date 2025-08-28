@@ -24,7 +24,7 @@ import { Lesson } from './entities/schedule/lesson.entity';
 import { Lesson_Coach } from './entities/schedule/lesson_coach.entity';
 import { DbLessonService } from './services/lesson/db-lesson.service';
 import { DbLesson_CoachService } from './services/lesson_coach/db-lesson_coach.service';
-import { DbLesson_GroupService } from './services/lesson-group-participants/db-lesson_-group.service';
+import { DbLesson_GroupService } from './services/lesson-group-participants/db-lesson_group.service';
 import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsman-participants/db-lesson_sportsman-participants.service';
 
 @Module({

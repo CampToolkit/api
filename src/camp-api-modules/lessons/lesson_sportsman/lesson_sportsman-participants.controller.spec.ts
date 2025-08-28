@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Lesson_SportsmanController } from './lesson__sportsman_controller';
-import { Lesson_SportsmanService } from './lesson_-sportsman.service';
+import { Lesson_SportsmanController } from './lesson_sportsman.controller';
+import { Lesson_SportsmanService } from './lesson_sportsman.service';
 
 describe('LessonSportsmanParticipantsController', () => {
   let controller: Lesson_SportsmanController;
