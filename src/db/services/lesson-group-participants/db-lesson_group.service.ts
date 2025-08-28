@@ -32,7 +32,7 @@ export class DbLesson_GroupService {
   }
 
   async update(id: number, params: { groupId: number }) {
-    const lesson_group = await this.lesson_GroupRepository.findOneBy({});
+    const lesson_group = await this.lesson_GroupRepository.findOneBy({ id });
     if (!lesson_group) {
       throw new Error(`lessonGroup with id ${id} not found`);
     }
