@@ -27,6 +27,7 @@ import { DbLesson_GroupService } from './services/lesson-group-participants/db-l
 import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsman-participants/db-lesson_sportsman-participants.service';
 import { DbRbAuditoriumService } from './services/rb-auditorium/db-rb-auditorium.service';
 import { DbRbActivityTypeService } from './services/rb-activity-type/db-rb-activity-type.service';
+import { DbCoachService } from './services/coach/db-coach.service';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { DbRbActivityTypeService } from './services/rb-activity-type/db-rb-activ
     DbLesson_SportsmanParticipantsService,
     DbRbAuditoriumService,
     DbRbActivityTypeService,
+    DbCoachService,
   ],
   exports: [
     DbCampService,
@@ -76,6 +78,7 @@ import { DbRbActivityTypeService } from './services/rb-activity-type/db-rb-activ
     DbRbActivityTypeService,
     DbRbAuditoriumService,
     DbLessonTypeService,
+    DbCoachService,
   ],
 })
 export class DbModule {}
