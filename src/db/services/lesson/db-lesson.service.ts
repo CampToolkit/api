@@ -105,7 +105,7 @@ export class DbLessonService {
       auditoriumId: number;
       lessonTypeId: number;
     }>,
-  ): Promise<Lesson> {
+  ) {
     const lesson = await this.lessonRepository.findOneBy({ id });
     if (!lesson) {
       throw new Error(`lesson is with id ${id} not found`);
