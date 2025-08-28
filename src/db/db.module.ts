@@ -26,6 +26,7 @@ import { DbLessonService } from './services/lesson/db-lesson.service';
 import { DbLesson_CoachService } from './services/lesson_coach/db-lesson_coach.service';
 import { DbLesson_GroupService } from './services/lesson-group-participants/db-lesson_group.service';
 import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsman-participants/db-lesson_sportsman-participants.service';
+import { DbRbAuditoriumService } from './services/rb-auditorium/db-rb-auditorium.service';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { DbLesson_SportsmanParticipantsService } from './services/lesson-sportsm
     DbLesson_CoachService,
     DbLesson_GroupService,
     DbLesson_SportsmanParticipantsService,
+    DbRbAuditoriumService,
   ],
   exports: [
     DbCampService,

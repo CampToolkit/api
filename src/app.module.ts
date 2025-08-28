@@ -25,6 +25,7 @@ import { LessonCoachModule } from './camp-api-modules/lessons/lesson_coach/lesso
 import { Lesson_GroupModule } from './camp-api-modules/lessons/lesson_group/lesson_group.module';
 import { Lesson_SportsmanModule } from './camp-api-modules/lessons/lesson_sportsman/lesson_sportsman-participants.module';
 import { RbActivityTypeModule } from './camp-api-modules/rb-activity-type/rb-activity-type.module';
+import { RbAuditoriumModule } from './camp-api-modules/rb-auditorium/rb-auditorium.module';
 import * as process from 'node:process';
 
 @Module({
@@ -75,6 +76,7 @@ import * as process from 'node:process';
     Lesson_GroupModule,
     Lesson_SportsmanModule,
     RbActivityTypeModule,
+    RbAuditoriumModule,
   ],
   controllers: [AppController],
   providers: [AppService],

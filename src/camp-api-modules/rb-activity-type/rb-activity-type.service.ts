@@ -30,7 +30,8 @@ export class RbActivityTypeService {
     if (!activityType) {
       throw new Error(`Activity type ${id} not found`);
     }
-    return this.rbActivityTypeRepository.update(id, params);
+    activityType.name = params.name;
+    return this.rbActivityTypeRepository.update(id, activityType);
   }
 
   remove(id: number) {

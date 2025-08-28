@@ -10,6 +10,4 @@ export class RbAuditorium extends AbstractEntity {
 
   @OneToMany(() => Lesson, (lesson) => lesson.activityType)
   lessons: Lesson[];
-
-  //   todo добавить Lesson
 }
