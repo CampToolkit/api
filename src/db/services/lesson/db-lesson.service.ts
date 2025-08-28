@@ -32,8 +32,8 @@ export class DbLessonService {
     return this.lessonRepository.findOne({
       where: { id },
       relations: [
-        'lessonCoaches',
-        'lessonCoaches.coach',
+        'lesson_coach',
+        'lesson_coach.coach',
         'lessonGroupParticipants',
         'lessonGroupParticipants.group',
         'lessonSportsmanParticipants',
@@ -76,12 +76,12 @@ export class DbLessonService {
     return this.lessonRepository.find({
       where: where,
       relations: [
-        'lessonCoaches',
-        'lessonCoaches.coach',
-        'lessonGroupParticipants',
-        'lessonGroupParticipants.group',
-        'lessonSportsmanParticipants',
-        'lessonSportsmanParticipants.sportsman',
+        'lesson_coaches',
+        'lesson_coaches.coach',
+        'lesson_group',
+        'lesson_group.group',
+        'lesson_sportsmen',
+        'lesson_sportsmen.sportsman',
         'activityType',
       ],
     });
