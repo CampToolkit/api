@@ -9,7 +9,7 @@ import { Camp } from './db/entities/camp/camp.entity';
 import { PracticeGroup } from './db/entities/practice-group.entity';
 
 import { CampSportsman } from './db/entities/camp/camp_sportsman.entity';
-import { PracticeSession } from './db/entities/practice-session.entity';
+
 import { RbActivityType } from './db/entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from './db/entities/schedule/rb-auditorium.entity';
 import { RbLessonType } from './db/entities/schedule/rb-lesson-type.entity';
@@ -17,7 +17,7 @@ import { Sportsman } from './db/entities/person/sportsman.entity';
 import { CampModule } from './camp-api-modules/camp/camp.module';
 import { PracticeGroupModule } from './camp-api-modules/pracite-group/practice-group.module';
 import { SportsmanModule } from './camp-api-modules/sportsman/sportsman.module';
-import { SessionModule } from './camp-api-modules/session/sessionModule';
+
 import { configuration } from './configuration';
 
 import { LessonModule } from './camp-api-modules/lessons/lesson/lesson.module';
@@ -50,7 +50,7 @@ import * as process from 'node:process';
           Camp,
           PracticeGroup,
           CampSportsman,
-          PracticeSession,
+
           RbActivityType,
           RbAuditorium,
           RbLessonType,
@@ -68,7 +68,7 @@ import * as process from 'node:process';
     CampModule,
     PracticeGroupModule,
     SportsmanModule,
-    SessionModule,
+
     LessonModule,
     LessonCoachModule,
     Lesson_GroupModule,

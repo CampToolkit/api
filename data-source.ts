@@ -12,7 +12,7 @@ import { RbActivityType } from './src/db/entities/schedule/rb-activity-type.enti
 import { RbAuditorium } from './src/db/entities/schedule/rb-auditorium.entity';
 import { RbLessonType } from './src/db/entities/schedule/rb-lesson-type.entity';
 import { Sportsman } from './src/db/entities/person/sportsman.entity';
-import { PracticeSession } from './src/db/entities/practice-session.entity';
+
 import { Coach } from './src/db/entities/person/coach.entity';
 import { Lesson_Group } from './src/db/entities/schedule/lesson_group.entity';
 import { Lesson_Sportsman } from './src/db/entities/schedule/lesson_sportsman.entity';
@@ -45,8 +45,6 @@ export const AppDataSource = new DataSource({
     RbLessonType,
     RbActivityType,
     RbAuditorium,
-
-    PracticeSession,
   ],
   migrations: [join(__dirname, 'src/migrations/*{.ts,.js}')],
   synchronize: false, // для prod через миграции
