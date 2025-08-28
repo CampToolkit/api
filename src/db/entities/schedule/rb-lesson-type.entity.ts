@@ -5,6 +5,4 @@ import { AbstractEntity } from '../abstract.entity';
 export class RbLessonType extends AbstractEntity {
   @Column({ type: 'varchar', length: 256 })
   name: string;
-
-  //   todo Lesson
 }
