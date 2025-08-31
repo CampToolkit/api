@@ -1,7 +1,9 @@
-import { AbstractEntity } from '../abstract.entity';
 import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
+import { AbstractEntity } from '../abstract.entity';
+
 import { Lesson_Sportsman } from '../schedule/lesson_sportsman.entity';
 import { PracticeGroup } from '../practice-group.entity';
+import { Camp } from '../camp/camp.entity';
 
 @Entity('sportsman')
 export class Sportsman extends AbstractEntity {
@@ -16,6 +18,9 @@ export class Sportsman extends AbstractEntity {
 
   @Column({ type: 'datetime', nullable: true })
   birthday: Date | null;
+
+  @ManyToMany(() => Camp, (camp) => camp.sportsmen)
+  camps: Camp[];
 
   @ManyToMany(() => PracticeGroup, (group) => group.sportsman, {
     onDelete: 'CASCADE',

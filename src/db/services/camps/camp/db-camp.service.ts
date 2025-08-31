@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Camp } from '../../entities/camp/camp.entity';
+import { Camp } from '../../../entities/camp/camp.entity';
 import { Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
+import { Sportsman } from '../../../entities/person/sportsman.entity';
 
 @Injectable()
 export class DbCampService {

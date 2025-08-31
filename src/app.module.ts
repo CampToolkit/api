@@ -8,8 +8,6 @@ import { User } from './db/entities/person/user.entity';
 import { Camp } from './db/entities/camp/camp.entity';
 import { PracticeGroup } from './db/entities/practice-group.entity';
 
-import { CampSportsman } from './db/entities/camp/camp_sportsman.entity';
-
 import { RbActivityType } from './db/entities/schedule/rb-activity-type.entity';
 import { RbAuditorium } from './db/entities/schedule/rb-auditorium.entity';
 import { RbLessonType } from './db/entities/schedule/rb-lesson-type.entity';
@@ -53,7 +51,6 @@ import * as process from 'node:process';
           User,
           Camp,
           PracticeGroup,
-          CampSportsman,
 
           RbActivityType,
           RbAuditorium,

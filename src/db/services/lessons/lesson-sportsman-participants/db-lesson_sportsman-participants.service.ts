@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Lesson_Sportsman } from '../../entities/schedule/lesson_sportsman.entity';
+import { Lesson_Sportsman } from '../../../entities/schedule/lesson_sportsman.entity';
 import { Repository } from 'typeorm';
-import { Sportsman } from '../../entities/person/sportsman.entity';
-import { Lesson } from '../../entities/schedule/lesson.entity';
+import { Sportsman } from '../../../entities/person/sportsman.entity';
+import { Lesson } from '../../../entities/schedule/lesson.entity';
 
 @Injectable()
 export class DbLesson_SportsmanParticipantsService {
