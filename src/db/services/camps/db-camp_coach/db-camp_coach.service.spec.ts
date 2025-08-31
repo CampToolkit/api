@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DbCampCoachService } from './db-camp_coach.service';
+import { DbCamp_CoachService } from './db-camp_coach.service';
 
 describe('DbCampCoachService', () => {
-  let service: DbCampCoachService;
+  let service: DbCamp_CoachService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [DbCampCoachService],
+      providers: [DbCamp_CoachService],
     }).compile();
 
-    service = module.get<DbCampCoachService>(DbCampCoachService);
+    service = module.get<DbCamp_CoachService>(DbCamp_CoachService);
   });
 
   it('should be defined', () => {

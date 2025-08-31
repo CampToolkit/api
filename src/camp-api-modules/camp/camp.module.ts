@@ -6,6 +6,8 @@ import { Camp_SportsmanController } from './camp_sportsman/camp_sportsman.contro
 import { Camp_SportsmanService } from './camp_sportsman/camp_sportsman.service';
 import { Camp_AuditoriumController } from './camp_auditorium/camp_auditorium.controller';
 import { Camp_AuditoriumService } from './camp_auditorium/camp_auditorium.service';
+import { Camp_CoachController } from './camp_coach/camp_coach.controller';
+import { Camp_CoachService } from './camp_coach/camp_coach.service';
 
 @Module({
   imports: [DbModule],
@@ -13,7 +15,13 @@ import { Camp_AuditoriumService } from './camp_auditorium/camp_auditorium.servic
     CampController,
     Camp_SportsmanController,
     Camp_AuditoriumController,
+    Camp_CoachController,
   ],
-  providers: [CampService, Camp_SportsmanService, Camp_AuditoriumService],
+  providers: [
+    CampService,
+    Camp_SportsmanService,
+    Camp_AuditoriumService,
+    Camp_CoachService,
+  ],
 })
 export class CampModule {}

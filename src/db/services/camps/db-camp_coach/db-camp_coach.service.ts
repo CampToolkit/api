@@ -4,7 +4,7 @@ import { Camp } from '../../../entities/camp/camp.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class DbCampCoachService {
+export class DbCamp_CoachService {
   constructor(
     @InjectRepository(Camp)
     private readonly campRepository: Repository<Camp>,
