@@ -7,15 +7,10 @@ import {
   Param,
   Delete,
   Logger,
-  NotFoundException,
-  ValidationPipe,
-  UsePipes,
-  BadRequestException,
 } from '@nestjs/common';
 import { SportsmanService } from './sportsman.service';
 import { CreateSportsmanDto } from './dto/create-sportsman.dto';
 import { UpdateSportsmanDto } from './dto/update-sportsman.dto';
-import { FindSportsmanByCampDto } from './dto/find-all-bycamp-sportsman.dto';
 
 @Controller('sportsman')
 export class SportsmanController {
@@ -29,16 +24,6 @@ export class SportsmanController {
   @Get()
   findAll() {
     return this.sportsmanService.findAll();
-  }
-
-  @Get('camp/:id')
-  findAllByCamp(@Param() params: FindSportsmanByCampDto) {
-    return this.sportsmanService.findAllByCamp(params.id);
-  }
-
-  @Get('camp')
-  invalidCamp() {
-    throw new BadRequestException('id обязателен');
   }
 
   @Get(':id')

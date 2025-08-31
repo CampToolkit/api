@@ -20,10 +20,6 @@ export class SportsmanService {
     return this.dbSportsmanService.findAll();
   }
 
-  findAllByCamp(campId: number) {
-    return this.dbSportsmanService.findAllByCamp(campId);
-  }
-
   findOne(id: number) {
     return this.dbSportsmanService.findOne(id);
   }
