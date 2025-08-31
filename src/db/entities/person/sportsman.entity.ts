@@ -19,7 +19,7 @@ export class Sportsman extends AbstractEntity {
   @Column({ type: 'datetime', nullable: true })
   birthday: Date | null;
 
-  @ManyToMany(() => Camp, (camp) => camp.sportsmen)
+  @ManyToMany(() => Camp, (camp) => camp.sportsmen, { onDelete: 'CASCADE' })
   camps: Camp[];
 
   @ManyToMany(() => PracticeGroup, (group) => group.sportsman, {

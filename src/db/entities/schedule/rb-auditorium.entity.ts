@@ -1,7 +1,8 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../abstract.entity';
 
 import { Lesson } from './lesson.entity';
+import { Camp } from '../camp/camp.entity';
 
 @Entity('rbAuditorium')
 export class RbAuditorium extends AbstractEntity {
@@ -10,4 +11,7 @@ export class RbAuditorium extends AbstractEntity {
 
   @OneToMany(() => Lesson, (lesson) => lesson.activityType)
   lessons: Lesson[];
+
+  @ManyToMany(() => Camp, (camp) => camp.auditoriums, { onDelete: 'CASCADE' })
+  camps: Camp[];
 }

@@ -3,6 +3,7 @@ import { AbstractEntity } from '../abstract.entity';
 
 import { PracticeGroup } from '../practice-group.entity';
 import { Sportsman } from '../person/sportsman.entity';
+import { RbAuditorium } from '../schedule/rb-auditorium.entity';
 
 @Entity('camp')
 export class Camp extends AbstractEntity {
@@ -28,4 +29,12 @@ export class Camp extends AbstractEntity {
 
   @OneToMany(() => PracticeGroup, (group) => group.camp)
   practiceGroups: PracticeGroup[];
+
+  @ManyToMany(() => RbAuditorium, (auditorium) => auditorium.camps)
+  @JoinTable({
+    name: 'camp_auditorium',
+    joinColumn: { name: 'auditoriumId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'auditoriumId', referencedColumnName: 'id' },
+  })
+  auditoriums: RbAuditorium[];
 }
