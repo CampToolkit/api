@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CampService } from './camp.service';
 import { CreateCampDto } from './dto/create-camp.dto';
@@ -26,17 +27,20 @@ export class CampController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.campService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.campService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCampDto: UpdateCampDto) {
-    return this.campService.update(+id, updateCampDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCampDto: UpdateCampDto,
+  ) {
+    return this.campService.update(id, updateCampDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.campService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.campService.remove(id);
   }
 }

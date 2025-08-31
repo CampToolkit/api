@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Lesson_Coach } from '../../entities/schedule/lesson_coach.entity';
+import { Lesson_Coach } from '../../../entities/schedule/lesson_coach.entity';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 

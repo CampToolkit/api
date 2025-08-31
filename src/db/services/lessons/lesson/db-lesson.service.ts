@@ -2,11 +2,11 @@ import { Between, FindOptionsWhere, Repository, UpdateResult } from 'typeorm';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Lesson } from '../../entities/schedule/lesson.entity';
+import { Lesson } from '../../../entities/schedule/lesson.entity';
 
-import { RbActivityType } from '../../entities/schedule/rb-activity-type.entity';
-import { RbAuditorium } from '../../entities/schedule/rb-auditorium.entity';
-import { RbLessonType } from '../../entities/schedule/rb-lesson-type.entity';
+import { RbActivityType } from '../../../entities/schedule/rb-activity-type.entity';
+import { RbAuditorium } from '../../../entities/schedule/rb-auditorium.entity';
+import { RbLessonType } from '../../../entities/schedule/rb-lesson-type.entity';
 
 @Injectable()
 export class DbLessonService {

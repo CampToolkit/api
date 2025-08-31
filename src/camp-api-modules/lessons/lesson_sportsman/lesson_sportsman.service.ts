@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbLesson_SportsmanParticipantsService } from '../../../db/services/lesson-sportsman-participants/db-lesson_sportsman-participants.service';
+import { DbLesson_SportsmanParticipantsService } from '../../../db/services/lessons/lesson-sportsman-participants/db-lesson_sportsman-participants.service';
 
 @Injectable()
 export class Lesson_SportsmanService {

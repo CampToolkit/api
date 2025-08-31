@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RbLessonType } from '../../entities/schedule/rb-lesson-type.entity';
+import { RbLessonType } from '../../../entities/schedule/rb-lesson-type.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

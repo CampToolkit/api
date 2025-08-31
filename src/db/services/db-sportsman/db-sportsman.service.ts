@@ -36,16 +36,11 @@ export class DbSportsmanService {
     return this.sportsmanRepository.find();
   }
 
-  findAllByCamp(campId: number) {
-    return this.sportsmanRepository
-      .createQueryBuilder('sm')
-      .innerJoin('camp_sportsman', 'csm', 'csm.sportsmanId = sm.id')
-      .where('csm.campId = :campId', { campId })
-      .getMany();
-  }
-
   findOne(id: number) {
-    return this.sportsmanRepository.findOne({ where: { id } });
+    return this.sportsmanRepository.findOne({
+      where: { id },
+      relations: ['camp'],
+    });
   }
 
   // todo сделать поиск по всем полям

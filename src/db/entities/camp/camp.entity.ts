@@ -1,7 +1,8 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../abstract.entity';
 
 import { PracticeGroup } from '../practice-group.entity';
+import { Sportsman } from '../person/sportsman.entity';
 
 @Entity('camp')
 export class Camp extends AbstractEntity {
@@ -16,6 +17,14 @@ export class Camp extends AbstractEntity {
 
   @Column({ type: 'varchar', length: 255 })
   city: string;
+
+  @ManyToMany(() => Sportsman, (sportsman) => sportsman.camps)
+  @JoinTable({
+    name: 'camp_sportsman',
+    joinColumn: { name: 'sportsmanId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'campId', referencedColumnName: 'id' },
+  })
+  sportsmen: Sportsman[];
 
   @OneToMany(() => PracticeGroup, (group) => group.camp)
   practiceGroups: PracticeGroup[];

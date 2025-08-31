@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Lesson_Group } from '../../entities/schedule/lesson_group.entity';
+import { Lesson_Group } from '../../../entities/schedule/lesson_group.entity';
 import { Repository } from 'typeorm';
-import { PracticeGroup } from '../../entities/practice-group.entity';
-import { Lesson } from '../../entities/schedule/lesson.entity';
+import { PracticeGroup } from '../../../entities/practice-group.entity';
+import { Lesson } from '../../../entities/schedule/lesson.entity';
 
 @Injectable()
 export class DbLesson_GroupService {
