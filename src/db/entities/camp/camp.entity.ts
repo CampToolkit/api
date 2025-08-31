@@ -4,6 +4,7 @@ import { AbstractEntity } from '../abstract.entity';
 import { PracticeGroup } from '../practice-group.entity';
 import { Sportsman } from '../person/sportsman.entity';
 import { RbAuditorium } from '../schedule/rb-auditorium.entity';
+import { Coach } from '../person/coach.entity';
 
 @Entity('camp')
 export class Camp extends AbstractEntity {
@@ -22,8 +23,8 @@ export class Camp extends AbstractEntity {
   @ManyToMany(() => Sportsman, (sportsman) => sportsman.camps)
   @JoinTable({
     name: 'camp_sportsman',
-    joinColumn: { name: 'sportsmanId', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'campId', referencedColumnName: 'id' },
+    joinColumn: { name: 'campId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'sportsmanId', referencedColumnName: 'id' },
   })
   sportsmen: Sportsman[];
 
@@ -33,8 +34,16 @@ export class Camp extends AbstractEntity {
   @ManyToMany(() => RbAuditorium, (auditorium) => auditorium.camps)
   @JoinTable({
     name: 'camp_auditorium',
-    joinColumn: { name: 'auditoriumId', referencedColumnName: 'id' },
+    joinColumn: { name: 'campId', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'auditoriumId', referencedColumnName: 'id' },
   })
   auditoriums: RbAuditorium[];
+
+  @ManyToMany(() => Coach, (coach) => coach.camps)
+  @JoinTable({
+    name: 'camp_coach',
+    joinColumn: { name: 'campId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'coachId', referencedColumnName: 'id' },
+  })
+  coaches: Coach[];
 }
