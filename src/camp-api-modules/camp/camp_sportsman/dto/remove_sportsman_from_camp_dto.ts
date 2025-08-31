@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, ArrayNotEmpty, IsInt } from 'class-validator';
 
-export class RemoveCamp_SportsmanDto {
+export class RemoveSportsmanFromCampDto {
   @ApiProperty({
     description: 'Список ID спортсменов',
     example: [1, 2, 3],

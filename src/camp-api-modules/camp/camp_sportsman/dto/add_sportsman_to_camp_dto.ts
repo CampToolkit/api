@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, ArrayNotEmpty, IsInt } from 'class-validator';
 
-export class CreateCamp_SportsmanDto {
+export class AddSportsmanToCampDto {
   @ApiProperty({
     description: 'Список ID спортсменов',
     example: [1, 2, 3],
@@ -11,6 +11,6 @@ export class CreateCamp_SportsmanDto {
   @IsArray()
   @ArrayNotEmpty()
   @Type(() => Number)
-  @IsInt({ each: true }) // проверяет каждый элемент массива
+  @IsInt({ each: true })
   ids: number[];
 }

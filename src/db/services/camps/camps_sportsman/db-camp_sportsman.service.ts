@@ -17,7 +17,11 @@ export class DbCamp_SportsmanService {
       relations: ['sportsmen'],
     });
 
-    return camp?.sportsmen;
+    if (!camp) {
+      throw new Error(`Camp with id ${campId} not found`);
+    }
+
+    return camp.sportsmen;
   }
 
   async addSportsmenToCamp(campId: number, sportsmanIds: number[]) {

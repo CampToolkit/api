@@ -7,8 +7,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { Camp_SportsmanService } from './camp_sportsman.service';
-import { CreateCamp_SportsmanDto } from '../dto/create-camp_sportsman.dto';
-import { RemoveCamp_SportsmanDto } from '../dto/remove-camp_sportsman.dto';
+import { AddSportsmanToCampDto } from './dto/add_sportsman_to_camp_dto';
+import { RemoveSportsmanFromCampDto } from './dto/remove_sportsman_from_camp_dto';
 
 @Controller('camp/:id')
 export class Camp_SportsmanController {
@@ -22,15 +22,15 @@ export class Camp_SportsmanController {
   @Post('add-sportsman')
   addSportsmenToCamp(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: CreateCamp_SportsmanDto,
+    @Body() dto: AddSportsmanToCampDto,
   ) {
     return this.camp_sportsmanService.create(id, dto.ids);
   }
 
-  @Post('delete-sportsman')
+  @Post('remove-sportsman')
   removeSportsmenFromCamp(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: RemoveCamp_SportsmanDto,
+    @Body() dto: RemoveSportsmanFromCampDto,
   ) {
     return this.camp_sportsmanService.remove(id, dto.ids);
   }
