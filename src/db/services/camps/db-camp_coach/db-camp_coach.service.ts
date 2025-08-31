@@ -2,29 +2,58 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Camp } from '../../../entities/camp/camp.entity';
 import { Repository } from 'typeorm';
-import { RbAuditorium } from '../../../entities/schedule/rb-auditorium.entity';
 
 @Injectable()
-export class DbCamp_AuditoriumService {
+export class DbCampCoachService {
   constructor(
     @InjectRepository(Camp)
-    private campRepository: Repository<Camp>,
+    private readonly campRepository: Repository<Camp>,
   ) {}
 
   async findAll(campId: number) {
     const camp = await this.campRepository.findOne({
       where: { id: campId },
-      relations: ['auditoriums'],
+      relations: ['coaches'],
     });
 
     if (!camp) {
       throw new Error(`Camp with id ${campId} not found`);
     }
 
-    return camp.auditoriums;
+    return camp?.coaches;
   }
 
-  async addAuditoriumToCamp(campId: number, auditoriumIds: number[]) {
+  async addCoachesToCamp(campId: number, coachIds: number[]) {
+    const camp = await this.campRepository.findOne({
+      where: { id: campId },
+      relations: ['coaches'],
+    });
+
+    if (!camp) {
+      throw new Error(`Camp with id ${campId} not found`);
+    }
+
+    const newIds = coachIds.filter(
+      (coachId) => !camp.coaches.some((item) => item.id === coachId),
+    );
+
+    if (newIds.length === 0) {
+      throw new Error(`Camp with id ${campId} has all sent coaches`);
+    }
+
+    await this.campRepository
+      .createQueryBuilder('camp')
+      .relation(Camp, 'coaches')
+      .of(campId)
+      .add(newIds);
+
+    return this.campRepository.findOne({
+      where: { id: campId },
+      relations: ['coaches'],
+    });
+  }
+
+  async removeCoachesFromCamp(campId: number, coachIds: number[]) {
     const camp = await this.campRepository.findOne({
       where: { id: campId },
     });
@@ -33,39 +62,12 @@ export class DbCamp_AuditoriumService {
       throw new Error(`Camp with id ${campId} not found`);
     }
 
-    const existingAuditoriums = await this.campRepository
-      .createQueryBuilder('camp')
-      .relation(Camp, 'rbAuditorium')
-      .of(campId)
-      .loadMany<RbAuditorium>();
-
-    const newIds = auditoriumIds.filter(
-      (id) => !existingAuditoriums.some((item) => item.id === id),
-    );
-
-    if (newIds.length === 0) {
-      throw new Error(`Camp with id ${campId} has all sent auditoriums`);
-    }
-
-    await this.campRepository
-      .createQueryBuilder('camp')
-      .relation(Camp, 'rbAuditorium')
-      .of(campId)
-      .add(newIds);
-
-    return this.campRepository.findOne({
-      where: { id: campId },
-      relations: ['auditoriums'],
-    });
-  }
-
-  async removeAuditoriumFromCamp(campId: number, auditoriumIds: number[]) {
     return this.campRepository
       .createQueryBuilder()
       .delete()
-      .from('camp_auditorium')
-      .where('campId =:campId', { id: campId })
-      .andWhere('auditoriumId IN (:ids)', { ids: auditoriumIds })
+      .from('camp_coach')
+      .where('campId =:id', { id: campId })
+      .andWhere('coachId IN (:ids)', { ids: coachIds })
       .execute();
   }
 }

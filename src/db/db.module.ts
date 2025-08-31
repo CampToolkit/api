@@ -28,8 +28,9 @@ import { DbLesson_SportsmanParticipantsService } from './services/lessons/lesson
 import { DbRbAuditoriumService } from './services/rb-auditorium/db-rb-auditorium.service';
 import { DbRbActivityTypeService } from './services/rb-activity-type/db-rb-activity-type.service';
 import { DbCoachService } from './services/coach/db-coach.service';
-import { DbCamp_SportsmanService } from './services/camps/camps_sportsman/db-camp_sportsman.service';
+import { DbCamp_SportsmanService } from './services/camps/camp_sportsman/db-camp_sportsman.service';
 import { DbCamp_AuditoriumService } from './services/camps/camp_auditorium/db-camp_auditorium.service';
+import { DbCampCoachService } from './services/camps/db-camp_coach/db-camp_coach.service';
 
 @Module({
   imports: [
@@ -68,6 +69,8 @@ import { DbCamp_AuditoriumService } from './services/camps/camp_auditorium/db-ca
     DbCamp_SportsmanService,
 
     DbCamp_AuditoriumService,
+
+    DbCampCoachService,
   ],
   exports: [
     DbCampService,
