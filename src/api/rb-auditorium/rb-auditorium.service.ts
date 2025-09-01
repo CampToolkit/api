@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbRbAuditoriumService } from '../../db/services/rb-auditorium/db-rb-auditorium.service';
+import { DbRbAuditoriumService } from '../../db/db-module/rb-auditorium/db-rb-auditorium.service';
 
 interface AuditoriumParams {
   name: string;

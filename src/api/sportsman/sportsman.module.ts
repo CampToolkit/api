@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { DbModule } from '../../db/db.module';
+import { DbModule } from '../../db/db-module/db.module';
 import { SportsmanService } from './sportsman.service';
 import { SportsmanController } from './sportsman.controller';
 

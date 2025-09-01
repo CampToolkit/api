@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbRbActivityTypeService } from '../../db/services/rb-activity-type/db-rb-activity-type.service';
+import { DbRbActivityTypeService } from '../../db/db-module/schedule/rb-activity-type/db-rb-activity-type.service';
 
 @Injectable()
 export class RbActivityTypeService {

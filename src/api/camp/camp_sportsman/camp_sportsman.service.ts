@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { DbCamp_SportsmanService } from '../../../db/services/camps/camp_sportsman/db-camp_sportsman.service';
+import { DbCamp_SportsmanService } from '../../../db/db-module/camps/camp_sportsman/db-camp_sportsman.service';
 
 @Injectable()
 export class Camp_SportsmanService {

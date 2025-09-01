@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbCoachService } from '../../db/services/coach/db-coach.service';
+import { DbCoachService } from '../../db/db-module/persons/coach/db-coach.service';
 
 interface CoachParams {
   lastName: string;

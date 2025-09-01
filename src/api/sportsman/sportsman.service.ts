@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { DbSportsmanService } from '../../db/services/sportsman/db-sportsman.service';
+import { DbSportsmanService } from '../../db/db-module/persons/sportsman/db-sportsman.service';
 
 @Injectable()
 export class SportsmanService {

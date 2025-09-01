@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CampService } from './camp.service';
 import { CampController } from './camp.controller';
-import { DbModule } from '../../db/db.module';
+import { DbModule } from '../../db/db-module/db.module';
 import { Camp_SportsmanController } from './camp_sportsman/camp_sportsman.controller';
 import { Camp_SportsmanService } from './camp_sportsman/camp_sportsman.service';
 import { Camp_AuditoriumController } from './camp_auditorium/camp_auditorium.controller';
