@@ -1,12 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { DbCoachService } from '../../db/services/coach/db-coach.service';
 
+interface CoachParams {
+  lastName: string;
+  firstName: string;
+  patrName: string;
+}
+
 @Injectable()
 export class CoachService {
   constructor(private dbCoachService: DbCoachService) {}
 
-  create(params: { lastName: string; firstName: string; patrName: string }) {
+  create(params: CoachParams) {
     return this.dbCoachService.create(params);
+  }
+
+  createMany(params: CoachParams[]) {
+    return this.dbCoachService.createMany(params);
   }
 
   findAll() {
@@ -17,14 +27,7 @@ export class CoachService {
     return this.dbCoachService.findOne(id);
   }
 
-  update(
-    id: number,
-    params: {
-      lastName?: string;
-      firstName?: string;
-      patrName?: string;
-    },
-  ) {
+  update(id: number, params: Partial<CoachParams>) {
     return this.dbCoachService.update(id, params);
   }
 

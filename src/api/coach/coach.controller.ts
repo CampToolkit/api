@@ -11,6 +11,7 @@ import {
 import { CoachService } from './coach.service';
 import { CreateCoachDto } from './dto/create-coach.dto';
 import { UpdateCoachDto } from './dto/update-coach.dto';
+import { CreateCoachBulkDto } from './dto/CreateCoachBulkDto';
 
 @Controller('coach')
 export class CoachController {
@@ -19,6 +20,11 @@ export class CoachController {
   @Post()
   create(@Body() createCoachDto: CreateCoachDto) {
     return this.coachService.create(createCoachDto);
+  }
+
+  @Post('bulk')
+  createMany(@Body() dto: CreateCoachBulkDto) {
+    return this.coachService.createMany(dto.items);
   }
 
   @Get()
