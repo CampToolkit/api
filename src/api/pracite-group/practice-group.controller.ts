@@ -12,7 +12,7 @@ import {
 import { PracticeGroupService } from './practice-group.service';
 import { CreatePracticeGroupDto } from './dto/create-practice-group.dto';
 import { UpdatePracticeGroupDto } from './dto/update-practice-group.dto';
-import { CreatePracticeGroupBulkDto } from './dto/CreatePracticeGroupBulkDto';
+import { CreatePracticeGroupBulkDto } from './dto/CreatePracticeGroupBulk.dto';
 
 @Controller('practice-group')
 export class PracticeGroupController {

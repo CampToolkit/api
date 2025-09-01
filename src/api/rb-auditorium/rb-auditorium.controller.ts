@@ -11,6 +11,7 @@ import {
 import { RbAuditoriumService } from './rb-auditorium.service';
 import { CreateRbAuditoriumDto } from './dto/create-rb-auditorium.dto';
 import { UpdateRbAuditoriumDto } from './dto/update-rb-auditorium.dto';
+import { CreateRbAuditoriumBulkDto } from './dto/create-rb-auditorium-bulk.dto';
 
 @Controller('auditorium')
 export class RbAuditoriumController {
@@ -19,6 +20,11 @@ export class RbAuditoriumController {
   @Post()
   create(@Body() createRbAuditoriumDto: CreateRbAuditoriumDto) {
     return this.rbAuditoriumService.create(createRbAuditoriumDto);
+  }
+
+  @Post('bulk')
+  createMany(@Body() dto: CreateRbAuditoriumBulkDto) {
+    return this.rbAuditoriumService.createMany(dto.items);
   }
 
   @Get()

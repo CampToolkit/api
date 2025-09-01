@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { DbRbAuditoriumService } from '../../db/services/rb-auditorium/db-rb-auditorium.service';
 
+interface AuditoriumParams {
+  name: string;
+}
+
 @Injectable()
 export class RbAuditoriumService {
   constructor(private dbRbAuditoriumService: DbRbAuditoriumService) {}
-  create(params: { name: string }) {
+  create(params: AuditoriumParams) {
     return this.dbRbAuditoriumService.create(params);
+  }
+
+  createMany(params: AuditoriumParams[]) {
+    return this.dbRbAuditoriumService.createMany(params);
   }
 
   findAll() {
@@ -16,7 +24,7 @@ export class RbAuditoriumService {
     return this.dbRbAuditoriumService.findOne(id);
   }
 
-  async update(id: number, params: { name: string }) {
+  async update(id: number, params: AuditoriumParams) {
     return this.dbRbAuditoriumService.update(id, params);
   }
 

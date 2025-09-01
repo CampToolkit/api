@@ -3,15 +3,31 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RbAuditorium } from '../../entities/schedule/rb-auditorium.entity';
 import { Repository } from 'typeorm';
 
+interface AuditoriumParams {
+  name: string;
+}
+
 @Injectable()
 export class DbRbAuditoriumService {
   constructor(
     @InjectRepository(RbAuditorium)
     private rbAuditoriumRepository: Repository<RbAuditorium>,
   ) {}
-  create(params: { name: string }) {
+  create(params: AuditoriumParams) {
     const auditorium = this.rbAuditoriumRepository.create(params);
     return this.rbAuditoriumRepository.save(auditorium);
+  }
+
+  async createMany(params: AuditoriumParams[]) {
+    const existing = await this.rbAuditoriumRepository.find({
+      where: params.map((item) => ({ name: item.name })),
+    });
+    if (existing && existing.length > 0) {
+      const names = existing.map((item) => item.name);
+      throw new Error(`Auditoriums ${names.join(', ')} already exists`);
+    }
+    const newAuditorium = this.rbAuditoriumRepository.create(params);
+    return this.rbAuditoriumRepository.save(newAuditorium);
   }
 
   findAll() {
@@ -22,7 +38,7 @@ export class DbRbAuditoriumService {
     return this.rbAuditoriumRepository.findOne({ where: { id: id } });
   }
 
-  async update(id: number, params: { name: string }) {
+  async update(id: number, params: AuditoriumParams) {
     const auditorium = await this.rbAuditoriumRepository.findOne({
       where: { id: id },
     });
