@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DbModule } from './db/db.module';
+import { DbModule } from './db/db-module/db.module';
 import { CampModule } from './api/camp/camp.module';
 import { PracticeGroupModule } from './api/pracite-group/practice-group.module';
 import { SportsmanModule } from './api/sportsman/sportsman.module';

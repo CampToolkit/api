@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbPracticeGroupService } from '../../db/services/practice-group/db-practice-group.service';
+import { DbPracticeGroupService } from '../../db/db-module/practice-group/db-practice-group.service';
 
 interface CreateGroupParams {
   name: string;

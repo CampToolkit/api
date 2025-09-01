@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { RbAuditoriumService } from './rb-auditorium.service';
 import { RbAuditoriumController } from './rb-auditorium.controller';
-import { DbModule } from '../../db/db.module';
+import { DbModule } from '../../db/db-module/db.module';
 
 @Module({
   imports: [DbModule],

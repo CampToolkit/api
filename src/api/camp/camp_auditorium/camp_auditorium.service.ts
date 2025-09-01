@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbCamp_AuditoriumService } from '../../../db/services/camps/camp_auditorium/db-camp_auditorium.service';
+import { DbCamp_AuditoriumService } from '../../../db/db-module/camps/camp_auditorium/db-camp_auditorium.service';
 
 @Injectable()
 export class Camp_AuditoriumService {

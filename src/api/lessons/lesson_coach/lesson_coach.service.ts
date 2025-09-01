@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DbLesson_CoachService } from '../../../db/services/lessons/lesson_coach/db-lesson_coach.service';
+import { DbLesson_CoachService } from '../../../db/db-module/schedule/lesson_coach/db-lesson_coach.service';
 
 @Injectable()
 export class Lesson_CoachService {
