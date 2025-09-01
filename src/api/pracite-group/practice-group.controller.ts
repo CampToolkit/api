@@ -12,6 +12,7 @@ import {
 import { PracticeGroupService } from './practice-group.service';
 import { CreatePracticeGroupDto } from './dto/create-practice-group.dto';
 import { UpdatePracticeGroupDto } from './dto/update-practice-group.dto';
+import { CreatePracticeGroupBulkDto } from './dto/CreatePracticeGroupBulkDto';
 
 @Controller('practice-group')
 export class PracticeGroupController {
@@ -22,20 +23,24 @@ export class PracticeGroupController {
     return this.practiceGroupService.create(createPracticeGroupDto);
   }
 
+  @Post('bulk')
+  createMany(@Body() dto: CreatePracticeGroupBulkDto) {
+    return this.practiceGroupService.createMany(dto.items);
+  }
+
   @Get()
   findAll() {
     return this.practiceGroupService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.practiceGroupService.findOne(Number(id));
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.practiceGroupService.findOne(id);
   }
 
   @Get('camp/:id')
-  // todo поставить ParseIntPipe
-  findAllByCamp(@Param('id') id: string) {
-    return this.practiceGroupService.findAllByCamp(Number(id));
+  findAllByCamp(@Param('id', ParseIntPipe) id: number) {
+    return this.practiceGroupService.findAllByCamp(id);
   }
 
   @Get('camp')
@@ -45,14 +50,14 @@ export class PracticeGroupController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updatePracticeGroupDto: UpdatePracticeGroupDto,
   ) {
-    return this.practiceGroupService.update(Number(id), updatePracticeGroupDto);
+    return this.practiceGroupService.update(id, updatePracticeGroupDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.practiceGroupService.remove(Number(id));
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.practiceGroupService.remove(id);
   }
 }

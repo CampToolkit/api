@@ -1,13 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { DbPracticeGroupService } from '../../db/services/practice-group/db-practice-group.service';
 
+interface CreateGroupParams {
+  name: string;
+  parentId?: number;
+  campId: number;
+}
+
 @Injectable()
 export class PracticeGroupService {
   constructor(
     private readonly dbPracticeGroupService: DbPracticeGroupService,
   ) {}
-  create(params: { name: string; parentId?: number; campId: number }) {
+  create(params: CreateGroupParams) {
     return this.dbPracticeGroupService.create(params);
+  }
+
+  createMany(params: CreateGroupParams[]) {
+    return this.dbPracticeGroupService.createMany(params);
   }
 
   findAll() {
