@@ -5,34 +5,35 @@ import {
   Body,
   Param,
   ParseIntPipe,
+  Delete,
 } from '@nestjs/common';
 import { Camp_CoachService } from './camp_coach.service';
-import { AddCoachToCampDto } from './dto/add-coach-to-camp.dto';
-import { RemoveCoachFromCampDto } from './dto/remove-coach-from-camp.dto';
+import { AddCoachBulkToCampDto } from './dto/add-coach-bulk-to-camp.dto';
+import { RemoveCoachBulkFromCampDto } from './dto/remove-coach-bulk-from-camp.dto';
 
-@Controller('camp/:id')
+@Controller('camp/:campId/coach')
 export class Camp_CoachController {
   constructor(private readonly camp_CoachService: Camp_CoachService) {}
 
-  @Post('add-coach')
-  addCoachToCamp(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: AddCoachToCampDto,
-  ) {
-    return this.camp_CoachService.create(id, dto.ids);
-  }
-
   @Get()
-  findAll(@Param('id', ParseIntPipe) id: number) {
-    return this.camp_CoachService.findAll(id);
+  findAll(@Param('campId', ParseIntPipe) campId: number) {
+    return this.camp_CoachService.findAll(campId);
   }
 
-  @Post('remove-coach')
-  remove(
-    @Param('id') id: number,
-
-    @Body() dto: RemoveCoachFromCampDto,
+  @Post()
+  addCoachToCamp(
+    @Param('campId', ParseIntPipe) campId: number,
+    @Body() dto: AddCoachBulkToCampDto,
   ) {
-    return this.camp_CoachService.remove(id, dto.ids);
+    return this.camp_CoachService.create(campId, dto.items);
+  }
+
+  @Delete()
+  remove(
+    @Param('campId') campId: number,
+
+    @Body() dto: RemoveCoachBulkFromCampDto,
+  ) {
+    return this.camp_CoachService.remove(campId, dto.items);
   }
 }

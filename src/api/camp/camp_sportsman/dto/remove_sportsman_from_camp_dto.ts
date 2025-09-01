@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, ArrayNotEmpty, IsInt } from 'class-validator';
 
-export class RemoveSportsmanFromCampDto {
+export class RemoveSportsmanBulkFromCampDto {
   @ApiProperty({
     description: 'Список ID спортсменов',
     example: [1, 2, 3],
@@ -12,5 +12,5 @@ export class RemoveSportsmanFromCampDto {
   @ArrayNotEmpty()
   @Type(() => Number)
   @IsInt({ each: true }) // проверяет каждый элемент массива
-  ids: number[];
+  items: number[];
 }

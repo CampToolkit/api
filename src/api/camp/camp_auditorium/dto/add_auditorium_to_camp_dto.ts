@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ArrayNotEmpty, IsArray, IsInt } from 'class-validator';
 import { Type } from 'class-transformer';
 
-export class AddAuditoriumToCampDto {
+export class AddAuditoriumBulkToCampDto {
   @ApiProperty({
     description: 'Список ID помещений',
     example: [1, 2, 3],
@@ -12,5 +12,5 @@ export class AddAuditoriumToCampDto {
   @ArrayNotEmpty()
   @Type(() => Number)
   @IsInt({ each: true })
-  ids: number[];
+  items: number[];
 }

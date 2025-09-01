@@ -1,37 +1,38 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
   Post,
 } from '@nestjs/common';
 import { Camp_SportsmanService } from './camp_sportsman.service';
-import { AddSportsmanToCampDto } from './dto/add_sportsman_to_camp_dto';
-import { RemoveSportsmanFromCampDto } from './dto/remove_sportsman_from_camp_dto';
+import { AddSportsmanBulkToCampDto } from './dto/add_sportsman_to_camp_dto';
+import { RemoveSportsmanBulkFromCampDto } from './dto/remove_sportsman_from_camp_dto';
 
-@Controller('camp/:id')
+@Controller('camp/:campId/sportsman')
 export class Camp_SportsmanController {
   constructor(private camp_sportsmanService: Camp_SportsmanService) {}
 
-  @Get('sportsman')
-  findAll(@Param('id', ParseIntPipe) id: number) {
+  @Get()
+  findAll(@Param('campId', ParseIntPipe) id: number) {
     return this.camp_sportsmanService.findAll(id);
   }
 
-  @Post('add-sportsman')
-  addSportsmenToCamp(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: AddSportsmanToCampDto,
+  @Post()
+  addSportsmanBulkToCamp(
+    @Param('campId', ParseIntPipe) campId: number,
+    @Body() dto: AddSportsmanBulkToCampDto,
   ) {
-    return this.camp_sportsmanService.create(id, dto.ids);
+    return this.camp_sportsmanService.create(campId, dto.items);
   }
 
-  @Post('remove-sportsman')
-  removeSportsmenFromCamp(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: RemoveSportsmanFromCampDto,
+  @Delete()
+  removeSportsmanBulkFromCamp(
+    @Param('campId', ParseIntPipe) campId: number,
+    @Body() dto: RemoveSportsmanBulkFromCampDto,
   ) {
-    return this.camp_sportsmanService.remove(id, dto.ids);
+    return this.camp_sportsmanService.remove(campId, dto.items);
   }
 }

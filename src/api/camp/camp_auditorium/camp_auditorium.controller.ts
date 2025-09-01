@@ -5,33 +5,34 @@ import {
   Body,
   Param,
   ParseIntPipe,
+  Delete,
 } from '@nestjs/common';
 import { Camp_AuditoriumService } from './camp_auditorium.service';
-import { AddAuditoriumToCampDto } from './dto/add_auditorium_to_camp_dto';
-import { RemoveAuditoriumFromCampDto } from './dto/update-camp_auditorium.dto';
+import { AddAuditoriumBulkToCampDto } from './dto/add_auditorium_to_camp_dto';
+import { RemoveAuditoriumBulkFromCampDto } from './dto/remove-camp_auditorium.dto';
 
-@Controller('camp/:id')
+@Controller('camp/:campId/auditorium')
 export class Camp_AuditoriumController {
   constructor(private readonly campAuditoriumService: Camp_AuditoriumService) {}
 
-  @Get('auditorium')
-  findAll(@Param('id', ParseIntPipe) id: number) {
-    return this.campAuditoriumService.findAll(id);
+  @Get()
+  findAll(@Param('campId', ParseIntPipe) campId: number) {
+    return this.campAuditoriumService.findAll(campId);
   }
 
-  @Post('add-auditorium')
+  @Post()
   addAuditoriumToCamp(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: AddAuditoriumToCampDto,
+    @Param('campId', ParseIntPipe) campId: number,
+    @Body() dto: AddAuditoriumBulkToCampDto,
   ) {
-    return this.campAuditoriumService.create(id, dto.ids);
+    return this.campAuditoriumService.create(campId, dto.items);
   }
 
-  @Post('remove-auditorium')
+  @Delete()
   remove(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: RemoveAuditoriumFromCampDto,
+    @Param('campId', ParseIntPipe) campId: number,
+    @Body() dto: RemoveAuditoriumBulkFromCampDto,
   ) {
-    return this.campAuditoriumService.remove(id, dto.ids);
+    return this.campAuditoriumService.remove(campId, dto.items);
   }
 }
