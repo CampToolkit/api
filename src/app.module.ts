@@ -4,28 +4,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DbModule } from './db/db.module';
-import { User } from './db/entities/person/user.entity';
-import { Camp } from './db/entities/camp/camp.entity';
-import { PracticeGroup } from './db/entities/practice-group.entity';
-
-import { RbActivityType } from './db/entities/schedule/rb-activity-type.entity';
-import { RbAuditorium } from './db/entities/schedule/rb-auditorium.entity';
-import { RbLessonType } from './db/entities/schedule/rb-lesson-type.entity';
-import { Sportsman } from './db/entities/person/sportsman.entity';
-import { CampModule } from './camp-api-modules/camp/camp.module';
-import { PracticeGroupModule } from './camp-api-modules/pracite-group/practice-group.module';
-import { SportsmanModule } from './camp-api-modules/sportsman/sportsman.module';
+import { CampModule } from './api/camp/camp.module';
+import { PracticeGroupModule } from './api/pracite-group/practice-group.module';
+import { SportsmanModule } from './api/sportsman/sportsman.module';
 
 import { configuration } from './configuration';
 
-import { LessonModule } from './camp-api-modules/lessons/lesson/lesson.module';
-import { LessonCoachModule } from './camp-api-modules/lessons/lesson_coach/lesson_coach.module';
-import { Lesson_GroupModule } from './camp-api-modules/lessons/lesson_group/lesson_group.module';
-import { Lesson_SportsmanModule } from './camp-api-modules/lessons/lesson_sportsman/lesson_sportsman-participants.module';
-import { RbActivityTypeModule } from './camp-api-modules/rb-activity-type/rb-activity-type.module';
-import { RbAuditoriumModule } from './camp-api-modules/rb-auditorium/rb-auditorium.module';
-import { LessonTypeModule } from './camp-api-modules/lesson-type/lesson-type.module';
-import { CoachModule } from './camp-api-modules/coach/coach.module';
+import { LessonModule } from './api/lessons/lesson/lesson.module';
+import { LessonCoachModule } from './api/lessons/lesson_coach/lesson_coach.module';
+import { Lesson_GroupModule } from './api/lessons/lesson_group/lesson_group.module';
+import { Lesson_SportsmanModule } from './api/lessons/lesson_sportsman/lesson_sportsman-participants.module';
+import { RbActivityTypeModule } from './api/rb-activity-type/rb-activity-type.module';
+import { RbAuditoriumModule } from './api/rb-auditorium/rb-auditorium.module';
+import { LessonTypeModule } from './api/lesson-type/lesson-type.module';
+import { CoachModule } from './api/coach/coach.module';
+
 import * as process from 'node:process';
 
 @Module({
@@ -45,20 +38,10 @@ import * as process from 'node:process';
         username: config.get('db.user'),
         password: config.get('db.password'),
         database: config.get('db.name'),
-        migrations: ['./src/db/migrations/*.js'],
-        migrationsTableName: 'typeorm_migrations',
-        entities: [
-          User,
-          Camp,
-          PracticeGroup,
-
-          RbActivityType,
-          RbAuditorium,
-          RbLessonType,
-          Sportsman,
-        ],
-        synchronize: true,
         autoLoadEntities: true,
+        migrations: [__dirname + '/db/migrations/*{.ts,.js}'],
+        migrationsTableName: 'typeorm_migrations',
+        synchronize: true,
         connectorPackage: 'mysql2',
         migrationsRun: true,
         // logging: true,

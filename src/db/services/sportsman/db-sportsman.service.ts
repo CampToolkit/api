@@ -10,6 +10,37 @@ export class DbSportsmanService {
     private readonly sportsmanRepository: Repository<Sportsman>,
   ) {}
 
+  async createMany(
+    params: {
+      lastName: string;
+      firstName: string;
+      patrName: string;
+      birthDate?: string;
+    }[],
+  ) {
+    // проверяем существующих спортсменов
+    const existing = await this.sportsmanRepository.find({
+      where: params.map((p) => ({
+        lastName: p.lastName,
+        firstName: p.firstName,
+        patrName: p.patrName,
+      })),
+    });
+
+    if (existing.length > 0) {
+      const names = existing.map(
+        (s) => `${s.lastName} ${s.firstName} ${s.patrName}`,
+      );
+      throw new Error(`Sportsmen ${names.join(', ')} already exist`);
+    }
+
+    // создаём массив сущностей
+    const newSportsmen = this.sportsmanRepository.create(params);
+
+    // сохраняем все разом
+    return this.sportsmanRepository.save(newSportsmen);
+  }
+
   async create(params: {
     lastName: string;
     firstName: string;

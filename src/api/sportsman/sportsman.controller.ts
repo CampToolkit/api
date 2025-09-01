@@ -11,14 +11,21 @@ import {
 import { SportsmanService } from './sportsman.service';
 import { CreateSportsmanDto } from './dto/create-sportsman.dto';
 import { UpdateSportsmanDto } from './dto/update-sportsman.dto';
+import { CreateSportsmanBulkDto } from './dto/create-sportsman-bulk.dto';
 
 @Controller('sportsman')
 export class SportsmanController {
   constructor(private readonly sportsmanService: SportsmanService) {}
   logger = new Logger('SportsmanController');
+
   @Post()
   create(@Body() createSportsmanDto: CreateSportsmanDto) {
     return this.sportsmanService.create(createSportsmanDto);
+  }
+
+  @Post('bulk')
+  createMany(@Body() dto: CreateSportsmanBulkDto) {
+    return this.sportsmanService.createMany(dto.items);
   }
 
   @Get()

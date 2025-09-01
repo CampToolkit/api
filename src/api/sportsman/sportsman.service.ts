@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { DbSportsmanService } from '../../db/services/db-sportsman/db-sportsman.service';
+import { DbSportsmanService } from '../../db/services/sportsman/db-sportsman.service';
 
 @Injectable()
 export class SportsmanService {
@@ -14,6 +14,17 @@ export class SportsmanService {
     birthDate?: string;
   }) {
     return this.dbSportsmanService.create(params);
+  }
+
+  createMany(
+    params: {
+      lastName: string;
+      firstName: string;
+      patrName: string;
+      birthDate?: string;
+    }[],
+  ) {
+    return this.dbSportsmanService.createMany(params);
   }
 
   findAll() {
