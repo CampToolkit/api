@@ -65,7 +65,7 @@ export class DbCamp_AuditoriumService {
       .delete()
       .from('camp_auditorium')
       .where('campId =:campId', { id: campId })
-      .andWhere('auditoriumId IN (:ids)', { ids: auditoriumIds })
+      .andWhere('auditoriumId IN (:items)', { ids: auditoriumIds })
       .execute();
   }
 }

@@ -3,6 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PracticeGroup } from '../../entities/practice-group.entity';
 import { Repository, IsNull } from 'typeorm';
 
+interface CreateGroupParams {
+  name: string;
+  parentId?: number;
+  campId: number;
+}
+
 @Injectable()
 export class DbPracticeGroupService {
   constructor(
@@ -12,10 +18,29 @@ export class DbPracticeGroupService {
 
   logger = new Logger('DbPracticeGroupService');
 
-  create(params: { name: string; parentId?: number; campId: number }) {
+  create(params: CreateGroupParams) {
     const group = this.practiceGroupRepository.create(params);
-    this.logger.log(group);
+
     return this.practiceGroupRepository.save(group);
+  }
+
+  async createMany(params: CreateGroupParams[]) {
+    const existing = await this.practiceGroupRepository.find({
+      where: params.map((pg) => ({
+        name: pg.name,
+        campId: pg.campId,
+      })),
+    });
+
+    if (existing.length > 0) {
+      const names = existing.map((p) => p.name);
+      throw new Error(
+        `Group ${names.join(', ')} already exists in Camp id ${existing[0].camp.id}`,
+      );
+    }
+
+    const newGroups = this.practiceGroupRepository.create(params);
+    return this.practiceGroupRepository.save(newGroups);
   }
 
   findAll() {

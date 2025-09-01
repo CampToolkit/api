@@ -11,7 +11,7 @@ import { Sportsman } from './entities/person/sportsman.entity';
 
 import { DbCampService } from './services/camps/camp/db-camp.service';
 import { DbPracticeGroupService } from './services/practice-group/db-practice-group.service';
-import { DbSportsmanService } from './services/db-sportsman/db-sportsman.service';
+import { DbSportsmanService } from './services/sportsman/db-sportsman.service';
 
 import { DbLessonTypeService } from './services/lessons/lesson-type/db-lesson-type.service';
 

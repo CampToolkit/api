@@ -3,6 +3,12 @@ import { Coach } from '../../entities/person/coach.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+interface CoachParams {
+  lastName: string;
+  firstName: string;
+  patrName: string;
+}
+
 @Injectable()
 export class DbCoachService {
   constructor(
@@ -10,23 +16,39 @@ export class DbCoachService {
     private coachRepository: Repository<Coach>,
   ) {}
 
-  async create(params: {
-    lastName: string;
-    firstName: string;
-    patrName: string;
-  }) {
-    const existingCoach = await this.coachRepository.findOne({
+  async create(params: CoachParams) {
+    const existing = await this.coachRepository.findOne({
       where: {
         lastName: params.lastName,
         firstName: params.firstName,
         patrName: params.patrName,
       },
     });
-    if (existingCoach) {
-      return existingCoach;
+    if (existing) {
+      return existing;
     }
     const coach = this.coachRepository.create(params);
     return this.coachRepository.save(coach);
+  }
+
+  async createMany(params: CoachParams[]) {
+    const existing = await this.coachRepository.find({
+      where: params.map((p) => ({
+        lastName: p.lastName,
+        firstName: p.firstName,
+        patrName: p.patrName,
+      })),
+    });
+
+    if (existing.length > 0) {
+      const names = existing.map(
+        (c) => `${c.lastName} ${c.firstName} ${c.patrName}`,
+      );
+      throw new Error(`Coaches ${names.join(', ')} already exist`);
+    }
+
+    const newCoaches = this.coachRepository.create(params);
+    return this.coachRepository.save(newCoaches);
   }
 
   findAll() {
@@ -37,14 +59,7 @@ export class DbCoachService {
     return this.coachRepository.findOne({ where: { id } });
   }
 
-  async update(
-    id: number,
-    params: {
-      lastName?: string;
-      firstName?: string;
-      patrName?: string;
-    },
-  ) {
+  async update(id: number, params: Partial<CoachParams>) {
     const coach = await this.coachRepository.findOne({ where: { id } });
     if (!coach) {
       throw new Error(`Coach with id ${id} not found`);

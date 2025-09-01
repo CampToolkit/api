@@ -67,7 +67,7 @@ export class DbCamp_CoachService {
       .delete()
       .from('camp_coach')
       .where('campId =:id', { id: campId })
-      .andWhere('coachId IN (:ids)', { ids: coachIds })
+      .andWhere('coachId IN (:items)', { ids: coachIds })
       .execute();
   }
 }
