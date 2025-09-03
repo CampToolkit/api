@@ -20,12 +20,8 @@ export class PracticeGroupService {
     return this.dbPracticeGroupService.createMany(params);
   }
 
-  findAll() {
-    return this.dbPracticeGroupService.findAll();
-  }
-
-  findAllByCamp(campId: number) {
-    return this.dbPracticeGroupService.findAllByCamp(campId);
+  findAll(params: { campId?: number }) {
+    return this.dbPracticeGroupService.findAll(params);
   }
 
   findOne(id: number) {

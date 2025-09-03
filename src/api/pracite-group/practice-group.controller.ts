@@ -6,13 +6,14 @@ import {
   Patch,
   Param,
   Delete,
-  BadRequestException,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { PracticeGroupService } from './practice-group.service';
 import { CreatePracticeGroupDto } from './dto/create-practice-group.dto';
 import { UpdatePracticeGroupDto } from './dto/update-practice-group.dto';
 import { CreatePracticeGroupBulkDto } from './dto/CreatePracticeGroupBulk.dto';
+import { FindAllDto } from './dto/FindAll.dto';
 
 @Controller('practice-group')
 export class PracticeGroupController {
@@ -29,23 +30,13 @@ export class PracticeGroupController {
   }
 
   @Get()
-  findAll() {
-    return this.practiceGroupService.findAll();
+  findAll(@Query('campId') dto: FindAllDto) {
+    return this.practiceGroupService.findAll(dto);
   }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.practiceGroupService.findOne(id);
-  }
-
-  @Get('camp/:id')
-  findAllByCamp(@Param('id', ParseIntPipe) id: number) {
-    return this.practiceGroupService.findAllByCamp(id);
-  }
-
-  @Get('camp')
-  invalidCamp() {
-    throw new BadRequestException('id обязателен');
   }
 
   @Patch(':id')
