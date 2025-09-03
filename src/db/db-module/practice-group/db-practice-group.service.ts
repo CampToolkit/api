@@ -37,13 +37,6 @@ export class DbPracticeGroupService {
   }
 
   async createMany(params: CreateGroupParams[]) {
-    const existing = await this.practiceGroupRepository.find({
-      where: params.map((pg) => ({
-        name: pg.name,
-        campId: pg.campId,
-      })),
-    });
-
     await checkDuplicates({
       repository: this.practiceGroupRepository,
       where: params.map((pm) => ({
