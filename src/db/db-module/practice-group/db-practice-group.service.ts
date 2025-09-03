@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PracticeGroup } from './practice-group.entity';
-import { Repository, IsNull } from 'typeorm';
+import { Repository, IsNull, FindOptionsWhere } from 'typeorm';
+import { Camp } from '../camps/camp/camp.entity';
 
 interface CreateGroupParams {
   name: string;
@@ -43,14 +44,13 @@ export class DbPracticeGroupService {
     return this.practiceGroupRepository.save(newGroups);
   }
 
-  findAll() {
-    return this.practiceGroupRepository.find();
-  }
-
-  findAllByCamp(campId: number) {
+  findAll(params: { campId?: number }) {
+    const whereParams: FindOptionsWhere<PracticeGroup> = {};
+    if (params.campId) {
+      whereParams.camp = { id: params.campId };
+    }
     return this.practiceGroupRepository.find({
-      where: { camp: { id: campId }, parent: IsNull() },
-      relations: ['parent', 'children'],
+      where: whereParams,
     });
   }
 
