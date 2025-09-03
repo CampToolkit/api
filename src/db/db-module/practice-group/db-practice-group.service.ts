@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PracticeGroup } from './practice-group.entity';
-import { Repository, IsNull, FindOptionsWhere } from 'typeorm';
-import { Camp } from '../camps/camp/camp.entity';
+import { Repository, FindOptionsWhere } from 'typeorm';
+import { checkDuplicates } from '../shared/utils/check-duplicates';
 
 interface CreateGroupParams {
   name: string;
@@ -19,7 +19,18 @@ export class DbPracticeGroupService {
 
   logger = new Logger('DbPracticeGroupService');
 
-  create(params: CreateGroupParams) {
+  async create(params: CreateGroupParams) {
+    await checkDuplicates({
+      repository: this.practiceGroupRepository,
+      where: {
+        name: params.name,
+        parent: { id: params.parentId },
+        camp: { id: params.campId },
+      },
+      entityName: 'PracticeGroup',
+      uniqueFields: ['name'],
+    });
+
     const group = this.practiceGroupRepository.create(params);
 
     return this.practiceGroupRepository.save(group);
@@ -33,12 +44,16 @@ export class DbPracticeGroupService {
       })),
     });
 
-    if (existing.length > 0) {
-      const names = existing.map((p) => p.name);
-      throw new Error(
-        `Group ${names.join(', ')} already exists in Camp id ${existing[0].camp.id}`,
-      );
-    }
+    await checkDuplicates({
+      repository: this.practiceGroupRepository,
+      where: params.map((pm) => ({
+        name: pm.name,
+        parent: { id: pm.parentId },
+        camp: { id: pm.campId },
+      })),
+      entityName: 'PracticeGroup',
+      uniqueFields: ['name'],
+    });
 
     const newGroups = this.practiceGroupRepository.create(params);
     return this.practiceGroupRepository.save(newGroups);
