@@ -37,6 +37,7 @@ export class DbPracticeGroupService {
   }
 
   async createMany(params: CreateGroupParams[]) {
+    this.logger.log('Creating new practiceGroup', params);
     await checkDuplicates({
       repository: this.practiceGroupRepository,
       where: params.map((pm) => ({
@@ -59,6 +60,13 @@ export class DbPracticeGroupService {
     }
     return this.practiceGroupRepository.find({
       where: whereParams,
+    });
+  }
+
+  findAllByCamp(campId: number) {
+    return this.practiceGroupRepository.find({
+      where: { camp: { id: campId } },
+      relations: ['children'],
     });
   }
 
