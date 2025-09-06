@@ -19,6 +19,12 @@ export class DbPracticeGroupService {
 
   logger = new Logger('DbPracticeGroupService');
 
+  /*
+   todo для create и createMany
+    сделать проверку если пришел parenId:
+    если Group.id == parenId && Group.parentId != null,
+    то выбросить ошибку о недопустимости присваивать подгруппе дочернюю групп
+   */
   async create(params: CreateGroupParams) {
     await checkDuplicates({
       repository: this.practiceGroupRepository,
@@ -66,7 +72,7 @@ export class DbPracticeGroupService {
   findAllByCamp(campId: number) {
     return this.practiceGroupRepository.find({
       where: { camp: { id: campId } },
-      relations: ['children'],
+      relations: ['parent', 'children'],
     });
   }
 
