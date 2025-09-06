@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Camp } from './camp.entity';
 import { Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
-import { Sportsman } from '../../persons/sportsman/sportsman.entity';
 
 @Injectable()
 export class DbCampService {
