@@ -71,8 +71,10 @@ export class DbPracticeGroupService {
 
   findAllByCamp(campId: number) {
     return this.practiceGroupRepository.find({
-      where: { camp: { id: campId } },
-      relations: ['parent', 'children'],
+      where: {
+        camp: { id: campId },
+      },
+      relations: ['children'],
     });
   }
 

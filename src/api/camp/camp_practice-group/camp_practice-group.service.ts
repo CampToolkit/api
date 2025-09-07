@@ -9,6 +9,6 @@ export class Camp_PracticeGroupService {
 
   async findAll(campId: number) {
     const groups = await this.dbPracticeGroupService.findAllByCamp(campId);
-    return groups.filter((item) => item?.parent?.id === undefined);
+    return groups.filter((item) => item.parentId === null);
   }
 }
