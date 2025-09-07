@@ -37,13 +37,16 @@ export class DbPracticeGroupService {
       uniqueFields: ['name'],
     });
 
-    const group = this.practiceGroupRepository.create(params);
+    const group = this.practiceGroupRepository.create({
+      name: params.name,
+      parent: { id: params.parentId },
+      camp: { id: params.campId },
+    });
 
     return this.practiceGroupRepository.save(group);
   }
 
   async createMany(params: CreateGroupParams[]) {
-    this.logger.log('Creating new practiceGroup', params);
     await checkDuplicates({
       repository: this.practiceGroupRepository,
       where: params.map((pm) => ({
@@ -55,7 +58,13 @@ export class DbPracticeGroupService {
       uniqueFields: ['name'],
     });
 
-    const newGroups = this.practiceGroupRepository.create(params);
+    const newGroups = this.practiceGroupRepository.create(
+      params.map((p) => ({
+        name: p.name,
+        parent: { id: p.parentId },
+        camp: { id: p.campId },
+      })),
+    );
     return this.practiceGroupRepository.save(newGroups);
   }
 
@@ -85,10 +94,7 @@ export class DbPracticeGroupService {
     });
   }
 
-  async update(
-    id: number,
-    params: Partial<{ name: string; parentId?: number }>,
-  ) {
+  async update(id: number, params: { name?: string; parentId?: number }) {
     const group = await this.practiceGroupRepository.findOne({
       where: { id: id },
     });
@@ -105,7 +111,12 @@ export class DbPracticeGroupService {
       }
     }
 
-    Object.assign(group, params);
+    if (params.name) {
+      group.name = params.name;
+    }
+    if (params.parentId) {
+      group.parent = { id: params.parentId } as PracticeGroup;
+    }
 
     return this.practiceGroupRepository.save(group);
   }

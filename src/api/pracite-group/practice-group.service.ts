@@ -28,7 +28,7 @@ export class PracticeGroupService {
     return this.dbPracticeGroupService.findOne(id);
   }
 
-  update(id: number, params: Partial<{ name: string; parentId?: number }>) {
+  update(id: number, params: { name?: string; parentId?: number }) {
     return this.dbPracticeGroupService.update(id, params);
   }
 

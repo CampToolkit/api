@@ -6,6 +6,7 @@ import { Type } from 'class-transformer';
 export class UpdatePracticeGroupDto {
   @ApiProperty({ example: 'Старшая группа', description: 'название группы' })
   @IsString()
+  @IsOptional()
   name: string;
 
   @ApiProperty({ example: '3', description: 'id родительской группы' })

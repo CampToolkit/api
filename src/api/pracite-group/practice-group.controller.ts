@@ -8,6 +8,7 @@ import {
   Delete,
   ParseIntPipe,
   Query,
+  Logger,
 } from '@nestjs/common';
 import { PracticeGroupService } from './practice-group.service';
 import { CreatePracticeGroupDto } from './dto/create-practice-group.dto';
@@ -19,6 +20,7 @@ import { FindAllDto } from './dto/FindAll.dto';
 export class PracticeGroupController {
   constructor(private readonly practiceGroupService: PracticeGroupService) {}
 
+  logger = new Logger('DbPracticeGroupController');
   @Post()
   create(@Body() createPracticeGroupDto: CreatePracticeGroupDto) {
     return this.practiceGroupService.create(createPracticeGroupDto);
