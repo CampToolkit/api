@@ -83,10 +83,7 @@ export class DbPracticeGroupService {
     });
   }
 
-  async update(
-    id: number,
-    params: Partial<{ name: string; parentId?: number }>,
-  ) {
+  async update(id: number, params: { name?: string; parentId?: number }) {
     const group = await this.practiceGroupRepository.findOne({
       where: { id: id },
     });
