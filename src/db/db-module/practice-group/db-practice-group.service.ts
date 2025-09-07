@@ -70,10 +70,13 @@ export class DbPracticeGroupService {
   }
 
   findAllByCamp(campId: number) {
-    return this.practiceGroupRepository.find({
-      where: { camp: { id: campId } },
-      relations: ['parent', 'children'],
-    });
+    return this.practiceGroupRepository
+      .createQueryBuilder('group')
+      .leftJoinAndSelect('group.parent', 'parent')
+      .leftJoinAndSelect('group.children', 'children')
+      .loadRelationIdAndMap('children.parentId', 'children.parent')
+      .where('group.campId = :campId', { campId })
+      .getMany();
   }
 
   findOne(id: number) {
