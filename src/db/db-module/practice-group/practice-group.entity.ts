@@ -6,6 +6,7 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  RelationId,
 } from 'typeorm';
 import { AbstractEntity } from '../shared/abstract.entity';
 
@@ -47,4 +48,10 @@ export class PracticeGroup extends AbstractEntity {
     (lessonGroupParticipants) => lessonGroupParticipants.group,
   )
   lesson_group: Lesson_Group[];
+
+  @RelationId((group: PracticeGroup) => group.parent)
+  parentId?: number;
+
+  @RelationId((group: PracticeGroup) => group.camp)
+  campId: number;
 }
