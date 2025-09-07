@@ -23,7 +23,6 @@ export class PracticeGroupController {
   logger = new Logger('DbPracticeGroupController');
   @Post()
   create(@Body() createPracticeGroupDto: CreatePracticeGroupDto) {
-    this.logger.log('creat');
     return this.practiceGroupService.create(createPracticeGroupDto);
   }
 

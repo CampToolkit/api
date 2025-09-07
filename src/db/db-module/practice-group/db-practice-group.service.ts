@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PracticeGroup } from './practice-group.entity';
 import { Repository, FindOptionsWhere } from 'typeorm';
 import { checkDuplicates } from '../shared/utils/check-duplicates';
-import { Camp } from '../camps/camp/camp.entity';
 
 interface CreateGroupParams {
   name: string;
@@ -44,8 +43,6 @@ export class DbPracticeGroupService {
       camp: { id: params.campId },
     });
 
-    this.logger.log('Created new practiceGroup group', group);
-
     return this.practiceGroupRepository.save(group);
   }
 
@@ -61,7 +58,13 @@ export class DbPracticeGroupService {
       uniqueFields: ['name'],
     });
 
-    const newGroups = this.practiceGroupRepository.create(params);
+    const newGroups = this.practiceGroupRepository.create(
+      params.map((p) => ({
+        name: p.name,
+        parent: { id: p.parentId },
+        camp: { id: p.campId },
+      })),
+    );
     return this.practiceGroupRepository.save(newGroups);
   }
 
