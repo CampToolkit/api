@@ -20,7 +20,7 @@ export class DbPracticeGroupService {
   logger = new Logger('DbPracticeGroupService');
 
   /*
-   todo для create и createMany
+   todo для createMany и createMany
     сделать проверку если пришел parenId:
     если Group.id == parenId && Group.parentId != null,
     то выбросить ошибку о недопустимости присваивать подгруппе дочернюю групп
