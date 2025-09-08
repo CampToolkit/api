@@ -17,7 +17,7 @@ export class Camp_AuditoriumService {
   }
 
   remove(campId: number, auditoriumIds: number[]) {
-    return this.dbCamp_AuditoriumService.removeAuditoriumFromCamp(
+    return this.dbCamp_AuditoriumService.removeManyAuditoriumFromCamp(
       campId,
       auditoriumIds,
     );

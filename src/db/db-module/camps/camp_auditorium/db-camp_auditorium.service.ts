@@ -59,12 +59,12 @@ export class DbCamp_AuditoriumService {
     });
   }
 
-  async removeAuditoriumFromCamp(campId: number, auditoriumIds: number[]) {
+  async removeManyAuditoriumFromCamp(campId: number, auditoriumIds: number[]) {
     return this.campRepository
       .createQueryBuilder()
       .delete()
       .from('camp_auditorium')
-      .where('campId =:campId', { id: campId })
+      .where('campId = :id', { id: campId })
       .andWhere('auditoriumId IN (:ids)', { ids: auditoriumIds })
       .execute();
   }
