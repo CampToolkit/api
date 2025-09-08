@@ -21,11 +21,11 @@ export class Camp_AuditoriumController {
   }
 
   @Post()
-  addAuditoriumToCamp(
+  addManyAuditoriumToCamp(
     @Param('campId', ParseIntPipe) campId: number,
     @Body() dto: AddAuditoriumBulkToCampDto,
   ) {
-    return this.campAuditoriumService.create(campId, dto.items);
+    return this.campAuditoriumService.createMany(campId, dto.items);
   }
 
   @Delete()

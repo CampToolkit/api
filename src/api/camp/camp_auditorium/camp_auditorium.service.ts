@@ -5,8 +5,8 @@ import { DbCamp_AuditoriumService } from '../../../db/db-module/camps/camp_audit
 export class Camp_AuditoriumService {
   constructor(private dbCamp_AuditoriumService: DbCamp_AuditoriumService) {}
 
-  create(campId: number, auditoriumIds: number[]) {
-    return this.dbCamp_AuditoriumService.addAuditoriumToCamp(
+  createMany(campId: number, auditoriumIds: number[]) {
+    return this.dbCamp_AuditoriumService.addManyAuditoriumToCamp(
       campId,
       auditoriumIds,
     );
@@ -17,7 +17,7 @@ export class Camp_AuditoriumService {
   }
 
   remove(campId: number, auditoriumIds: number[]) {
-    return this.dbCamp_AuditoriumService.removeAuditoriumFromCamp(
+    return this.dbCamp_AuditoriumService.removeManyAuditoriumFromCamp(
       campId,
       auditoriumIds,
     );

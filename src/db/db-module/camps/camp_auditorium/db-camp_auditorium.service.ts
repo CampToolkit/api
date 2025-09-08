@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Camp } from '../camp/camp.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { RbAuditorium } from '../../rb-auditorium/rb-auditorium.entity';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class DbCamp_AuditoriumService {
     return camp.auditoriums;
   }
 
-  async addAuditoriumToCamp(campId: number, auditoriumIds: number[]) {
+  async addManyAuditoriumToCamp(campId: number, auditoriumIds: number[]) {
     const camp = await this.campRepository.findOne({
       where: { id: campId },
     });
@@ -35,7 +35,7 @@ export class DbCamp_AuditoriumService {
 
     const existingAuditoriums = await this.campRepository
       .createQueryBuilder('camp')
-      .relation(Camp, 'rbAuditorium')
+      .relation(Camp, 'auditoriums')
       .of(campId)
       .loadMany<RbAuditorium>();
 
@@ -43,29 +43,29 @@ export class DbCamp_AuditoriumService {
       (id) => !existingAuditoriums.some((item) => item.id === id),
     );
 
-    if (newIds.length === 0) {
-      throw new Error(`Camp with id ${campId} has all sent auditoriums`);
+    if (newIds.length !== auditoriumIds.length) {
+      throw new Error(`Camp with id ${campId} has some of sent auditoriums`);
     }
 
     await this.campRepository
       .createQueryBuilder('camp')
-      .relation(Camp, 'rbAuditorium')
+      .relation(Camp, 'auditoriums')
       .of(campId)
       .add(newIds);
 
-    return this.campRepository.findOne({
-      where: { id: campId },
+    return this.campRepository.find({
+      where: { id: campId, auditoriums: { id: In(auditoriumIds) } },
       relations: ['auditoriums'],
     });
   }
 
-  async removeAuditoriumFromCamp(campId: number, auditoriumIds: number[]) {
+  async removeManyAuditoriumFromCamp(campId: number, auditoriumIds: number[]) {
     return this.campRepository
       .createQueryBuilder()
       .delete()
       .from('camp_auditorium')
-      .where('campId =:campId', { id: campId })
-      .andWhere('auditoriumId IN (:items)', { ids: auditoriumIds })
+      .where('campId = :id', { id: campId })
+      .andWhere('auditoriumId IN (:ids)', { ids: auditoriumIds })
       .execute();
   }
 }
