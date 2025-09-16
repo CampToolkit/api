@@ -48,6 +48,8 @@ export class DbLessonService {
         'lessonSportsmanParticipants',
         'lessonSportsmanParticipants.sportsman',
         'activityType',
+        'lessonType',
+        'auditorium',
       ],
     });
   }
@@ -85,13 +87,12 @@ export class DbLessonService {
     return this.lessonRepository.find({
       where: where,
       relations: [
-        'lesson_coaches',
         'lesson_coaches.coach',
-        'lesson_group',
         'lesson_group.group',
-        'lesson_sportsmen',
         'lesson_sportsmen.sportsman',
         'activityType',
+        'lessonType',
+        'auditorium',
       ],
     });
   }
