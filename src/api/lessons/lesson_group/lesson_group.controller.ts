@@ -11,7 +11,7 @@ import { Lesson_GroupService } from './lesson_group.service';
 import { CreateLesson_GroupDto } from './dto/create-lesson_group.dto';
 import { UpdateLesson_GroupDto } from './dto/update-lesson_group.dto';
 
-@Controller('lesson/group')
+@Controller('lesson-group')
 export class Lesson_GroupController {
   constructor(
     private readonly lessonGroupParticipantsService: Lesson_GroupService,
