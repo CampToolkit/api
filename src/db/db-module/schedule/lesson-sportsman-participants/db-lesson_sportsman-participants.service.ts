@@ -34,13 +34,18 @@ export class DbLesson_SportsmanParticipantsService {
   async update(id: number, params: { sportsmanId: number }) {
     const lesson_sportsman = await this.lessonSportsmanRepository.findOne({
       where: { id },
+      relations: ['lesson'],
     });
 
     if (!lesson_sportsman) {
       throw new Error(`lesson_sportsman with  Id: ${id}  not found`);
     }
     lesson_sportsman.sportsman = { id: params.sportsmanId } as Sportsman;
-    return this.lessonSportsmanRepository.save(lesson_sportsman);
+    const updated = await this.lessonSportsmanRepository.save(lesson_sportsman);
+    return {
+      ...updated,
+      lesson: lesson_sportsman.lesson,
+    };
   }
 
   remove(id: number) {

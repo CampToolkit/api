@@ -17,7 +17,6 @@ export class DbLesson_CoachService {
     coachId: number;
     role: 'PRIMARY' | 'SECONDARY';
   }) {
-    this.logger.log(params);
     const lessonCoach = this.lessonCoachRepository.create(params);
     return this.lessonCoachRepository.save(lessonCoach);
   }

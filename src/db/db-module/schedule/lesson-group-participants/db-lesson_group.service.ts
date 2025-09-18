@@ -32,12 +32,19 @@ export class DbLesson_GroupService {
   }
 
   async update(id: number, params: { groupId: number }) {
-    const lesson_group = await this.lesson_GroupRepository.findOneBy({ id });
+    const lesson_group = await this.lesson_GroupRepository.findOne({
+      where: { id },
+      relations: ['lesson'],
+    });
     if (!lesson_group) {
       throw new Error(`lessonGroup with id ${id} not found`);
     }
     lesson_group.group = { id: params.groupId } as PracticeGroup;
-    return this.lesson_GroupRepository.save(lesson_group);
+    const updated = await this.lesson_GroupRepository.save(lesson_group);
+    return {
+      ...updated,
+      lesson: lesson_group.lesson,
+    };
   }
 
   remove(id: number) {
