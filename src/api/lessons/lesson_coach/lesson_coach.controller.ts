@@ -11,8 +11,8 @@ import { Lesson_CoachService } from './lesson_coach.service';
 import { CreateLessonCoachDto } from './dto/create-lesson_coach.dto';
 import { UpdateLessonCoachDto } from './dto/update-lesson_coach.dto';
 
-@Controller('lesson/coach')
-export class LessonCoachController {
+@Controller('lesson-coach')
+export class Lesson_CoachController {
   constructor(private readonly lessonCoachService: Lesson_CoachService) {}
 
   @Post()
