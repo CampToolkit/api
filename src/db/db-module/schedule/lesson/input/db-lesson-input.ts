@@ -1,7 +1,7 @@
 import { LessonCoachRole } from '../../lesson_coach/enums/LessonCoachRole';
 
-interface CoachWithRoleInput {
-  id: number;
+export interface CoachWithRoleInput {
+  coachId: number;
   role: LessonCoachRole;
 }
 
@@ -12,9 +12,9 @@ export interface CreateLessonInput {
   activityTypeId: number;
   auditoriumId: number;
   lessonTypeId: number;
-  coaches: CoachWithRoleInput[];
-  groupIds: number[];
-  sportsmanIds: number[];
+  coaches?: CoachWithRoleInput[];
+  groupIds?: number[];
+  sportsmanIds?: number[];
 }
 
 export type UpdateLessonInput = Partial<Omit<CreateLessonInput, 'campId'>>;

@@ -7,6 +7,25 @@ import { Lesson } from './lesson.entity';
 import { RbActivityType } from '../rb-activity-type/rb-activity-type.entity';
 import { RbAuditorium } from '../../rb-auditorium/rb-auditorium.entity';
 import { RbLessonType } from '../lesson-type/rb-lesson-type.entity';
+import { CreateLessonInput, UpdateLessonInput } from './input/db-lesson-input';
+import { Lesson_Coach } from '../lesson_coach/lesson_coach.entity';
+import { Lesson_Group } from '../lesson-group-participants/lesson_group.entity';
+import { Lesson_Sportsman } from '../lesson-sportsman-participants/lesson_sportsman.entity';
+import { Coach } from '../../persons/coach/coach.entity';
+import { PracticeGroup } from '../../practice-group/practice-group.entity';
+import { Sportsman } from '../../persons/sportsman/sportsman.entity';
+
+const DEFAULT_RELATIONS = [
+  'lesson_coaches',
+  'lesson_coaches.coach',
+  'lesson_group',
+  'lesson_group.group',
+  'lesson_sportsmen',
+  'lesson_sportsmen.sportsman',
+  'activityType',
+  'lessonType',
+  'auditorium',
+];
 
 @Injectable()
 export class DbLessonService {
@@ -17,40 +36,60 @@ export class DbLessonService {
 
   logger = new Logger(DbLessonService.name);
 
-  async create(params: {
-    campId: number;
-    startDate: string;
-    endDate: string;
-    activityTypeId: number;
-    auditoriumId: number;
-    lessonTypeId: number;
-  }): Promise<Lesson> {
-    const lesson = this.lessonRepository.create({
-      camp: { id: params.campId },
-      activityType: { id: params.activityTypeId },
-      auditorium: { id: params.auditoriumId },
-      lessonType: { id: params.lessonTypeId },
-      startDate: params.startDate,
-      endDate: params.endDate,
+  async create(input: CreateLessonInput): Promise<Lesson> {
+    return await this.lessonRepository.manager.transaction(async (manager) => {
+      const lesson = manager.create(Lesson, {
+        camp: { id: input.campId },
+        activityType: { id: input.activityTypeId },
+        auditorium: { id: input.auditoriumId },
+        lessonType: { id: input.lessonTypeId },
+        startDate: input.startDate,
+        endDate: input.endDate,
+      });
+      await manager.save(lesson);
+
+      if (input.coaches?.length) {
+        const lessonCoaches = input.coaches.map((c) =>
+          manager.create(Lesson_Coach, {
+            lesson,
+            coach: { id: c.coachId },
+            role: c.role,
+          }),
+        );
+        await manager.save(lessonCoaches);
+      }
+
+      if (input.groupIds?.length) {
+        const lessonGroups = input.groupIds.map((groupId) =>
+          manager.create(Lesson_Group, {
+            lesson,
+            group: { id: groupId },
+          }),
+        );
+        await manager.save(lessonGroups);
+      }
+
+      if (input.sportsmanIds?.length) {
+        const lessonSportsmen = input.sportsmanIds.map((sportsmanId) =>
+          manager.create(Lesson_Sportsman, {
+            lesson,
+            sportsman: { id: sportsmanId },
+          }),
+        );
+        await manager.save(lessonSportsmen);
+      }
+
+      return manager.findOneOrFail(Lesson, {
+        where: { id: lesson.id },
+        relations: DEFAULT_RELATIONS,
+      });
     });
-    this.logger.log(lesson);
-    return await this.lessonRepository.save(lesson);
   }
 
   findOne(id: number) {
     return this.lessonRepository.findOne({
       where: { id },
-      relations: [
-        'lesson_coach',
-        'lesson_coach.coach',
-        'lessonGroupParticipants',
-        'lessonGroupParticipants.group',
-        'lessonSportsmanParticipants',
-        'lessonSportsmanParticipants.sportsman',
-        'activityType',
-        'lessonType',
-        'auditorium',
-      ],
+      relations: DEFAULT_RELATIONS,
     });
   }
 
@@ -86,52 +125,80 @@ export class DbLessonService {
 
     return this.lessonRepository.find({
       where: where,
-      relations: [
-        'lesson_coaches.coach',
-        'lesson_group.group',
-        'lesson_sportsmen.sportsman',
-        'activityType',
-        'lessonType',
-        'auditorium',
-      ],
+      relations: DEFAULT_RELATIONS,
     });
   }
 
-  async update(
-    id: number,
-    params: Partial<{
-      startDate: string;
-      endDate: string;
-      activityTypeId: number;
-      auditoriumId: number;
-      lessonTypeId: number;
-    }>,
-  ) {
-    const lesson = await this.lessonRepository.findOneBy({ id });
-    if (!lesson) {
-      throw new Error(`lesson is with id ${id} not found`);
-    }
+  async update(lessonId: number, input: UpdateLessonInput) {
+    return await this.lessonRepository.manager.transaction(async (manager) => {
+      // Получаем lesson с текущими связями
+      const lesson = await manager.findOne(Lesson, {
+        where: { id: lessonId },
+        relations: DEFAULT_RELATIONS,
+      });
 
-    if (params.startDate) {
-      lesson.startDate = new Date(params.startDate);
-    }
-    if (params.endDate) {
-      lesson.endDate = new Date(params.endDate);
-    }
+      if (!lesson) {
+        throw new Error(`Lesson with id ${lessonId} not found`);
+      }
 
-    if (params.activityTypeId) {
-      lesson.activityType = { id: params.activityTypeId } as RbActivityType;
-    }
+      // Обновляем поля, которые пришли
+      if (input.startDate !== undefined)
+        lesson.startDate = new Date(input.startDate);
+      if (input.endDate !== undefined) lesson.endDate = new Date(input.endDate);
+      if (input.activityTypeId !== undefined)
+        lesson.activityType = { id: input.activityTypeId } as RbActivityType;
+      if (input.auditoriumId !== undefined)
+        lesson.auditorium = { id: input.auditoriumId } as RbAuditorium;
+      if (input.lessonTypeId !== undefined)
+        lesson.lessonType = { id: input.lessonTypeId } as RbLessonType;
 
-    if (params.lessonTypeId) {
-      lesson.lessonType = { id: params.lessonTypeId } as RbLessonType;
-    }
+      // Обновляем coaches, если пришли
+      if (input.coaches) {
+        // Удаляем текущих и добавляем новых
+        await manager.delete(Lesson_Coach, { lesson: { id: lessonId } });
 
-    if (params.auditoriumId) {
-      lesson.auditorium = { id: params.auditoriumId } as RbAuditorium;
-    }
+        const newCoaches = input.coaches.map((c) => {
+          return manager.create(Lesson_Coach, {
+            lesson: { id: lessonId } as Lesson,
+            coach: { id: c.coachId } as Coach,
+            role: c.role,
+          });
+        });
 
-    return this.lessonRepository.save(lesson);
+        await manager.save(newCoaches);
+
+        lesson.lesson_coaches = newCoaches;
+      }
+
+      // Обновляем группы
+      if (input.groupIds) {
+        await manager.delete(Lesson_Group, { lesson: { id: lessonId } });
+        const newGroups = input.groupIds.map((groupId) =>
+          manager.create(Lesson_Group, {
+            lesson: { id: lessonId } as Lesson,
+            group: { id: groupId } as PracticeGroup,
+          }),
+        );
+        await manager.save(newGroups);
+        lesson.lesson_group = newGroups;
+      }
+
+      // Обновляем sportsmen
+      if (input.sportsmanIds) {
+        await manager.delete(Lesson_Sportsman, { lesson: { id: lessonId } });
+        const newSportsmen = input.sportsmanIds.map((sportsmanId) =>
+          manager.create(Lesson_Sportsman, {
+            lesson: { id: lessonId } as Lesson,
+            sportsman: { id: sportsmanId } as Sportsman,
+          }),
+        );
+        await manager.save(newSportsmen);
+        lesson.lesson_sportsmen = newSportsmen;
+      }
+      this.logger.log('lesson', lesson);
+      // Сохраняем основные поля lesson
+      return await manager.save(lesson);
+    });
   }
 
   async delete(id: number): Promise<UpdateResult> {
