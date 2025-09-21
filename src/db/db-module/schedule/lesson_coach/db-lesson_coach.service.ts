@@ -2,6 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson_Coach } from './lesson_coach.entity';
 import { Repository } from 'typeorm';
 import { Injectable, Logger } from '@nestjs/common';
+import { LessonCoachRole } from './enums/LessonCoachRole';
 
 @Injectable()
 export class DbLesson_CoachService {
@@ -12,11 +13,7 @@ export class DbLesson_CoachService {
 
   private readonly logger = new Logger('db_lesson_coach');
 
-  create(params: {
-    lessonId: number;
-    coachId: number;
-    role: 'PRIMARY' | 'SECONDARY';
-  }) {
+  create(params: { lessonId: number; coachId: number; role: LessonCoachRole }) {
     const lessonCoach = this.lessonCoachRepository.create(params);
     return this.lessonCoachRepository.save(lessonCoach);
   }
@@ -25,7 +22,7 @@ export class DbLesson_CoachService {
     id: number,
     params: Partial<{
       coachId: number;
-      role: 'PRIMARY' | 'SECONDARY';
+      role: LessonCoachRole;
     }>,
   ) {
     const lessonCoach = await this.lessonCoachRepository.findOneBy({ id });

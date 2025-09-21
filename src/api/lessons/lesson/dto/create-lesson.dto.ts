@@ -8,10 +8,8 @@ import {
   IsOptional,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import {
-  CoachWithRoleDto,
-  LessonCoachRole,
-} from '../../lesson_coach/dto/create-lesson_coach.dto';
+import { CoachWithRoleDto } from '../../lesson_coach/dto/create-lesson_coach.dto';
+import { LessonCoachRole } from '../../../../db/db-module/schedule/lesson_coach/enums/LessonCoachRole';
 
 export class CreateLessonDto {
   @ApiProperty({ example: '1', description: 'ID лагеря' })

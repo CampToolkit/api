@@ -1,19 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { DbLessonService } from '../../../db/db-module/schedule/lesson/db-lesson.service';
+import { CreateLessonInput, UpdateLessonInput } from './input/LessonInputs';
 
 @Injectable()
 export class LessonService {
   constructor(private dbLessonService: DbLessonService) {}
 
-  create(args: {
-    campId: number;
-    startDate: string;
-    endDate: string;
-    activityTypeId: number;
-    auditoriumId: number;
-    lessonTypeId: number;
-  }) {
-    return this.dbLessonService.create(args);
+  create(input: CreateLessonInput) {
+    return this.dbLessonService.create(input);
   }
 
   async findAllBy(params: {
@@ -51,17 +45,8 @@ export class LessonService {
     return this.dbLessonService.findOne(id);
   }
 
-  update(
-    id: number,
-    params: Partial<{
-      startDate: string;
-      endDate: string;
-      activityTypeId: number;
-      auditoriumId: number;
-      lessonTypeId: number;
-    }>,
-  ) {
-    return this.dbLessonService.update(id, params);
+  update(id: number, input: UpdateLessonInput) {
+    return this.dbLessonService.update(id, input);
   }
 
   remove(id: number) {

@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { AbstractEntity } from '../../shared/abstract.entity';
 import { Lesson } from '../lesson/lesson.entity';
 import { Coach } from '../../persons/coach/coach.entity';
+import { LessonCoachRole } from './enums/LessonCoachRole';
 
 @Entity('lesson_coach')
 export class Lesson_Coach extends AbstractEntity {
@@ -23,8 +24,8 @@ export class Lesson_Coach extends AbstractEntity {
 
   @Column({
     type: 'enum',
-    enum: ['PRIMARY', 'SECONDARY'],
-    default: 'PRIMARY',
+    enum: LessonCoachRole,
+    default: LessonCoachRole.PRIMARY,
   })
-  role: 'PRIMARY' | 'SECONDARY';
+  role: LessonCoachRole;
 }

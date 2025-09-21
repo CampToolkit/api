@@ -1,11 +1,7 @@
 import { IsEnum, IsInt, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-
-export enum LessonCoachRole {
-  PRIMARY = 'PRIMARY',
-  SECONDARY = 'SECONDARY',
-}
+import { LessonCoachRole } from '../../../../db/db-module/schedule/lesson_coach/enums/LessonCoachRole';
 
 export class UpdateLessonCoachDto {
   @ApiProperty({
