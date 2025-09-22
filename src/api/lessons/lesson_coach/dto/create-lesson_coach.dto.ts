@@ -1,23 +1,9 @@
 import { IsEnum, IsInt, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { LessonCoachRole } from '../../../../db/db-module/schedule/lesson_coach/enums/LessonCoachRole';
 
-export enum LessonCoachRole {
-  PRIMARY = 'PRIMARY',
-  SECONDARY = 'SECONDARY',
-}
-
-export class CreateLessonCoachDto {
-  @ApiProperty({
-    example: 1,
-    description: 'ID урока',
-    type: Number,
-  })
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  lessonId: number;
-
+export class CoachWithRoleDto {
   @ApiProperty({
     example: 5,
     description: 'ID тренера',
@@ -37,4 +23,16 @@ export class CreateLessonCoachDto {
     message: 'role must be either PRIMARY or SECONDARY',
   })
   role: LessonCoachRole;
+}
+
+export class CreateLessonCoachDto extends CoachWithRoleDto {
+  @ApiProperty({
+    example: 1,
+    description: 'ID урока',
+    type: Number,
+  })
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  lessonId: number;
 }
