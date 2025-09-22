@@ -131,7 +131,6 @@ export class DbLessonService {
 
   async update(lessonId: number, input: UpdateLessonInput) {
     return await this.lessonRepository.manager.transaction(async (manager) => {
-      // Получаем lesson с текущими связями
       const lesson = await manager.findOne(Lesson, {
         where: { id: lessonId },
         relations: DEFAULT_RELATIONS,
@@ -141,7 +140,6 @@ export class DbLessonService {
         throw new Error(`Lesson with id ${lessonId} not found`);
       }
 
-      // Обновляем поля, которые пришли
       if (input.startDate !== undefined)
         lesson.startDate = new Date(input.startDate);
       if (input.endDate !== undefined) lesson.endDate = new Date(input.endDate);
@@ -152,9 +150,7 @@ export class DbLessonService {
       if (input.lessonTypeId !== undefined)
         lesson.lessonType = { id: input.lessonTypeId } as RbLessonType;
 
-      // Обновляем coaches, если пришли
       if (input.coaches) {
-        // Удаляем текущих и добавляем новых
         await manager.delete(Lesson_Coach, { lesson: { id: lessonId } });
 
         const newCoaches = input.coaches.map((c) => {
@@ -170,7 +166,6 @@ export class DbLessonService {
         lesson.lesson_coaches = newCoaches;
       }
 
-      // Обновляем группы
       if (input.groupIds) {
         await manager.delete(Lesson_Group, { lesson: { id: lessonId } });
         const newGroups = input.groupIds.map((groupId) =>
@@ -183,7 +178,6 @@ export class DbLessonService {
         lesson.lesson_group = newGroups;
       }
 
-      // Обновляем sportsmen
       if (input.sportsmanIds) {
         await manager.delete(Lesson_Sportsman, { lesson: { id: lessonId } });
         const newSportsmen = input.sportsmanIds.map((sportsmanId) =>
@@ -195,9 +189,18 @@ export class DbLessonService {
         await manager.save(newSportsmen);
         lesson.lesson_sportsmen = newSportsmen;
       }
-      this.logger.log('lesson', lesson);
-      // Сохраняем основные поля lesson
-      return await manager.save(lesson);
+
+      await manager.save(lesson);
+
+      const updatedLesson = await manager.findOne(Lesson, {
+        where: { id: lessonId },
+        relations: DEFAULT_RELATIONS,
+      });
+
+      if (!updatedLesson) {
+        throw new Error(`Lesson with id ${lessonId} not found`);
+      }
+      return updatedLesson;
     });
   }
 
