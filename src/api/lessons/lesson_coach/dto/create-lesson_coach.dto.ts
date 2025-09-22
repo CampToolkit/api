@@ -11,7 +11,7 @@ export class CoachWithRoleDto {
   })
   @Type(() => Number)
   @IsInt()
-  @Min(1)
+  @Min(1, { message: 'coachId должен быть больше 0' })
   coachId: number;
 
   @ApiProperty({
@@ -33,6 +33,6 @@ export class CreateLessonCoachDto extends CoachWithRoleDto {
   })
   @Type(() => Number)
   @IsInt()
-  @Min(1)
+  @Min(1, { message: 'lessonId должен быть больше 0' })
   lessonId: number;
 }

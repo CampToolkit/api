@@ -174,14 +174,18 @@ export class DbLessonService {
 
       if (input.groupIds) {
         await manager.delete(Lesson_Group, { lesson: { id: lessonId } });
-        const newGroups = input.groupIds.map((groupId) =>
-          manager.create(Lesson_Group, {
-            lesson: { id: lessonId } as Lesson,
-            group: { id: groupId } as PracticeGroup,
-          }),
-        );
-        await manager.save(newGroups);
-        lesson.lesson_group = newGroups;
+        if (input.groupIds.length > 0) {
+          const newGroups = input.groupIds.map((groupId) =>
+            manager.create(Lesson_Group, {
+              lesson: { id: lessonId } as Lesson,
+              group: { id: groupId } as PracticeGroup,
+            }),
+          );
+          await manager.save(newGroups);
+          lesson.lesson_group = newGroups;
+        } else {
+          lesson.lesson_group = [];
+        }
       }
 
       if (input.sportsmanIds) {

@@ -4,8 +4,8 @@ import {
   IsDateString,
   IsArray,
   ValidateNested,
-  ArrayNotEmpty,
   IsOptional,
+  Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CoachWithRoleDto } from '../../lesson_coach/dto/create-lesson_coach.dto';
@@ -15,6 +15,7 @@ export class CreateLessonDto {
   @ApiProperty({ example: '1', description: 'ID лагеря' })
   @Type(() => Number)
   @IsInt()
+  @Min(1)
   campId: number;
 
   @ApiProperty({
@@ -56,7 +57,6 @@ export class CreateLessonDto {
   })
   @IsOptional()
   @IsArray()
-  @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => CoachWithRoleDto)
   coaches: CoachWithRoleDto[];
@@ -68,8 +68,11 @@ export class CreateLessonDto {
   })
   @IsOptional()
   @IsArray()
-  @ArrayNotEmpty()
   @IsInt({ each: true })
+  @Min(1, {
+    each: true,
+    message: 'Каждый элемент groupIds должен быть больше 0',
+  })
   groupIds: number[];
 
   @ApiPropertyOptional({
@@ -79,7 +82,10 @@ export class CreateLessonDto {
   })
   @IsOptional()
   @IsArray()
-  @ArrayNotEmpty()
   @IsInt({ each: true })
+  @Min(1, {
+    each: true,
+    message: 'Каждый элемент sportsmanIds должен быть больше 0',
+  })
   sportsmanIds: number[];
 }
