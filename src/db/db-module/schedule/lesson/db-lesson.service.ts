@@ -1,4 +1,10 @@
-import { Between, FindOptionsWhere, Repository, UpdateResult } from 'typeorm';
+import {
+  Between,
+  DeleteResult,
+  FindOptionsWhere,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -204,11 +210,30 @@ export class DbLessonService {
     });
   }
 
-  async delete(id: number): Promise<UpdateResult> {
-    const lesson = await this.lessonRepository.findOneBy({ id });
-    if (!lesson) {
-      throw new Error(`lesson is with id ${id} not found`);
-    }
-    return this.lessonRepository.softDelete(lesson);
+  async delete(lessonId: number): Promise<DeleteResult> {
+    return await this.lessonRepository.manager.transaction(async (manager) => {
+      const lesson = await manager.findOne(Lesson, {
+        where: { id: lessonId },
+        relations: DEFAULT_RELATIONS,
+      });
+
+      if (!lesson) {
+        throw new Error(`lesson is with id ${lessonId} not found`);
+      }
+
+      if (lesson.lesson_coaches.length > 0) {
+        await manager.delete(Lesson_Coach, { lesson: { id: lessonId } });
+      }
+
+      if (lesson.lesson_group.length > 0) {
+        await manager.delete(Lesson_Group, { lesson: { id: lessonId } });
+      }
+
+      if (lesson.lesson_sportsmen.length > 0) {
+        await manager.delete(Lesson_Sportsman, { lesson: { id: lessonId } });
+      }
+
+      return manager.delete(Lesson, { id: lessonId });
+    });
   }
 }
