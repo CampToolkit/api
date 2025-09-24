@@ -1,10 +1,4 @@
-import {
-  Between,
-  DeleteResult,
-  FindOptionsWhere,
-  Repository,
-  UpdateResult,
-} from 'typeorm';
+import { Between, DeleteResult, FindOptionsWhere, Repository } from 'typeorm';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -105,6 +99,7 @@ export class DbLessonService {
     activityTypeId?: number;
     auditoriumId?: number;
     lessonTypeId?: number;
+    groupId?: number;
   }) {
     const where: FindOptionsWhere<Lesson> = {};
     where.camp = { id: params.campId };
@@ -127,6 +122,10 @@ export class DbLessonService {
 
     if (params.lessonTypeId) {
       where.lessonType = { id: params.lessonTypeId };
+    }
+
+    if (params.startDate) {
+      where.lesson_group = { group: { id: 1 } };
     }
 
     return this.lessonRepository.find({
