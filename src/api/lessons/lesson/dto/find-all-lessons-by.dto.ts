@@ -33,4 +33,10 @@ export class FindAllLessonsByDto {
   @Type(() => Number)
   @IsInt()
   lessonTypeId: number;
+
+  @ApiPropertyOptional({ example: 1, description: 'ID группы' })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  groupId: number;
 }

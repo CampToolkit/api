@@ -41,14 +41,19 @@ export class LessonService {
     activityTypeId?: number;
     auditoriumId?: number;
     lessonTypeId?: number;
+    groupId?: number;
   }) {
     const data = await this.dbLessonService.findAllBy(params);
 
     return data.map(formatResponse);
   }
 
-  findOne(id: number) {
-    return this.dbLessonService.findOne(id);
+  async findOne(id: number) {
+    const data = await this.dbLessonService.findOne(id);
+    if (data) {
+      return formatResponse(data);
+    }
+    return null;
   }
 
   async update(id: number, input: UpdateLessonInput) {
