@@ -15,6 +15,7 @@ import { CreatePracticeGroupDto } from './dto/create-practice-group.dto';
 import { UpdatePracticeGroupDto } from './dto/update-practice-group.dto';
 import { CreatePracticeGroupBulkDto } from './dto/CreatePracticeGroupBulk.dto';
 import { FindAllDto } from './dto/FindAll.dto';
+import { AddSportsmenToGroupDTO } from './dto/add-sportsmen-to-group.dto';
 
 @Controller('practice-group')
 export class PracticeGroupController {
@@ -52,5 +53,17 @@ export class PracticeGroupController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.practiceGroupService.remove(id);
+  }
+
+  @Post(':id/sportsman')
+  addSportsmen(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: AddSportsmenToGroupDTO,
+  ) {
+    return this.practiceGroupService.addSportsmen({
+      campId: dto.campId,
+      groupId: id,
+      sportsmanIds: dto.items,
+    });
   }
 }

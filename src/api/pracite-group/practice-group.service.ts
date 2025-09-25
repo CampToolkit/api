@@ -35,4 +35,12 @@ export class PracticeGroupService {
   remove(id: number) {
     return this.dbPracticeGroupService.remove(id);
   }
+
+  addSportsmen(params: {
+    campId: number;
+    groupId: number;
+    sportsmanIds: number[];
+  }) {
+    return this.dbPracticeGroupService.addSportsmen(params);
+  }
 }

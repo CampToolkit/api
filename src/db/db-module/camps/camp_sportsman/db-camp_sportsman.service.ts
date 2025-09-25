@@ -61,4 +61,17 @@ export class DbCamp_SportsmanService {
       .andWhere('sportsmanId IN (:...sportsmanIds)', { sportsmanIds })
       .execute();
   }
+
+  async getMissingSportsmenInCamp(campId: number, sportsmanIds: number[]) {
+    const result = await this.campRepository
+      .createQueryBuilder('camp')
+      .innerJoin('camp.sportsmen', 'sportsman')
+      .where('campId = :campId', { campId })
+      .andWhere('sportsmanId IN (:ids)', { ids: sportsmanIds })
+      .select('camp_sportsman.sportsmanId', 'sportsmanId')
+      .getRawMany<{ sportsmanId: number }>();
+
+    const foundIds = result.map((s) => s.sportsmanId);
+    return sportsmanIds.filter((id) => !foundIds.includes(id));
+  }
 }

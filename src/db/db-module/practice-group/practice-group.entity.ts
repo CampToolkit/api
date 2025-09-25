@@ -35,13 +35,13 @@ export class PracticeGroup extends AbstractEntity {
   @JoinColumn({ name: 'campId' })
   camp: Camp;
 
-  @ManyToMany(() => Sportsman, (sportsman) => sportsman.practiceGroups, {})
+  @ManyToMany(() => Sportsman, (sportsmen) => sportsmen.practiceGroups, {})
   @JoinTable({
     name: 'group_sportsman',
     joinColumn: { name: 'groupId', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'sportsmanId', referencedColumnName: 'id' },
   })
-  sportsman: Sportsman[];
+  sportsmen: Sportsman[];
 
   @OneToMany(
     () => Lesson_Group,

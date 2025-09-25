@@ -22,7 +22,7 @@ export class Sportsman extends AbstractEntity {
   @ManyToMany(() => Camp, (camp) => camp.sportsmen, { onDelete: 'CASCADE' })
   camps: Camp[];
 
-  @ManyToMany(() => PracticeGroup, (group) => group.sportsman, {
+  @ManyToMany(() => PracticeGroup, (group) => group.sportsmen, {
     onDelete: 'CASCADE',
   })
   practiceGroups: PracticeGroup[];
