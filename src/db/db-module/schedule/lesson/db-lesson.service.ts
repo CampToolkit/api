@@ -7,7 +7,7 @@ import { Lesson } from './lesson.entity';
 import { RbActivityType } from '../rb-activity-type/rb-activity-type.entity';
 import { RbAuditorium } from '../../rb-auditorium/rb-auditorium.entity';
 import { RbLessonType } from '../lesson-type/rb-lesson-type.entity';
-import { CreateLessonInput, UpdateLessonInput } from './input/db-lesson-input';
+import { CreateLessonInput, UpdateLessonInput } from './input/db-lesson.input';
 import { Lesson_Coach } from '../lesson_coach/lesson_coach.entity';
 import { Lesson_Group } from '../lesson-group-participants/lesson_group.entity';
 import { Lesson_Sportsman } from '../lesson-sportsman-participants/lesson_sportsman.entity';
