@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DbPracticeGroupService } from '../../db/db-module/practice-group/db-practice-group.service';
+import { DbPracticeGroup_SportsmanService } from '../../db/db-module/practice-group/db-practice-group_sportsman.service';
 
 interface CreateGroupParams {
   name: string;
@@ -11,6 +12,7 @@ interface CreateGroupParams {
 export class PracticeGroupService {
   constructor(
     private readonly dbPracticeGroupService: DbPracticeGroupService,
+    private readonly dbPracticeGroup_SportsmanService: DbPracticeGroup_SportsmanService,
   ) {}
   create(params: CreateGroupParams) {
     return this.dbPracticeGroupService.create(params);
@@ -41,6 +43,10 @@ export class PracticeGroupService {
     groupId: number;
     sportsmanIds: number[];
   }) {
-    return this.dbPracticeGroupService.addSportsmen(params);
+    return this.dbPracticeGroup_SportsmanService.addSportsmen(params);
+  }
+
+  getSportsmen(groupId: number) {
+    return this.dbPracticeGroup_SportsmanService.getSportsmen(groupId);
   }
 }

@@ -31,6 +31,7 @@ import { DbCoachService } from './persons/coach/db-coach.service';
 import { DbCamp_SportsmanService } from './camps/camp_sportsman/db-camp_sportsman.service';
 import { DbCamp_AuditoriumService } from './camps/camp_auditorium/db-camp_auditorium.service';
 import { DbCamp_CoachService } from './camps/camp_coach/db-camp_coach.service';
+import { DbPracticeGroup_SportsmanService } from './practice-group/db-practice-group_sportsman.service';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { DbCamp_CoachService } from './camps/camp_coach/db-camp_coach.service';
   providers: [
     DbCampService,
     DbPracticeGroupService,
+    DbPracticeGroup_SportsmanService,
     DbSportsmanService,
 
     DbLessonTypeService,
@@ -75,6 +77,7 @@ import { DbCamp_CoachService } from './camps/camp_coach/db-camp_coach.service';
   exports: [
     DbCampService,
     DbPracticeGroupService,
+    DbPracticeGroup_SportsmanService,
     DbSportsmanService,
 
     DbLessonService,

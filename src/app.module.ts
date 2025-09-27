@@ -18,6 +18,7 @@ import { RbActivityTypeModule } from './api/rb-activity-type/rb-activity-type.mo
 import { RbAuditoriumModule } from './api/rb-auditorium/rb-auditorium.module';
 import { LessonTypeModule } from './api/lesson-type/lesson-type.module';
 import { CoachModule } from './api/coach/coach.module';
+import { DbPracticeGroup_SportsmanService } from './db/db-module/practice-group/db-practice-group_sportsman.service';
 
 import * as process from 'node:process';
 
