@@ -55,6 +55,14 @@ export class PracticeGroupController {
     return this.practiceGroupService.remove(id);
   }
 
+  // note sportsmen block
+
+  @Get(':id/sportsman')
+  async getSportsmen(@Param('id', ParseIntPipe) id: number) {
+    const result = await this.practiceGroupService.getSportsmen(id);
+    return result.sportsmen;
+  }
+
   @Post(':id/sportsman')
   addSportsmen(
     @Param('id', ParseIntPipe) id: number,
