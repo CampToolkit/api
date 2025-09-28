@@ -100,6 +100,7 @@ export class DbLessonService {
     auditoriumId?: number;
     lessonTypeId?: number;
     groupId?: number;
+    sportsmanId?: number;
   }) {
     const where: FindOptionsWhere<Lesson> = {};
     where.camp = { id: params.campId };
@@ -124,8 +125,12 @@ export class DbLessonService {
       where.lessonType = { id: params.lessonTypeId };
     }
 
-    if (params.startDate) {
-      where.lesson_group = { group: { id: 1 } };
+    if (params.groupId) {
+      where.lesson_group = { group: { id: params.groupId } };
+    }
+
+    if (params.sportsmanId) {
+      where.lesson_sportsmen = { sportsman: { id: params.sportsmanId } };
     }
 
     return this.lessonRepository.find({

@@ -42,6 +42,7 @@ export class LessonService {
     auditoriumId?: number;
     lessonTypeId?: number;
     groupId?: number;
+    sportsmenId?: number;
   }) {
     const data = await this.dbLessonService.findAllBy(params);
 
