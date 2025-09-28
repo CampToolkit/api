@@ -11,15 +11,15 @@ const formatResponse = (lesson: Lesson) => {
     auditorium: lesson.auditorium,
     lessonType: lesson.lessonType,
     activityType: lesson.activityType,
-    groups: lesson.lesson_group.map((item) => ({
+    groups: (lesson.lesson_group ?? []).map((item) => ({
       ...item.group,
       lesson_group: item.id,
     })),
-    sportsmen: lesson.lesson_sportsmen.map((item) => ({
+    sportsmen: (lesson.lesson_sportsmen ?? []).map((item) => ({
       ...item.sportsman,
       lesson_sportsman: item.id,
     })),
-    coaches: lesson.lesson_coaches.map((item) => ({
+    coaches: (lesson.lesson_coaches ?? []).map((item) => ({
       ...item.coach,
       lesson_coach: item.id,
     })),

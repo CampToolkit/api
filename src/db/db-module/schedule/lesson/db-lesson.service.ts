@@ -1,4 +1,10 @@
-import { Between, DeleteResult, FindOptionsWhere, Repository } from 'typeorm';
+import {
+  Between,
+  createQueryBuilder,
+  DeleteResult,
+  FindOptionsWhere,
+  Repository,
+} from 'typeorm';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -93,7 +99,7 @@ export class DbLessonService {
     });
   }
 
-  findAllBy(params: {
+  async findAllBy(params: {
     campId: number;
     startDate?: string;
     activityTypeId?: number;
@@ -102,41 +108,64 @@ export class DbLessonService {
     groupId?: number;
     sportsmanId?: number;
   }) {
-    const where: FindOptionsWhere<Lesson> = {};
-    where.camp = { id: params.campId };
+    const qb = this.lessonRepository
+      .createQueryBuilder('lesson')
+      .innerJoin('lesson.camp', 'camp')
+      .leftJoinAndSelect('lesson.activityType', 'activityType')
+      .leftJoinAndSelect('lesson.auditorium', 'auditorium')
+      .leftJoinAndSelect('lesson.lessonType', 'lessonType')
+      .leftJoinAndSelect('lesson.lesson_group', 'lesson_group')
+      .leftJoinAndSelect('lesson_group.group', 'group')
+      .leftJoinAndSelect('lesson.lesson_sportsmen', 'lesson_sportsmen')
+      .leftJoinAndSelect('lesson_sportsmen.sportsman', 'sportsman');
+
+    qb.where('camp.id = :id', { id: params.campId });
 
     if (params.startDate) {
       const startDate = new Date(params.startDate);
       startDate.setHours(0, 0, 0, 0);
       const endDate = new Date(params.startDate);
       endDate.setHours(23, 59, 0, 0);
-      where.startDate = Between(startDate, endDate);
+
+      qb.andWhere('lesson.startDate BETWEEN :startDate AND :endDate', {
+        startDate,
+        endDate,
+      });
     }
 
     if (params.activityTypeId) {
-      where.activityType = { id: params.activityTypeId };
+      qb.andWhere('activityType.id = :id', {
+        id: params.activityTypeId,
+      });
     }
 
     if (params.auditoriumId) {
-      where.auditorium = { id: params.auditoriumId };
+      qb.andWhere('auditorium.id = :id', {
+        id: params.auditoriumId,
+      });
     }
 
     if (params.lessonTypeId) {
-      where.lessonType = { id: params.lessonTypeId };
+      qb.andWhere('lessonType.id = :id', {
+        id: params.lessonTypeId,
+      });
     }
 
-    if (params.groupId) {
-      where.lesson_group = { group: { id: params.groupId } };
+    if (params.groupId && params.sportsmanId) {
+      qb.andWhere('(group.id = :groupId OR sportsman.id = :sportsmanId)', {
+        groupId: params.groupId,
+        sportsmanId: params.sportsmanId,
+      });
+    } else if (params.groupId) {
+      qb.andWhere('group.id = :groupId', { groupId: params.groupId });
+    } else if (params.sportsmanId) {
+      qb.andWhere('sportsman.id = :sportsmanId', {
+        sportsmanId: params.sportsmanId,
+      });
     }
-
-    if (params.sportsmanId) {
-      where.lesson_sportsmen = { sportsman: { id: params.sportsmanId } };
-    }
-
-    return this.lessonRepository.find({
-      where: where,
-      relations: DEFAULT_RELATIONS,
-    });
+    const tets = await qb.getMany();
+    this.logger.log(tets);
+    return tets;
   }
 
   async update(lessonId: number, input: UpdateLessonInput) {
