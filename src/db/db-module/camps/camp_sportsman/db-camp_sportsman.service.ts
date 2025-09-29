@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Camp } from '../camp/camp.entity';
 import { Repository } from 'typeorm';
 import { Sportsman } from '../../persons/sportsman/sportsman.entity';
+import { EntityIncludes } from '../../shared/types/entity-includes.type';
 
 @Injectable()
 export class DbCamp_SportsmanService {
@@ -11,10 +12,21 @@ export class DbCamp_SportsmanService {
     private readonly campRepository: Repository<Camp>,
   ) {}
 
-  async findAll(campId: number) {
+  async findAll(
+    campId: number,
+    params?: { includes?: EntityIncludes<Sportsman>[] },
+  ) {
+    const relations: string[] = ['sportsmen'];
+
+    if (params?.includes?.length) {
+      for (const key of params.includes) {
+        relations.push(`sportsmen.${key}`);
+      }
+    }
+
     const camp = await this.campRepository.findOne({
       where: { id: campId },
-      relations: ['sportsmen'],
+      relations: relations,
     });
 
     if (!camp) {

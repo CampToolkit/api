@@ -158,7 +158,7 @@ export class DbLessonService {
       });
     }
     const tets = await qb.getMany();
-    this.logger.log(tets);
+    this.logger.log('tets', tets);
     return tets;
   }
 
