@@ -6,4 +6,4 @@ type RelationKeys<T> = {
       : never;
 };
 
-export type EntityIncludes<T> = RelationKeys<T>;
+export type EntityIncludes<T> = Extract<RelationKeys<T>[keyof T], string>;
