@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 import { DbCamp_SportsmanService } from '../../../db/db-module/camps/camp_sportsman/db-camp_sportsman.service';
+import { EntityIncludes } from '../../../db/db-module/shared/types/entity-includes.type';
+import { Sportsman } from '../../../db/db-module/persons/sportsman/sportsman.entity';
 
 @Injectable()
 export class Camp_SportsmanService {
@@ -20,7 +22,7 @@ export class Camp_SportsmanService {
     );
   }
 
-  findAll(campId: number) {
-    return this.dbCamp_SportsmanService.findAll(campId);
+  findAll(campId: number, params?: { includes?: EntityIncludes<Sportsman>[] }) {
+    return this.dbCamp_SportsmanService.findAll(campId, params);
   }
 }
