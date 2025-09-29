@@ -7,11 +7,15 @@ import {
   Param,
   Delete,
   Logger,
+  Query,
 } from '@nestjs/common';
 import { SportsmanService } from './sportsman.service';
 import { CreateSportsmanDto } from './dto/create-sportsman.dto';
 import { UpdateSportsmanDto } from './dto/update-sportsman.dto';
 import { CreateSportsmanBulkDto } from './dto/create-sportsman-bulk.dto';
+import { EntityIncludes } from '../../db/db-module/shared/types/entity-includes.type';
+import { Sportsman } from '../../db/db-module/persons/sportsman/sportsman.entity';
+import { FindAllSportsmenDto } from './dto/find-all-sportsmen.dto';
 
 @Controller('sportsman')
 export class SportsmanController {
@@ -29,8 +33,8 @@ export class SportsmanController {
   }
 
   @Get()
-  findAll() {
-    return this.sportsmanService.findAll();
+  findAll(@Query() query: FindAllSportsmenDto) {
+    return this.sportsmanService.findAll(query);
   }
 
   @Get(':id')

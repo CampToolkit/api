@@ -1,5 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { DbSportsmanService } from '../../db/db-module/persons/sportsman/db-sportsman.service';
+import { EntityIncludes } from '../../db/db-module/shared/types/entity-includes.type';
+import { Sportsman } from '../../db/db-module/persons/sportsman/sportsman.entity';
 
 @Injectable()
 export class SportsmanService {
@@ -27,8 +29,8 @@ export class SportsmanService {
     return this.dbSportsmanService.createMany(params);
   }
 
-  findAll() {
-    return this.dbSportsmanService.findAll();
+  findAll(params?: { includes?: EntityIncludes<Sportsman>[] }) {
+    return this.dbSportsmanService.findAll(params);
   }
 
   findOne(id: number) {
