@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sportsman } from './sportsman.entity';
 import { Repository } from 'typeorm';
+import { EntityIncludes } from '../../shared/types/entity-includes.type';
 
 @Injectable()
 export class DbSportsmanService {
@@ -63,8 +64,10 @@ export class DbSportsmanService {
     return this.sportsmanRepository.save(newSportsman);
   }
 
-  findAll() {
-    return this.sportsmanRepository.find();
+  findAll(params?: { includes?: EntityIncludes<Sportsman>[] }) {
+    return this.sportsmanRepository.find({
+      relations: params?.includes ?? [],
+    });
   }
 
   findOne(id: number) {
